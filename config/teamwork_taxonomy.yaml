@@ -1,0 +1,67 @@
+challenge_tags:
+  - accountability
+  - communication_breakdown
+  - coordination
+  - decision_making
+  - inclusion
+  - psychological_safety
+  - role_ambiguity
+  - uneven_work_distribution
+
+conflict_types:
+  - task_conflict
+  - process_conflict
+  - interpersonal_conflict
+  - certainty_conflict
+
+possible_conflict_sources:
+  - accountability
+  - commitment_differences
+  - miscommunication
+  - time_pressure
+  - uneven_work_distribution
+  - role_ambiguity
+  - skill_or_confidence_differences
+
+signal_tags:
+  - missed_deadlines
+  - unclear_task_ownership
+  - uneven_contribution
+  - repeated_miscommunication
+  - meeting_domination
+  - silence_in_meetings
+  - idea_dismissal
+  - decisions_without_input
+
+supported_intervention_tags:
+  - assign_task_ownership
+  - clarify_roles
+  - clarify_shared_goal
+  - create_team_charter
+  - establish_checkpoints
+  - establish_team_norms
+  - invite_team_input
+  - use_behavior_specific_feedback
+
+evidence_roles:
+  - problem_definition
+  - observable_signals
+  - contributing_factor
+  - intervention_support
+  - implementation_guidance
+  - limitation
+  - diagnostic_caution
+  - escalation_guidance
+
+action_levels:
+  - reflect
+  - talk_to_teammate
+  - team_process_change
+  - seek_instructor_or_advisor_support
+
+source_types:
+  - open_access_research
+  - professional_guidance
+  - engineering_framework
+  - behavioral_rubric
+  - approved_summary

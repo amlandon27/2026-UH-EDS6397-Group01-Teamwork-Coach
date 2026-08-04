@@ -12,7 +12,7 @@ Decisions made while building the MVP. Keep entries short and dated.
 | Interface | Streamlit | Fastest Python demo UI |
 | Corpus (MVP) | Hand-built tagged chunks | Ship end-to-end now; replace with ingestion later |
 | PII user flow | Automatic redaction before downstream processing | Simplest path that meets PRD privacy rule |
-| LangSmith | Off by default | Less setup for MVP |
+| LangSmith | Off by default; when enabled, one nested sanitized trace per `run_coach` | Privacy-preserving observability for demos/debug |
 | Citation style | APA 7 | Matches PRD proposal |
 | Repair | One controlled repair attempt, then fallback | Matches PRD |
 | High-risk detection | Keyword/heuristic gate before LLM coaching | Deterministic, cheap, fails safe |
@@ -39,3 +39,12 @@ Decisions made while building the MVP. Keep entries short and dated.
 | Placeholder ingestion modules | Present but `NotImplementedError` | Preserve PRD layout for later swap |
 | LLM model pin | Switched default from `gemini-2.5-flash` to `gemini-3.5-flash` | API returned 404 for new users on 2.5 Flash |
 | Retrieval min score | Lowered default to `0.05` | Chroma relevance scores often land well below 0.25 for short reflections |
+
+## 2026-08-03 — LangSmith nested tracing
+
+| Decision | Choice | Rationale |
+| --- | --- | --- |
+| Observability | LangSmith via `services/tracing_service.py` | One nested trace per coach run (graph + LLM + retrieval) |
+| Default | `LANGSMITH_TRACING=false` | No key required for local/tests |
+| Privacy | Omit `raw_input`/`reflection`; PII-redact other strings | Matches PRD telemetry rule |
+| Wiring | `run_with_tracing` + `@traceable` root + node/LLM/retriever spans | Full end-to-end chain in one link |

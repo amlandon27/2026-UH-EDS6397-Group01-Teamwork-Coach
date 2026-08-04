@@ -25,6 +25,9 @@ class Settings(BaseSettings):
     retrieval_min_score: float = 0.05
     max_repair_attempts: int = 1
     langsmith_tracing: bool = False
+    langsmith_api_key: str = ""
+    langsmith_project: str = "teamwork-leadership-coach"
+    langsmith_endpoint: str = ""
     corpus_dir: str = str(ROOT_DIR / "corpus")
 
 

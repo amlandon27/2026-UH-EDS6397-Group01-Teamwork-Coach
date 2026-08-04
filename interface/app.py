@@ -2,7 +2,15 @@
 
 from __future__ import annotations
 
+import sys
+from pathlib import Path
+
 import streamlit as st
+
+# Streamlit sets the script dir as cwd/path; add project root for imports.
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 from main_system import run_coach
 
@@ -20,12 +28,8 @@ def main() -> None:
     st.caption("AI-assisted reflection for engineering student teams (MVP)")
     st.info(PRIVACY_NOTICE)
 
-    goal = st.text_input(
-        "Optional goal",
-        placeholder="e.g., Improve coordination before the next milestone",
-    )
     reflection = st.text_area(
-        "Describe the teamwork situation",
+        "Describe the teamwork situation (required)",
         height=220,
         placeholder=(
             "Focus on observable behaviors: what happened, when, and how it affected the work. "
@@ -33,10 +37,23 @@ def main() -> None:
         ),
     )
 
-    if st.button("Get coaching", type="primary", disabled=not reflection.strip()):
+    include_goal = st.checkbox("Add a goal (optional)", value=False)
+    goal = ""
+    if include_goal:
+        goal = st.text_input(
+            "What would you like help with?",
+            placeholder="e.g., Improve coordination before the next milestone",
+        )
+
+    can_submit = bool(reflection.strip())
+    if not can_submit:
+        st.caption("Enter a situation description to continue. A goal is optional.")
+
+    if st.button("Get coaching", type="primary", disabled=not can_submit):
         with st.spinner("Running privacy checks, diagnosis, retrieval, and validation..."):
             try:
-                result = run_coach(reflection.strip(), goal.strip() or None)
+                goal_arg = goal.strip() if include_goal and goal.strip() else None
+                result = run_coach(reflection.strip(), goal_arg)
             except Exception as exc:  # noqa: BLE001 - show friendly UI error
                 st.error(f"Something went wrong: {exc}")
                 return

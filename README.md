@@ -9,6 +9,7 @@ AI-powered teamwork coaching for engineering students (EDS 6397).
 - Vector store: ChromaDB (local)
 - UI: Streamlit
 - Orchestration: LangGraph
+- Observability: LangSmith (optional, sanitized nested traces)
 
 ## Setup
 
@@ -20,6 +21,22 @@ cp .env.example .env
 # Add GOOGLE_API_KEY to .env
 python -m ingestion.build_index
 ```
+
+### LangSmith tracing (optional)
+
+1. Create an API key at [smith.langchain.com](https://smith.langchain.com).
+2. In `.env` set:
+
+```bash
+LANGSMITH_TRACING=true
+LANGSMITH_API_KEY=your_langsmith_api_key
+LANGSMITH_PROJECT=teamwork-leadership-coach
+```
+
+3. Run the CLI or Streamlit UI. Each `run_coach` call appears as **one** nested trace:
+   `teamwork_coach_run` → graph nodes (privacy, diagnosis/retrieval, advice, validation, …) → LLM and retrieval spans.
+
+Raw reflections are omitted from telemetry; sensitive fields are redacted before upload.
 
 ## Run
 

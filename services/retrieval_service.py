@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 
 from langchain_chroma import Chroma
+from langsmith import traceable
 
 from config.settings import Settings, get_settings
 from contract import CitationMetadata, RetrievedEvidence, TeamworkDiagnosis
@@ -45,6 +46,7 @@ def get_vectorstore(settings: Settings | None = None) -> Chroma:
     )
 
 
+@traceable(name="retrieve_evidence", run_type="retriever")
 def retrieve_evidence(
     reflection: str,
     diagnosis: TeamworkDiagnosis | None = None,

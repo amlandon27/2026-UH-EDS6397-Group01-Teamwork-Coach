@@ -153,6 +153,7 @@ The MVP will demonstrate this end-to-end outcome:
 - High-risk escalation
 - Safe fallback
 - Synthetic and de-identified evaluation cases
+- LangSmith end-to-end nested tracing (optional, sanitized; one trace per coach run)
 
 ### Deferred
 
@@ -163,7 +164,7 @@ The MVP will demonstrate this end-to-end outcome:
 - Multi-institution deployment
 - Advanced indirect-identifier detection
 - Production authentication
-- Large-scale observability
+- Large-scale multi-tenant observability beyond LangSmith
 - Automatic sentence-level citation entailment
 - Full document-ingestion pipeline replacing the hand-built corpus
 
@@ -590,6 +591,7 @@ For the MVP:
 
 - Only redacted text is processed downstream.
 - Raw reflections are not sent to external telemetry.
+- When LangSmith tracing is enabled, telemetry payloads omit `raw_input` and PII-redact other sensitive string fields before upload.
 - Logs are sanitized.
 - Evaluation cases are synthetic or de-identified.
 - User history is not retained beyond the session.
@@ -687,7 +689,7 @@ The system may use:
 - Approved embedding APIs
 - The project-controlled knowledge base
 - The project vector store
-- Optional sanitized telemetry
+- Optional LangSmith tracing with sanitized payloads (raw reflections omitted)
 
 The system must not access:
 
@@ -716,7 +718,7 @@ No LLM node should receive an external operational tool registry.
 - Pydantic v2
 - pytest
 - python-dotenv
-- Optional LangSmith with sanitized telemetry
+- LangSmith (optional, sanitized nested tracing; configurable via env)
 
 ### Selected MVP stack
 
@@ -726,6 +728,7 @@ No LLM node should receive an external operational tool registry.
 | Embedding model | `sentence-transformers/all-MiniLM-L6-v2` (local) |
 | Vector store | ChromaDB (local) |
 | Interface | Streamlit |
+| Observability | LangSmith (optional; one nested trace per `run_coach` call; sanitized) |
 | Evidence corpus (MVP) | Hand-built tagged chunks; replaceable with fuller ingestion later |
 
 ### RAG components
@@ -896,7 +899,6 @@ Each test should record:
 ```text
 /teamwork-leadership-coach/
 ├── README.md
-├── DESIGN_DOCS.md
 ├── requirements.txt
 ├── .env.example
 ├── contract.py
@@ -937,7 +939,8 @@ Each test should record:
 ├── services/
 │   ├── llm_service.py
 │   ├── embedding_service.py
-│   └── retrieval_service.py
+│   ├── retrieval_service.py
+│   └── tracing_service.py
 │
 ├── interface/
 │   └── app.py
@@ -1007,6 +1010,7 @@ The final prototype should demonstrate:
 - External-tool restrictions
 - Quantitative evaluation
 - A modular LangGraph workflow
+- End-to-end LangSmith observability (optional, sanitized nested traces)
 
 ---
 
@@ -1044,7 +1048,7 @@ The final prototype should demonstrate:
 | MVP corpus approach     | Hand-built tagged evidence chunks; replaceable with fuller ingestion later                    | Selected |
 | Data retention          | Session-only recommended for MVP                                                              | Proposed |
 | Demo inputs             | Synthetic or de-identified                                                                    | Proposed |
-| LangSmith               | Optional, sanitized, and configurable                                                         | Open     |
+| LangSmith               | Optional nested end-to-end tracing; sanitized (raw input omitted); project `teamwork-leadership-coach` | Selected |
 | Maximum rounds          | Five                                                                                          | Proposed |
 | Contract                | Root-level frozen `contract.py`                                                               | Selected |
 

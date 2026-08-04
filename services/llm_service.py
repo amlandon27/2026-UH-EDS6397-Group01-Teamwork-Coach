@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Type, TypeVar
 
 from langchain_google_genai import ChatGoogleGenerativeAI
+from langsmith import traceable
 from pydantic import BaseModel
 
 from config.settings import Settings, get_settings
@@ -25,6 +26,7 @@ def get_chat_model(settings: Settings | None = None) -> ChatGoogleGenerativeAI:
     )
 
 
+@traceable(name="structured_llm_invoke", run_type="llm")
 def structured_invoke(
     schema: Type[T],
     system_prompt: str,

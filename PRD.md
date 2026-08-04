@@ -198,6 +198,11 @@ Validation
 
 Diagnosis and retrieval remain conceptually separate but will be implemented in one LangGraph node for the MVP.
 
+The MVP uses a one-shot interaction model: one student reflection produces one
+validated response. It does not provide a user-facing conversation loop or retain
+cross-session memory. The single repair attempt is an internal validation step,
+not an additional conversation round.
+
 ---
 
 ## 8. Knowledge Base Design
@@ -782,7 +787,7 @@ Key state fields should include:
 raw_input:
 redacted_input:
 student_goal:
-round_number:
+round_number: 1  # Fixed for the one-shot MVP; not a user conversation counter.
 regeneration_count:
 pii_detected:
 diagnosis_payload:
@@ -1037,7 +1042,7 @@ The final prototype should demonstrate:
 | PII user flow           | Automatic redaction before downstream processing; show redacted text in UI                    | Selected |
 | Validation              | Required before display                                                                       | Selected |
 | High-risk behavior      | Stop coaching and show generic plus UH resources                                              | Selected |
-| Repair                  | One controlled repair attempt                                                                 | Proposed |
+| Internal repair         | At most one controlled internal repair attempt                                                 | Selected |
 | External tools          | No operational tools or user actions                                                          | Selected |
 | Framework               | Python, LangGraph, LangChain Core, Pydantic                                                   | Selected |
 | LLM provider            | Google Gemini 3.5 Flash                                                                       | Selected |
@@ -1045,10 +1050,12 @@ The final prototype should demonstrate:
 | Vector store            | ChromaDB (local)                                                                              | Selected |
 | Interface               | Streamlit                                                                                     | Selected |
 | MVP corpus approach     | Hand-built tagged evidence chunks; replaceable with fuller ingestion later                    | Selected |
-| Data retention          | Session-only recommended for MVP                                                              | Proposed |
+| Data retention          | Session-only for the MVP                                                                      | Selected |
+| Cross-session memory    | None                                                                                          | Selected |
 | Demo inputs             | Synthetic or de-identified                                                                    | Proposed |
 | LangSmith               | Optional nested end-to-end tracing; sanitized (raw input omitted); project `teamwork-leadership-coach` | Selected |
-| Maximum rounds          | Five                                                                                          | Proposed |
+| User interaction        | One reflection produces one validated response                                                 | Selected |
+| Conversational rounds   | No user-facing conversation loop in the MVP                                                    | Selected |
 | Contract                | Root-level frozen `contract.py`                                                               | Selected |
 
 

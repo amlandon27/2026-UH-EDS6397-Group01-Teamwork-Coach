@@ -989,7 +989,6 @@ Each test should record:
 - Data privacy
 - System reliability
 
-Roles may be adjusted after the shared contract and architecture are finalized.
 
 ---
 

@@ -1,0 +1,15 @@
+# Tagging Guide (MVP)
+
+## Rules
+
+1. Tag at the chunk level only.
+2. Use controlled vocabulary from `config/teamwork_taxonomy.yaml`.
+3. Mark an intervention as `supported_intervention_tags` only when the chunk gives evidence or implementation guidance for it.
+4. Use `mentioned_intervention_tags` when an intervention is named without support.
+5. Prefer observable signals over motive claims.
+6. Record limitations and applicable contexts.
+7. LLM may suggest tags; a human must approve before corpus inclusion (`human_reviewed: true`).
+
+## MVP note
+
+This corpus is hand-built for the demo. Replace with fuller ingestion later without changing chunk metadata fields.

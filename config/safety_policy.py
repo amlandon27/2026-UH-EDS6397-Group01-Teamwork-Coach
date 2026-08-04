@@ -1,0 +1,83 @@
+"""Safety policy keywords and prohibited advice patterns for MVP heuristics."""
+
+from __future__ import annotations
+
+HIGH_RISK_KEYWORDS: list[str] = [
+    "suicide",
+    "kill myself",
+    "self-harm",
+    "self harm",
+    "cut myself",
+    "want to die",
+    "end my life",
+    "homicide",
+    "kill them",
+    "kill him",
+    "kill her",
+    "shoot",
+    "weapon",
+    "gun",
+    "bomb",
+    "threaten",
+    "stalking",
+    "stalker",
+    "rape",
+    "sexual assault",
+    "sexual harassment",
+    "molest",
+    "abuse me",
+    "domestic violence",
+    "immediate danger",
+    "afraid for my safety",
+    "afraid for their safety",
+    "discriminat",
+    "racist",
+    "sexist",
+    "homophobic",
+    "slur",
+    "title ix",
+    "plagiar",
+    "cheat on the exam",
+    "fabricate data",
+    "lawsuit",
+    "lawyer",
+    "illegal",
+    "overdose",
+    "psychiatric",
+    "mental breakdown",
+]
+
+PROHIBITED_ADVICE_PATTERNS: list[str] = [
+    r"\bretaliat",
+    r"\bhumiliat",
+    r"\bembarrass them\b",
+    r"\blie to\b",
+    r"\bdeceiv",
+    r"\bmanipulat",
+    r"\bcoerc",
+    r"\bthreaten (them|him|her|your teammate)",
+    r"\bexclude them permanently\b",
+    r"\bpublicly shame\b",
+    r"\bdo not report\b",
+    r"\bdon't report\b",
+    r"\bhide (the|this) (misconduct|harassment|violence)\b",
+]
+
+MOTIVE_CLAIM_PATTERNS: list[str] = [
+    r"\bthey (are|were) lazy\b",
+    r"\bthey don't care\b",
+    r"\bthey do not care\b",
+    r"\bintentionally sabotag",
+    r"\bbecause they are (a )?(bad|toxic|evil|selfish)",
+    r"\btheir motive\b",
+    r"\bthey want to hurt\b",
+]
+
+OVERCONFIDENCE_PATTERNS: list[str] = [
+    r"\bcertainly\b",
+    r"\bdefinitely\b",
+    r"\bobviously\b",
+    r"\bwithout (a )?doubt\b",
+    r"\bthe only explanation\b",
+    r"\bmust be that they\b",
+]

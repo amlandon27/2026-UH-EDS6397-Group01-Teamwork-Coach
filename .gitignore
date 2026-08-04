@@ -157,6 +157,12 @@ ENV/
 env.bak/
 venv.bak/
 
+# Local vector store / model caches
+.chroma/
+.cache/
+*.bin
+sentence-transformers/
+
 # Spyder project settings
 .spyderproject
 .spyproject

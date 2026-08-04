@@ -1,9 +1,11 @@
-"""Routing tests that do not require an LLM API key."""
+"""Routing and workflow topology tests that do not require an LLM API key."""
 
 from agents.coordinator import (
+    _increment_repair,
     _route_after_privacy,
     _route_after_retrieval,
     _route_after_validation,
+    build_graph,
 )
 from agents.escalation_node import escalation_node
 from agents.fallback_node import fallback_node
@@ -11,50 +13,212 @@ from agents.privacy_risk_node import privacy_and_risk_node
 from contract import AgentState, ValidationResult
 
 
-def test_privacy_node_redacts_and_flags_risk():
+def test_privacy_node_redacts_pii_and_flags_high_risk():
     out = privacy_and_risk_node(
-        {"raw_input": "Teammate Alex Rivera said they may be in immediate danger."}
+        {
+            "raw_input": (
+                "A teammate emailed from teammate@example.com and said "
+                "I may be in immediate danger."
+            )
+        }
     )
+
     assert out["pii_detected"] is True
-    assert "Alex Rivera" not in out["redacted_input"]
+    assert "teammate@example.com" not in out["redacted_input"]
+    assert "[EMAIL]" in out["redacted_input"]
     assert out["high_risk_detected"] is True
     assert out["escalation_required"] is True
 
 
-def test_route_privacy_to_escalation():
-    state = AgentState(raw_input="x", escalation_required=True, high_risk_detected=True)
+def test_route_normal_privacy_result_to_diagnosis_and_retrieval():
+    state = AgentState(
+        raw_input="x",
+        escalation_required=False,
+        high_risk_detected=False,
+    )
+
+    assert _route_after_privacy(state) == "diagnosis_retrieval"
+
+
+def test_route_high_risk_privacy_result_to_escalation():
+    state = AgentState(
+        raw_input="x",
+        escalation_required=True,
+        high_risk_detected=True,
+    )
+
     assert _route_after_privacy(state) == "escalation"
 
 
+def test_route_sufficient_evidence_to_advice():
+    state = AgentState(
+        raw_input="x",
+        retrieval_sufficient=True,
+    )
+
+    assert _route_after_retrieval(state) == "advice"
+
+
 def test_route_insufficient_evidence_to_fallback():
-    state = AgentState(raw_input="x", retrieval_sufficient=False)
+    state = AgentState(
+        raw_input="x",
+        retrieval_sufficient=False,
+    )
+
     assert _route_after_retrieval(state) == "fallback"
 
 
-def test_route_repair_then_fallback():
+def test_route_missing_validation_result_to_fallback():
+    state = AgentState(
+        raw_input="x",
+        validation_result=None,
+    )
+
+    assert _route_after_validation(state) == "fallback"
+
+
+def test_route_validation_escalation_to_escalation():
+    state = AgentState(
+        raw_input="x",
+        validation_result=ValidationResult(
+            safe_to_display=False,
+            escalation_required=True,
+            repairable=False,
+            reasons=["human support required"],
+        ),
+    )
+
+    assert _route_after_validation(state) == "escalation"
+
+
+def test_route_safe_validation_result_to_finalize():
+    state = AgentState(
+        raw_input="x",
+        validation_result=ValidationResult(
+            safe_to_display=True,
+            escalation_required=False,
+            repairable=False,
+            reasons=[],
+        ),
+    )
+
+    assert _route_after_validation(state) == "finalize"
+
+
+def test_route_repairable_result_to_single_repair_attempt():
     state = AgentState(
         raw_input="x",
         regeneration_count=0,
         validation_result=ValidationResult(
-            safe_to_display=False, repairable=True, reasons=["missing citation"]
+            safe_to_display=False,
+            escalation_required=False,
+            repairable=True,
+            reasons=["missing citation"],
         ),
     )
+
     assert _route_after_validation(state) == "repair"
 
     state.regeneration_count = 1
     assert _route_after_validation(state) == "fallback"
 
 
-def test_escalation_and_fallback_nodes():
-    esc = escalation_node({"redacted_input": "redacted", "pii_detected": False})
-    assert esc["final_response"].route == "escalation"
-    assert esc["final_response"].resources
+def test_route_nonrepairable_validation_failure_to_fallback():
+    state = AgentState(
+        raw_input="x",
+        regeneration_count=0,
+        validation_result=ValidationResult(
+            safe_to_display=False,
+            escalation_required=False,
+            repairable=False,
+            reasons=["unsafe advice"],
+        ),
+    )
 
-    fb = fallback_node(
+    assert _route_after_validation(state) == "fallback"
+
+
+def test_increment_repair_increases_counter_without_other_state_changes():
+    out = _increment_repair({"regeneration_count": 0})
+
+    assert out == {"regeneration_count": 1}
+
+
+def test_increment_repair_handles_missing_counter():
+    out = _increment_repair({})
+
+    assert out == {"regeneration_count": 1}
+
+
+def test_escalation_node_returns_terminal_resource_response():
+    out = escalation_node(
+        {
+            "redacted_input": "redacted",
+            "pii_detected": False,
+        }
+    )
+
+    assert out["final_response"].route == "escalation"
+    assert out["final_response"].resources
+    assert out["safe_to_display"] is True
+    assert out["escalation_required"] is True
+
+
+def test_fallback_node_returns_terminal_abstention_response():
+    out = fallback_node(
         {
             "redacted_input": "redacted",
             "retrieval_sufficient": False,
             "validation_result": None,
         }
     )
-    assert fb["final_response"].route == "fallback"
+
+    assert out["final_response"].route == "fallback"
+    assert out["final_response"].citations == []
+    assert out["safe_to_display"] is True
+
+
+def test_compiled_graph_contains_expected_nodes():
+    graph = build_graph().get_graph()
+
+    assert set(graph.nodes) == {
+        "__start__",
+        "__end__",
+        "privacy_risk",
+        "diagnosis_retrieval",
+        "advice",
+        "validation",
+        "repair_increment",
+        "finalize",
+        "fallback",
+        "escalation",
+    }
+
+
+def test_compiled_graph_contains_expected_workflow_edges():
+    graph = build_graph().get_graph()
+    edges = {
+        (
+            edge.source,
+            edge.target,
+            bool(edge.conditional),
+        )
+        for edge in graph.edges
+    }
+
+    assert edges == {
+        ("__start__", "privacy_risk", False),
+        ("privacy_risk", "diagnosis_retrieval", True),
+        ("privacy_risk", "escalation", True),
+        ("diagnosis_retrieval", "advice", True),
+        ("diagnosis_retrieval", "fallback", True),
+        ("advice", "validation", False),
+        ("validation", "finalize", True),
+        ("validation", "repair_increment", True),
+        ("validation", "fallback", True),
+        ("validation", "escalation", True),
+        ("repair_increment", "advice", False),
+        ("finalize", "__end__", False),
+        ("fallback", "__end__", False),
+        ("escalation", "__end__", False),
+    }

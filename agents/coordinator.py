@@ -17,6 +17,25 @@ from config.settings import get_settings
 from contract import AgentState
 
 
+def _privacy_boundary(state: Any) -> dict[str, Any]:
+    """Remove raw identifiers before workflow state reaches downstream nodes."""
+    update = dict(privacy_and_risk_node(state))
+
+    sanitized_spans = [
+        {
+            key: value
+            for key, value in span.items()
+            if key != "text"
+        }
+        for span in update.get("pii_spans", [])
+        if isinstance(span, dict)
+    ]
+
+    update["raw_input"] = ""
+    update["pii_spans"] = sanitized_spans
+    return update
+
+
 def _route_after_privacy(state: AgentState) -> Literal["escalation", "diagnosis_retrieval"]:
     if state.escalation_required or state.high_risk_detected:
         return "escalation"
@@ -54,7 +73,7 @@ def _increment_repair(state: Any) -> dict[str, Any]:
 def build_graph():
     graph = StateGraph(AgentState)
 
-    graph.add_node("privacy_risk", privacy_and_risk_node)
+    graph.add_node("privacy_risk", _privacy_boundary)
     graph.add_node("diagnosis_retrieval", diagnosis_retrieval_node)
     graph.add_node("advice", advice_agent)
     graph.add_node("validation", validation_agent)

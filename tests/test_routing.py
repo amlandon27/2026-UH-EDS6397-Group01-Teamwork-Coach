@@ -2,6 +2,7 @@
 
 from agents.coordinator import (
     _increment_repair,
+    _privacy_boundary,
     _route_after_privacy,
     _route_after_retrieval,
     _route_after_validation,
@@ -28,6 +29,52 @@ def test_privacy_node_redacts_pii_and_flags_high_risk():
     assert "[EMAIL]" in out["redacted_input"]
     assert out["high_risk_detected"] is True
     assert out["escalation_required"] is True
+
+
+def test_privacy_boundary_removes_raw_pii_from_state_update():
+    email = "student@example.com"
+    phone = "713-555-0100"
+    out = _privacy_boundary(
+        {
+            "raw_input": (
+                f"Email {email} or call {phone}. "
+                "I may be in immediate danger."
+            )
+        }
+    )
+
+    assert out["raw_input"] == ""
+    assert email not in out["redacted_input"]
+    assert phone not in out["redacted_input"]
+    assert out["pii_detected"] is True
+    assert out["pii_spans"]
+    assert all("text" not in span for span in out["pii_spans"])
+    assert email not in str(out)
+    assert phone not in str(out)
+
+
+def test_compiled_graph_does_not_retain_raw_pii_after_privacy_boundary():
+    email = "student@example.com"
+    phone = "713-555-0100"
+    result = build_graph().invoke(
+        {
+            "raw_input": (
+                f"Email {email} or call {phone}. "
+                "I may be in immediate danger."
+            )
+        }
+    )
+
+    state_view = (
+        result.model_dump()
+        if isinstance(result, AgentState)
+        else result
+    )
+
+    assert state_view["raw_input"] == ""
+    assert all("text" not in span for span in state_view["pii_spans"])
+    assert email not in str(state_view)
+    assert phone not in str(state_view)
 
 
 def test_route_normal_privacy_result_to_diagnosis_and_retrieval():

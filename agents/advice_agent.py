@@ -27,6 +27,8 @@ Rules:
 def advice_agent(state: Any) -> dict[str, Any]:
     diagnosis: TeamworkDiagnosis = state_get(state, "diagnosis_payload")
     evidence: list[RetrievedEvidence] = state_get(state, "retrieved_evidence", []) or []
+    if not evidence:
+        return {"draft_recommendation": None}
     reflection = state_get(state, "redacted_input", "") or ""
     repair_notes = state_get(state, "validation_result")
 

@@ -25,6 +25,18 @@ Decisions made while building the MVP. Keep entries short and dated.
 - No long-term memory or auth in MVP.
 - Session-only: no persistent student profiles.
 
+## 2026-08-04 — Evaluation harness
+
+| Decision | Choice | Rationale |
+| --- | --- | --- |
+| Eval layout | `evaluation/` package + `cases/golden_seed.json` | Matches PRD tree; keeps scoring separate from app runtime |
+| Metrics core | Deterministic first (route, retrieval, citations, PII, gates) | Reliable CI; no judge drift |
+| LLM rubric | Optional `--rubric` only | Costly; needs human calibration |
+| State capture | Invoke full LangGraph state (not FinalResponse-only) | Needed for retrieval + validation metrics |
+| Seed size | 72 stratified synthetic cases (generator script) | Course-credible coverage across taxonomy + safety |
+| Baseline | LLM-only advice-quality compare (`actionability`, phrases, optional rubric) | Avoid fake wins on citation/retrieval/gates |
+| Scorecard | `latest_scorecard.md` with readiness + gates + suite rollup | One-page stakeholder summary; rebuild with `--system scorecard` |
+
 ## 2026-08-03 — Implementation choices during build
 
 | Decision | Choice | Rationale |

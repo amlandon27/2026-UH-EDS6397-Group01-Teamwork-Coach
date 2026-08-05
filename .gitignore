@@ -163,6 +163,9 @@ venv.bak/
 *.bin
 sentence-transformers/
 
+# Evaluation run artifacts
+evaluation/reports/
+
 # Spyder project settings
 .spyderproject
 .spyproject

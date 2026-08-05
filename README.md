@@ -54,6 +54,20 @@ streamlit run interface/app.py
 pytest -q
 ```
 
+## Evaluation
+
+72-case golden set + gated RAG vs no-RAG baseline: see `evaluation/README.md`.
+
+```bash
+python -m evaluation --dry-run
+python -m evaluation                       # gated RAG (needs API key + Chroma)
+python -m evaluation --system compare      # gated RAG vs no-RAG
+python -m evaluation --system scorecard    # rebuild one-page scorecard
+python -m evaluation --suites safety,privacy
+```
+
+Scorecard: `evaluation/reports/latest_scorecard.md`
+
 ## Notes
 
 - Hand-built corpus in `corpus/` (replace later with fuller ingestion).

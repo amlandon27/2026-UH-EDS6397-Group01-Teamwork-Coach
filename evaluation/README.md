@@ -61,7 +61,7 @@ python -m evaluation.cases.generate_golden_seed
 python -m evaluation --system scorecard
 ```
 
-Reports land in `evaluation/reports/` (`latest.md`, `latest_no_rag.md`, `latest_compare.md`, `latest_pairwise.md`, `latest_scorecard.md`).
+Reports land in `evaluation/reports/` (`latest.md`, `latest_no_rag.md`, `latest_compare.md`, `latest_pairwise.md`, `latest_preference.md`, `latest_scorecard.md`).
 
 ## Pairwise human review
 
@@ -130,14 +130,26 @@ Chunk-id `retrieval_recall_at_k` / `retrieval_precision_at_k` are **not scored**
 
 ## Optional LLM rubric (`--system rubric`)
 
-Scores saved coaching answers 1–5 on:
+PRD-aligned LLM-as-judge for **coaching-suite** answers already saved in reports.
 
-- observation vs interpretation
-- actionability
-- proportionality
-- evidence alignment
-- scope fidelity
-- non-accusatory tone
+Absolute dimensions (1–5; pass ≥4):
+
+- `observation_vs_interpretation` — observable behavior vs motive/character claims
+- `actionability` — specific, feasible next steps
+- `proportionality` — advice scaled to severity
+- `evidence_to_action` — grounded in cites when present; LLM-only capped conceptually at generic advice
+- `scope_fidelity` — teamwork/leadership only
+- `tone_non_accusatory` — respectful, non-shaming
+- `calibrated_certainty` — no overclaiming / blame verdicts
+- `student_agency` — encourage without commanding
+
+Also emits `rubric_no_weak_dimension` (no dim ≤3) and `rubric_min_dimension`.
+
+After absolute scoring, runs **pairwise preference** (gated vs no-RAG) and writes
+`latest_preference.md` / `.json`. Win rate is the main discriminative compare signal.
+
+Uses structured LLM output (with hardened JSON salvage) and passes retrieved/cited
+chunk IDs into the judge so evidence scoring is product-aware.
 
 **Preferred workflow:** run `--system compare` first (writes `latest_gated_rag.json` + `latest_no_rag.json`), then:
 
@@ -145,9 +157,11 @@ Scores saved coaching answers 1–5 on:
 python -m evaluation --system rubric
 ```
 
-That judges both systems’ already-saved answers, writes `rubric_*` metrics back into the reports, and refreshes compare + scorecard. Use `--suites` / `--case-ids` to limit which coaching cases are judged. Live `--rubric` on a coach run still works but re-pays for generation unnecessarily.
+Defaults to `--suites coaching`. Widen with `--suites coaching,privacy` if needed.
+Live `--rubric` on a coach run still works but re-pays for generation unnecessarily.
 
-**Calibrate** against a human sample (instructor/TA) before treating means as absolute truth. Industry practice treats LLM-as-judge as a scalable proxy, not a replacement for expert review.
+**Calibrate** against a human sample (instructor/TA) before treating means as absolute truth.
+Prefer pairwise win-rate and `% cases with any weak dim` over raw means (means inflate easily).
 
 ## Baseline definition (`no_rag` / LLM-only)
 

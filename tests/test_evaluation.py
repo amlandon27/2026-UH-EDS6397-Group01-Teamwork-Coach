@@ -325,13 +325,15 @@ def test_attach_rubric_scores_replaces_prior_metrics(monkeypatch):
     monkeypatch.setattr(
         rubric_mod,
         "judge_coaching_quality",
-        lambda _case, _obs: {
+        lambda _case, _obs, system="gated_rag": {
             "observation_vs_interpretation": 5,
             "actionability": 4,
             "proportionality": 4,
-            "evidence_alignment": 3,
+            "evidence_to_action": 3,
             "scope_fidelity": 5,
             "tone_non_accusatory": 5,
+            "calibrated_certainty": 4,
+            "student_agency": 5,
             "overall_notes": "unit",
         },
     )
@@ -340,8 +342,36 @@ def test_attach_rubric_scores_replaces_prior_metrics(monkeypatch):
     assert by_name["actionability"].value == 1.0
     assert by_name["rubric_actionability"].value == 0.8
     assert by_name["rubric_actionability"].passed is True
+    assert by_name["rubric_evidence_to_action"].value == 0.6
+    assert by_name["rubric_evidence_to_action"].passed is False
+    assert by_name["rubric_no_weak_dimension"].passed is False
+    assert by_name["rubric_min_dimension"].detail.startswith("min=3")
     assert result.rubric["actionability"] == 4
-    assert sum(1 for m in result.metrics if m.name.startswith("rubric_")) == 6
+    assert sum(1 for m in result.metrics if m.name.startswith("rubric_")) == 10
+
+
+def test_parse_rubric_json_salvages_wrapped_gemini_text():
+    """Tonight's failure mode: markdown JSON inside a stringified text blob."""
+    from evaluation.rubric import _parse_rubric_json
+
+    raw = (
+        "{'type': 'text', 'text': '```json\\n{\\n"
+        '  "observation_vs_interpretation": 5,\\n'
+        '  "actionability": 4,\\n'
+        '  "proportionality": 5,\\n'
+        '  "evidence_to_action": 3,\\n'
+        '  "scope_fidelity": 5,\\n'
+        '  "tone_non_accusatory": 5,\\n'
+        '  "calibrated_certainty": 4,\\n'
+        '  "student_agency": 5,\\n'
+        '  "overall_notes": "ok"\\n'
+        "}\\n```'}"
+    )
+    parsed = _parse_rubric_json(raw)
+    assert parsed.get("parse_error") is not True
+    assert parsed["actionability"] == 4
+    assert parsed["evidence_to_action"] == 3
+    assert parsed["calibrated_certainty"] == 4
 
 
 def test_run_rubric_on_reports_offline(tmp_path: Path, monkeypatch):
@@ -349,7 +379,7 @@ def test_run_rubric_on_reports_offline(tmp_path: Path, monkeypatch):
     from evaluation import rubric as rubric_mod
     from evaluation.report import write_report
     from evaluation.runner import run_rubric_on_reports
-    from evaluation.schema import CaseResult, EvalReport
+    from evaluation.schema import CaseResult, EvalReport, PreferenceReport
 
     case = EvalCase(
         case_id="offline_rubric_01",
@@ -369,6 +399,8 @@ def test_run_rubric_on_reports_offline(tmp_path: Path, monkeypatch):
                 observed=ObservedRun(
                     route="coaching",
                     student_facing_text="Gated: share a RACI.",
+                    cited_chunk_ids=["chk_1"],
+                    retrieved_chunk_ids=["chk_1"],
                 ),
             ),
             CaseResult(
@@ -399,14 +431,26 @@ def test_run_rubric_on_reports_offline(tmp_path: Path, monkeypatch):
     monkeypatch.setattr(
         rubric_mod,
         "judge_coaching_quality",
-        lambda _case, observed: {
+        lambda _case, observed, system="gated_rag": {
             "observation_vs_interpretation": 5,
             "actionability": 4 if "RACI" in (observed.student_facing_text or "") else 2,
             "proportionality": 4,
-            "evidence_alignment": 4,
+            "evidence_to_action": 4 if system == "gated_rag" else 3,
             "scope_fidelity": 5,
             "tone_non_accusatory": 5,
+            "calibrated_certainty": 4,
+            "student_agency": 5,
             "overall_notes": "mocked",
+        },
+    )
+    monkeypatch.setattr(
+        rubric_mod,
+        "judge_pairwise_preference",
+        lambda _case, _g, _n: {
+            "winner": "gated_rag",
+            "confidence": "high",
+            "decisive_dimensions": ["evidence_to_action"],
+            "rationale": "Cited RACI advice beats generic talk.",
         },
     )
     monkeypatch.setattr(
@@ -423,11 +467,21 @@ def test_run_rubric_on_reports_offline(tmp_path: Path, monkeypatch):
     coaching = next(c for c in gated_out.cases if c.case_id == case.case_id)
     safety = next(c for c in gated_out.cases if c.case_id == "safety_skip")
     assert coaching.rubric["actionability"] == 4
+    assert coaching.rubric["evidence_to_action"] == 4
     assert any(m.name == "rubric_actionability" for m in coaching.metrics)
+    assert any(m.name == "rubric_calibrated_certainty" for m in coaching.metrics)
     assert safety.rubric == {}
     assert any(a.name.startswith("rubric_") for a in gated_out.aggregates)
     assert (tmp_path / "latest_compare.json").exists()
     assert (tmp_path / "latest_scorecard.md").exists()
+    assert (tmp_path / "latest_preference.json").exists()
+    pref = PreferenceReport.model_validate(
+        json.loads((tmp_path / "latest_preference.json").read_text(encoding="utf-8"))
+    )
+    assert pref.gated_wins == 1
+    assert pref.gated_win_rate == 1.0
+    compare = json.loads((tmp_path / "latest_compare.json").read_text(encoding="utf-8"))
+    assert compare["preference"]["gated_wins"] == 1
 
 
 def test_pairwise_report_from_eval_reports(tmp_path: Path):

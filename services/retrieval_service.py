@@ -13,6 +13,31 @@ from contract import CitationMetadata, RetrievedEvidence, TeamworkDiagnosis
 from services.embedding_service import get_embedding_model
 
 
+def _synthesize_citation_text(item: dict) -> str:
+    """Prefer stored citation_text; otherwise build from title/authors/year."""
+    text = (item.get("citation_text") or "").strip()
+    if text:
+        return text
+
+    title = (item.get("source_title") or "").strip()
+    authors = (item.get("authors") or "").strip() or None
+    year = item.get("publication_year")
+    publication = (item.get("publication_title") or "").strip()
+
+    if authors and year and title:
+        return f"{authors} ({year}). {title}."
+    if authors and title:
+        return f"{authors}. {title}."
+    if title and year:
+        return f"{title} ({year})."
+    if title:
+        return title
+    if publication:
+        return publication
+    key = (item.get("citation_key") or item.get("source_id") or "Source").strip()
+    return key.replace("_", " ")
+
+
 def _load_sources(corpus_dir: Path) -> dict[str, CitationMetadata]:
     path = corpus_dir / "sources" / "sources.json"
     raw = json.loads(path.read_text(encoding="utf-8"))
@@ -20,7 +45,7 @@ def _load_sources(corpus_dir: Path) -> dict[str, CitationMetadata]:
         item["source_id"]: CitationMetadata(
             source_id=item["source_id"],
             citation_key=item.get("citation_key") or item["source_id"],
-            citation_text=item.get("citation_text") or "",
+            citation_text=_synthesize_citation_text(item),
             authors=item.get("authors"),
             publication_year=item.get("publication_year"),
             source_title=item.get("source_title"),

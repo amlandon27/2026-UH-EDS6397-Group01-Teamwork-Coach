@@ -1,0 +1,23 @@
+**Team science training in an engineering design program improves psychological safety and self-efficacy within interdisciplinary teams**
+
+**Authors:**
+Erin Blakeney, Soyoung Kang, Nicole Summerside, Jonathan Liu, Eric Siebel, Brenda Zierler, and Jonathan Posner
+
+**Abstract**
+
+**Impact:**
+This project successfully implemented a promising team science model by introducing and facilitating best practices to develop high-functioning teams working to accelerate health innovations from bench to bedside.
+
+**Objectives/Goals:**
+The goal of this project was to improve the team science knowledge, skills, and attitudes of interdisciplinary engineering students (undergraduate and graduate) who were partnered with health professionals to develop technical solutions to translational health challenges during a year-long Engineering Innovation in Health (EIH) program.
+
+**Methods/Study Population:**
+The team adapted, implemented, and evaluated team science training content and approaches within the EIH program at the University of Washington (UW). EIH faculty and the UW Institute for Translational Health Sciences (ITHS) Team Science Core co-developed and delivered highly interactive team science training modules. Their impact was evaluated through biannual surveys. A student cohort that received the training served as the intervention group, while a previous cohort served as the baseline.
+
+Descriptive statistics were used to summarize student demographics and survey responses within and between years. Median and interquartile range of responses to Likert-type questions were calculated, and Mann–Whitney U tests (implemented in R using the Wilcoxon Rank Sum Test) were used to compare differences within and between years.
+
+**Results/Anticipated Results:**
+Student demographics were similar during both the baseline and implementation years in terms of gender and previous experience working in teams. Team science training during the first year of implementation was well received. After implementation, students demonstrated measurable improvements in team dynamics, communication, and effectiveness. Students also reported higher levels of psychological safety and self-efficacy within their teams. Comparisons between the implementation year and the baseline year identified numerous statistically significant improvements.
+
+**Discussion/Significance of Impact:**
+Tailored team science training within an interdisciplinary Engineering Innovation in Health (EIH) program was successful in improving psychological safety and self-efficacy among undergraduate and graduate students. The program offers a promising model for similar educational settings and audiences.

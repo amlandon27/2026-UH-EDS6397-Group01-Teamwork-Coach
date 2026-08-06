@@ -1,0 +1,87 @@
+Transcript of the Podcast: HBR Podcast: The Right Way to Collaborate (If You Must)
+
+SARAH GREEN: Welcome to the Harvard Business Review IdeaCast. I’m Sarah Green. I’m joined today by Morten Hansen, a Professor at the University of California Berkeley School of Information, and at INSEAD in France. He’s the author of Collaboration: How Leaders Avoid the Traps, Create Unity, and Reap Big Results.
+
+Morten, thanks for talking with us today.
+
+MORTEN HANSEN: It’s a pleasure, Sarah.
+
+SARAH GREEN: Something you talk about in the book is when not to collaborate, which caught my attention, because I think there’s so much focus in every workplace on breaking down the silos. So tell us when we shouldn’t be collaborating.
+
+MORTEN HANSEN: Collaboration is everywhere in business these days. Sometimes it’s over-done. It’s everywhere in government as well, and sometimes it’s not very effective. So there’s a right way and there is a wrong way to collaborate. What my study shows is that the first thing is you’ve got to have a very compelling benefit before you collaborate. You need to be picky and scrutinize every project. And that’s the first rule of good collaboration.
+
+SARAH GREEN: Something you’ve said that you see managers falling into sometimes is collaborating for the sake of collaborating; forgetting there’s an actual goal to this working together.
+
+MORTEN HANSEN: Yeah, I mean sometimes you find that the goal of collaboration is collaboration itself. And of course, that is dead wrong. Collaboration is a lot more about find a value where there’s better sales and profit, and then you collaborate. And then you said no– no to projects, we don’t find that compelling value. And that is really about being disciplined about collaboration.
+
+SARAH GREEN: So, when you are looking for the kind of project where you say it does have compelling value, can you give us an example of something where collaboration was worth the return on investment?
+
+MORTEN HANSEN: You find many times that collaboration produced great results. One is, think about the Apple iPod and Sony’s inability to collaborate. Now, in the Apple iPod, that was a tight collaboration inside Apple and with vendors outside, and they were able to produce the first iPod in nine months. So that is a great example of good collaboration. Sony, in contrast, tried to do the same thing, but they could not collaborate across five divisions inside of Sony. So the product that they produced, called Sony Connect, was a flop as a result because it did not have that culture of collaboration in the company.
+
+SARAH GREEN: I think it’s interesting that you brought up Apple as an example of positive collaboration because I think, at least the reputation the company has developed, is it’s sort of all about Steve, right? It’s all about an audience of one. Does Steve Jobs like this product or not? Do you think that’s a fair assessment, or do you think that there is more collaboration happening at Apple than maybe we give credit for?
+
+MORTEN HANSEN: That is hard for outsiders to judge in the case of Apple. We can observe the behaviors and we can see that they are these behaviors of collaboration going on inside the company.
+
+Now, you have other companies where this is maybe more exemplified by the leader– I’m thinking about, for example, John Chambers of Cisco who has cultivated a culture of collaboration inside Cisco. And by now, more than 500 of the managers are working in collaborative groups inside of Cisco. So there you clearly have an example where it has gone from just the leader to much more a widespread phenomenon.
+
+SARAH GREEN: Well, let’s talk a little bit more about what leaders need to do specifically, and if we can use that example to dig into some specifics here.
+
+MORTEN HANSEN: I think the first thing a leader has to do is to change their own style. If you are really command and control, if you like, issuing orders and you don’t listen to anyone, it’s hard to get others to collaborate.
+
+So you need to kind of change your style. And I think that’s what John Chambers has done. He has said that he used to be a command and control leader and now he’s moved much more toward a collaborative leader. And what that means is that you have to delegate more, at least involve other people in the decision-making process. You need to listen well to others. And you need to seek common ground when you are looking for crafting solutions. It cannot be just your own show, you need involve people more. And that kind of style, then you will lead by example, if you follow that kind of style. I think that’s the first thing you have to do as a leader.
+
+And then secondly, I think you have to set a very strong common goal that involves everybody so people can see what are you shooting for together. Of course, the most famous one there is John F. Kennedy’s Man on the Moon speech. But what that did, which I think is the most important, it is that it united the 400,000 people who worked on the moon project. And some of them subordinated their own agendas in pursuit of the common goal.
+
+So, as a leader you have to craft that compelling common goal to unite people, and that’s another thing that we don’t see very much in business. So that’s a very important part to get done.
+
+SARAH GREEN: Something you mention also is that managers need to be T-shaped to collaborate well. That sounds painful. What exactly do you mean by that, and is it, in fact, painful?
+
+MORTEN HANSEN: Yeah, so the idea of a T-shaped– there are some companies out there practicing that. IBM, IDEO, the very successful industrial design firm, for example. So let me use that as an example.
+
+A T-shaped person has two characteristics. It is somebody who can do their own job really well. It’s the salesperson goes out and delivers every quarter. It is the product developer who does the work really well. So at IDEO they have people with different disciplines, people with different strengths. It might be somebody really good at industrial design, architect, mechanical engineer, or graphic designer. That’s the deep skill set you need to do a job really well. That’s a vertical stroke of the t metaphor, if you will, to think about that letter.
+
+But that is not enough. You also need a horizontal stroke of a T, which is that disposition for collaboration, for teamwork, having the right attitude, and being able to work with others. You need to know enough about what they do. You need to have empathy, that is to be able to put yourself in their shoes. And when you have that, you have a person who is a much more well-rounded– they have a deep expertise, they can do their job, and they also have this ability to work with others.
+
+So, T-shaped people have a huge benefit, and that is that they can deliver two kinds of performances: their own individual job, and by working with others. The beauty of a T-shaped is really you don’t need a lot of bureaucracy and a lot of systems to get people to collaborate. If you can cultivate T-shaped people in your company, what you’re getting is people who can do that by themselves. They’re disciplined enough to say, yes to great collaboration project and no to another and they can deliver on it. So it sort of takes care of itself. That’s what you’re seeing in leading edge companies like IDEO.
+
+SARAH GREEN: So, that should be comforting to people who may think that to collaborate better they need to reorganize their entire company. But essentially what you’re saying is that there are personal skills that we can work on and develop and develop in others that make it a much lower barrier to entry to getting collaboration right.
+
+MORTEN HANSEN: Yeah, Sarah, I think that as a leader, one is that you’re actually trying to develop these people. You help them train to kind of improve their muscle, in terms of T-shaped. The other thing you can do as a leader is to change the incentive systems, and that is that if you only reward individual performance, you’re not going to get T-shaped in your company. You’re going to get I-shaped, so to speak.
+
+So, what you need is to change it from a pure individual-based performance system to one that also has a team or component, and that you’re evaluating on these two dimensions, both individual and teamwork. That is tough to do. A lot of leaders don’t want to do that. They don’t want to tinker with their incentive system. But if you want effective collaboration you have no choice but to do that.
+
+SARAH GREEN: We’ve been talking a lot about the positive levers that you would have to move to get collaboration working in your company, how to get it right. But I’d like to also ask you what are some of the biggest mistakes that you have seen over and over in your research on collaboration that maybe we should also be focusing on so we know to avoid them.
+
+MORTEN HANSEN: There are some traps that I identified in my research on collaboration the last 15 years. One that has really surprised me a great deal is that if you walk around in the companies, its over-collaboration. So it isn’t that people don’t collaborate– I think a lot of listeners will resonate with this. A lot of us go to meetings, task forces, projects, cross-functional teams, committees, over and over again, and we wonder is this really producing value?
+
+So you’re seeing companies that are over-promoting collaboration. It’s collaboration run amok. For example, we studied the oil giant, BP. Under the former CEO, John Browne, they did a lot of great collaboration. But at one point in the history they over-collaborate– too many communities of practice, too many people flying around with not a clear focus on the bottom line.
+
+So, when that happens, leaders need to scrutinize, they need to prune collaboration, and need to be much more disciplined about how to collaborate. There is a right way and there is a wrong way to collaborate. The right way is to be disciplined and say no to wasteful collaboration. So that’s one trap you can really fall in to.
+
+SARAH GREEN: So, when we’re talking about collaboration mistakes and examples thereof, you talked about some of President Obama’s collaboration mistakes in a post you wrote for hbr.org, and I think, certainly, if we’re looking for failures of collaboration and teamwork, it seems like a US political system, as it is right now, is a pretty good example. What do you see there as being some of the mistakes or some of the barriers to collaboration?
+
+MORTEN HANSEN: I’m not a political science expert, so I don’t know the system really in depth, but I could say, I’ll just bring in a collaboration lens, and the research to bear on that problem. At the outset I think– well, it’s knowledge that President Obama has probably one of the greatest collaboration challenges ever seen before him, so that’s not an easy job. But if the goal is to collaborate, if the goal is to strike a bipartisanship, then we have to look how they have done, his administration have done over the last year. I think from a collaboration lens, there have been some mistakes made, and he’s trying to rectify some of them as we speak.
+
+One is, I mentioned this idea of having a compelling common goal. So you want to unite people, you need to articulate what the endpoint is in a vivid way. That’s why this Man in the Moon was such a great speech. I think we have to ask the question, what is the Man on the Moon goal for health care reform, for example? That’s not clear. That is not vivid in people’s minds. Something that people can unite behind. So I think he needs to articulate the compelling common goals much more forcefully than he has done so far. That’s one thing that he hasn’t done.
+
+But the other one is collaboration means compromising and finding common ground most of the time. And if people are not trying to be pragmatists and craft solutions that work, you would never get great collaboration. I am based out in California and we have a governor, Schwarzenegger, who has, in the years past, been pretty good at collaboration.
+
+For example, passing laws on a new minimum wage with his democratic opponents here in California, and they were able to do it because they compromised. They found some common ground that worked for both parties. Instead of having a gridlock, they were able to pass that law, and that’s to the benefit of this State. So, that is one thing that you’ll not see very often in a political system, but is necessary.
+
+SARAH GREEN: Well, and of course, you mentioned, I think in the book you talk about how Schwarzenegger didn’t start out that way as being a collaborative type of leader.
+
+MORTEN HANSEN: Yeah, I mean Schwarzenegger, he was a bit like John Chambers. He had a personal transformation in his leadership style. He came into office very much like his movie persona, the terminator. He’s called the Governator out here, and which was to attack the democrats the first time there was opposition.
+
+Then you might remember those very famous quotes there. He was out calling his opponents girlie men, and that did not sit well, of course, with the democrats. It didn’t go anywhere. His approval rating went from more than 60 points to the low 30 points. He lost special election. He was basically defeated with that kind of rhetoric.
+
+But then he had this personal transformation. He changed his style. And he reached out and the democrats responded. The year 2006 has been called one the most productive legislature years in California history. It’s a testimonial to the fact that collaboration, when done properly, does bring great results.
+
+SARAH GREEN: So, for some listeners out there who might be in the position of being leaders who would like to make that kind of transformation themselves, if you could leave them with one thought to take for the rest of their day, what would that be?
+
+MORTEN HANSEN: So I think the most important thing in collaboration is to remember there is a right way and a wrong way to collaborate. It is not about more is better. You’ve got to find that right way, to be disciplined about collaboration. The goal of collaboration is not collaboration, but far better results. And if you have that dictum in your head, you will pick the right project, you will force the common goals, and you will get the results.
+
+SARAH GREEN: Morten Hansen, thank you so much for talking with us today.
+
+MORTEN HANSEN: It was a pleasure, Sarah.
+
+SARAH GREEN: That was Morten Hansen, and the book is called Collaboration. For Morten’s blog post and more, please visit hbr.org.

@@ -25,18 +25,6 @@ Decisions made while building the MVP. Keep entries short and dated.
 - No long-term memory or auth in MVP.
 - Session-only: no persistent student profiles.
 
-## 2026-08-04 — Evaluation harness
-
-| Decision | Choice | Rationale |
-| --- | --- | --- |
-| Eval layout | `evaluation/` package + `cases/golden_seed.json` | Matches PRD tree; keeps scoring separate from app runtime |
-| Metrics core | Deterministic first (route, retrieval, citations, PII, gates) | Reliable CI; no judge drift |
-| LLM rubric | Optional `--rubric` only | Costly; needs human calibration |
-| State capture | Invoke full LangGraph state (not FinalResponse-only) | Needed for retrieval + validation metrics |
-| Seed size | 72 stratified synthetic cases (generator script) | Course-credible coverage across taxonomy + safety |
-| Baseline | LLM-only advice-quality compare (`actionability`, phrases, optional rubric) | Avoid fake wins on citation/retrieval/gates |
-| Scorecard | `latest_scorecard.md` with readiness + gates + suite rollup | One-page stakeholder summary; rebuild with `--system scorecard` |
-
 ## 2026-08-03 — Implementation choices during build
 
 | Decision | Choice | Rationale |
@@ -51,6 +39,43 @@ Decisions made while building the MVP. Keep entries short and dated.
 | Placeholder ingestion modules | Present but `NotImplementedError` | Preserve PRD layout for later swap |
 | LLM model pin | Switched default from `gemini-2.5-flash` to `gemini-3.5-flash` | API returned 404 for new users on 2.5 Flash |
 | Retrieval min score | Lowered default to `0.05` | Chroma relevance scores often land well below 0.25 for short reflections |
+
+## 2026-08-04 — LLM provider switch (Gemini quota)
+
+| Decision | Choice | Rationale |
+| --- | --- | --- |
+| Default LLM | Ollama `llama3.1:8b` via `LLM_PROVIDER=ollama` | Gemini free-tier 429 RESOURCE_EXHAUSTED |
+| Fallback | Auto Ollama on Gemini quota errors | Keep demos working without billing |
+| Config | `OLLAMA_HOST` / `OLLAMA_MODEL` in settings | Same local stack as corpus builder |
+| Quota error type | `GeminiQuotaExceeded` raised for Gemini 429 | Evaluation runner can stop cleanly |
+
+## 2026-08-04 — Evaluation harness (teammate merge)
+
+| Decision | Choice | Rationale |
+| --- | --- | --- |
+| Eval layout | `evaluation/` package + `cases/golden_seed.json` | Matches PRD tree; keeps scoring separate from app runtime |
+| Metrics core | Deterministic first (route, retrieval, citations, PII, gates) | Reliable CI; no judge drift |
+| LLM rubric | Optional `--rubric` only | Costly; needs human calibration |
+| State capture | Invoke full LangGraph state (not FinalResponse-only) | Needed for retrieval + validation metrics |
+| Seed size | 72 stratified synthetic cases (generator script) | Course-credible coverage across taxonomy + safety |
+| Baseline | LLM-only advice-quality compare (`actionability`, phrases, optional rubric) | Avoid fake wins on citation/retrieval/gates |
+| Scorecard | `latest_scorecard.md` with readiness + gates + suite rollup | One-page stakeholder summary; rebuild with `--system scorecard` |
+| Active corpus for eval | Restore hand-tagged 10/5 MVP under `corpus/` | Golden-set `gold_chunk_ids` must resolve |
+| Builder dump | Keep under `corpus/expanded_from_builder/` | Promote after review without breaking eval |
+
+## 2026-08-04 — Knowledge Corpus Builder
+
+| Decision | Choice | Rationale |
+| --- | --- | --- |
+| Placement | Standalone Streamlit under `Knowledge_Corpus_Builder/` | Keep builder separate from coach runtime |
+| Conversion | Docling for pdf/pptx/docx/txt/md/html/images | One converter for all day-one formats |
+| Markdown repair | Ollama `llama3.1:8b` local | Strip ads/noise without cloud dependency |
+| Tag suggestion | Same Ollama model + taxonomy filter | Local structured tags; invalid terms dropped |
+| Chunking | Structure-based (headings/slides/paragraphs) | Matches PRD meaning-oriented chunking |
+| Clustering | MiniLM embeddings + agglomerative + near-dupe merge | Merge/dedupe/organize review batches |
+| Human review | Batch by source/cluster; approve/reject/needs_rewrite | PRD requires human approval path |
+| Export | `Corpus_Output` + `*_mvp.json` copy-compatible schema | Manual handoff into `corpus/` after evals |
+| MVP corpus | Keep until evals | Do not auto-overwrite coach evidence |
 
 ## 2026-08-03 — LangSmith nested tracing
 

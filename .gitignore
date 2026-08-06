@@ -163,9 +163,6 @@ venv.bak/
 *.bin
 sentence-transformers/
 
-# Evaluation run artifacts
-evaluation/reports/
-
 # Spyder project settings
 .spyderproject
 .spyproject
@@ -225,6 +222,22 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Knowledge Corpus Builder generated artifacts (keep folder structure via .gitkeep)
+Knowledge_Corpus_Builder/Corpus_Output/markdown/**
+Knowledge_Corpus_Builder/Corpus_Output/sources/*.json
+Knowledge_Corpus_Builder/Corpus_Output/chunks/*.json
+Knowledge_Corpus_Builder/Corpus_Output/review/*
+!Knowledge_Corpus_Builder/Corpus_Output/**/.gitkeep
+Knowledge_Corpus_Builder/.venv/
+
+# Evaluation generated reports (keep folder via .gitkeep)
+evaluation/reports/*
+!evaluation/reports/.gitkeep
+
+# Local merge snapshots / teammate drop folders
+Latest Update*/
+Latest Update */
 
 # Streamlit agent skills (environment-specific symlinks)
 .agents/

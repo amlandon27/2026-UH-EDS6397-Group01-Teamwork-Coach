@@ -257,6 +257,7 @@ def test_compiled_graph_contains_expected_workflow_edges():
         ("__start__", "privacy_risk", False),
         ("privacy_risk", "diagnosis_retrieval", True),
         ("privacy_risk", "escalation", True),
+        ("privacy_risk", "fallback", True),
         ("diagnosis_retrieval", "advice", True),
         ("diagnosis_retrieval", "fallback", True),
         ("advice", "validation", False),

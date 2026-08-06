@@ -13,13 +13,36 @@ def finalize_coaching_node(state: Any) -> dict[str, Any]:
     diagnosis = state_get(state, "diagnosis_payload")
     evidence: list[RetrievedEvidence] = state_get(state, "retrieved_evidence", []) or []
 
+    cited_chunk_ids = set(recommendation.cited_chunk_ids or [])
+    cited_source_ids = set(recommendation.cited_source_ids or [])
+
     citations = []
-    seen = set()
-    for e in evidence:
-        if e.source_id in recommendation.cited_source_ids and e.citation:
-            if e.source_id not in seen:
-                citations.append(e.citation)
-                seen.add(e.source_id)
+    seen_sources: set[str] = set()
+    supporting: list[RetrievedEvidence] = []
+    seen_chunks: set[str] = set()
+
+    for item in evidence:
+        # Prefer explicitly cited chunks; otherwise keep cited sources.
+        cited = (
+            (item.chunk_id and item.chunk_id in cited_chunk_ids)
+            or (item.source_id in cited_source_ids)
+        )
+        if not cited:
+            continue
+        if item.chunk_id and item.chunk_id not in seen_chunks:
+            supporting.append(item)
+            seen_chunks.add(item.chunk_id)
+        if item.citation and item.source_id not in seen_sources:
+            citations.append(item.citation)
+            seen_sources.add(item.source_id)
+
+    # If model cited poorly, still surface retrieved evidence for UI grounding
+    if not supporting and evidence:
+        supporting = list(evidence)
+        for item in evidence:
+            if item.citation and item.source_id not in seen_sources:
+                citations.append(item.citation)
+                seen_sources.add(item.source_id)
 
     body_parts = [
         "## What may be happening",
@@ -47,6 +70,7 @@ def finalize_coaching_node(state: Any) -> dict[str, Any]:
         body="\n".join(body_parts),
         recommendation=recommendation,
         citations=citations,
+        supporting_evidence=supporting,
         diagnosis=diagnosis,
         redacted_input=state_get(state, "redacted_input"),
         pii_detected=bool(state_get(state, "pii_detected")),

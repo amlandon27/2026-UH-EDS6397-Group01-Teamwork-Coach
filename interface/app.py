@@ -103,6 +103,168 @@ def _render_diagnosis(diagnosis: Any) -> None:
                 st.markdown(f"- {note}")
 
 
+def _citation_label(citation: Any) -> str:
+    """Build a non-empty display label for a supporting source."""
+    text = (getattr(citation, "citation_text", None) or "").strip()
+    if text:
+        return text
+
+    title = (getattr(citation, "source_title", None) or "").strip()
+    authors = (getattr(citation, "authors", None) or "").strip()
+    year = getattr(citation, "publication_year", None)
+    publication = (getattr(citation, "publication_title", None) or "").strip()
+
+    parts: list[str] = []
+    if authors:
+        parts.append(authors)
+    if year:
+        parts.append(f"({year})")
+    if title:
+        parts.append(title if not parts else f"{title}.")
+    elif publication:
+        parts.append(publication)
+
+    if parts:
+        # "Authors (year). Title" or just title
+        if authors and year and title:
+            return f"{authors} ({year}). {title}"
+        if authors and title:
+            return f"{authors}. {title}"
+        return " ".join(parts).strip()
+
+    key = (getattr(citation, "citation_key", None) or "").strip()
+    if key:
+        return key.replace("_", " ").strip()
+
+    source_id = (getattr(citation, "source_id", None) or "").strip()
+    if source_id:
+        return source_id.replace("src_", "").replace("_", " ").strip() or "Source"
+
+    return "Source"
+
+
+def _tokenize(text: str) -> set[str]:
+    return {
+        token
+        for token in "".join(
+            ch.lower() if ch.isalnum() else " " for ch in (text or "")
+        ).split()
+        if len(token) > 2
+    }
+
+
+def _section_relevance(section_text: str, evidence: Any) -> float:
+    """Rank evidence for a coaching section via token overlap + retrieval score."""
+    section_tokens = _tokenize(section_text)
+    chunk_tokens = _tokenize(getattr(evidence, "text", "") or "")
+    if not section_tokens or not chunk_tokens:
+        return float(getattr(evidence, "score", 0.0) or 0.0)
+    overlap = len(section_tokens & chunk_tokens) / len(section_tokens)
+    return overlap + 0.15 * float(getattr(evidence, "score", 0.0) or 0.0)
+
+
+def _evidence_for_section(
+    section_text: str,
+    evidence: list[Any],
+    *,
+    limit: int = 2,
+) -> list[Any]:
+    if not evidence:
+        return []
+    ranked = sorted(
+        evidence,
+        key=lambda item: _section_relevance(section_text, item),
+        reverse=True,
+    )
+    return ranked[: max(1, limit)]
+
+
+def _render_section_evidence(evidence_items: list[Any]) -> None:
+    """Show retrieved chunk text + source under a coaching paragraph."""
+    if not evidence_items:
+        return
+
+    for item in evidence_items:
+        chunk_text = (getattr(item, "text", None) or "").strip()
+        if not chunk_text:
+            continue
+        # Keep UI readable for long OCR/markdown chunks
+        display = chunk_text if len(chunk_text) <= 700 else chunk_text[:700].rstrip() + "…"
+
+        st.markdown("**Chunk text**")
+        st.info(display)
+
+        citation = getattr(item, "citation", None)
+        source_label = _citation_label(citation) if citation else (
+            (getattr(item, "source_id", None) or "Source")
+            .replace("src_", "")
+            .replace("_", " ")
+        )
+        target = _citation_target(citation) if citation else None
+        if target:
+            st.markdown(f"**Source:** [{source_label}]({target})")
+        else:
+            st.markdown(f"**Source:** {source_label}")
+
+
+def _render_coaching_sections(result: Any) -> None:
+    """Render each coaching paragraph with its supporting retrieved chunks."""
+    recommendation = getattr(result, "recommendation", None)
+    evidence = list(getattr(result, "supporting_evidence", None) or [])
+
+    if recommendation is None:
+        body = _public_body(
+            route=result.route,
+            body=result.body,
+            has_resources=bool(result.resources),
+        )
+        if body:
+            st.markdown(body)
+        return
+
+    sections: list[tuple[str, str, bool]] = [
+        ("What may be happening", recommendation.what_may_be_happening or "", False),
+        (
+            "What you could do next",
+            "\n".join(recommendation.what_you_could_do_next or []),
+            True,
+        ),
+        (
+            "How you might say it",
+            "\n".join(recommendation.how_you_might_say_it or []),
+            True,
+        ),
+        ("Why this may help", recommendation.why_this_may_help or "", False),
+        (
+            "What to watch for",
+            "\n".join(recommendation.what_to_watch_for or []),
+            True,
+        ),
+        (
+            "When to involve someone else",
+            recommendation.when_to_involve_someone_else or "",
+            False,
+        ),
+    ]
+
+    for title, content, as_bullets in sections:
+        st.markdown(f"### {title}")
+        text = (content or "").strip()
+        if not text:
+            st.caption("No content for this section.")
+        elif as_bullets:
+            for line in text.splitlines():
+                line = line.strip()
+                if not line:
+                    continue
+                st.markdown(f"- {line}")
+        else:
+            st.markdown(text)
+
+        section_evidence = _evidence_for_section(text or title, evidence, limit=2)
+        _render_section_evidence(section_evidence)
+
+
 def _render_citations(citations: list[Any]) -> None:
     """Render supporting citations with clickable source targets."""
     if not citations:
@@ -110,7 +272,7 @@ def _render_citations(citations: list[Any]) -> None:
 
     st.markdown("### Supporting sources")
     for citation in citations:
-        citation_text = getattr(citation, "citation_text", "Source")
+        citation_text = _citation_label(citation)
         target = _citation_target(citation)
 
         if target:
@@ -149,20 +311,29 @@ def _render_result(result: Any) -> None:
     if result.route == "escalation":
         st.error("This reflection was routed to human-support resources.")
     elif result.route == "fallback":
-        st.warning(
-            "The system abstained because it could not produce "
-            "validated, evidence-grounded coaching."
-        )
+        if "scope" in (result.title or "").lower():
+            st.info(
+                "This input is outside the teamwork coaching scope "
+                "(greetings, jailbreaks, or unrelated text are not coached)."
+            )
+        else:
+            st.warning(
+                "The system abstained because it could not produce "
+                "validated, evidence-grounded coaching."
+            )
     else:
         st.success("Validated coaching response")
 
-    body = _public_body(
-        route=result.route,
-        body=result.body,
-        has_resources=bool(result.resources),
-    )
-    if body:
-        st.markdown(body)
+    if result.route == "coaching":
+        _render_coaching_sections(result)
+    else:
+        body = _public_body(
+            route=result.route,
+            body=result.body,
+            has_resources=bool(result.resources),
+        )
+        if body:
+            st.markdown(body)
 
     if result.route == "coaching" and result.diagnosis:
         _render_diagnosis(result.diagnosis)

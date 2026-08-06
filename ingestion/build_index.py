@@ -15,7 +15,18 @@ from langchain_chroma import Chroma
 
 def load_chunks(corpus_dir: Path) -> list[dict]:
     path = corpus_dir / "chunks" / "chunks.json"
-    return json.loads(path.read_text(encoding="utf-8"))
+    data = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(data, list):
+        raise ValueError(f"{path} must be a JSON array of chunk objects")
+    if data and "chunk_id" not in data[0]:
+        keys = sorted(data[0].keys())
+        raise ValueError(
+            f"{path} does not look like chunks.json (missing 'chunk_id'). "
+            f"First object keys={keys}. "
+            "Did you copy sources_mvp.json into chunks by mistake? "
+            "Use Knowledge_Corpus_Builder/Corpus_Output/chunks/chunks_mvp.json → corpus/chunks/chunks.json"
+        )
+    return data
 
 
 def chunk_to_document(chunk: dict) -> Document:

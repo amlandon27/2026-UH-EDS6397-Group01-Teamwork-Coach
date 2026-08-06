@@ -49,3 +49,12 @@ SAFE_FALLBACK_MESSAGE = (
     "Consider restating observable behaviors (what happened, when, and who was involved without names), "
     "or talking with a teammate, instructor, or advisor."
 )
+
+OUT_OF_SCOPE_MESSAGE = (
+    "This tool only provides coaching on teamwork and leadership situations "
+    "for engineering student teams. "
+    "Your message does not look like a teamwork reflection "
+    "(for example: greetings, random text, or requests to reveal system prompts). "
+    "Please describe an observable team situation—what happened, when, and how it affected the work—"
+    "without personal identifiers."
+)

@@ -93,6 +93,7 @@ class FinalResponse(BaseModel):
     body: str
     recommendation: Optional[CoachingRecommendation] = None
     citations: list[CitationMetadata] = Field(default_factory=list)
+    supporting_evidence: list[RetrievedEvidence] = Field(default_factory=list)
     diagnosis: Optional[TeamworkDiagnosis] = None
     resources: list[dict[str, str]] = Field(default_factory=list)
     redacted_input: Optional[str] = None
@@ -110,6 +111,7 @@ class AgentState(BaseModel):
     pii_detected: bool = False
     pii_spans: list[dict[str, Any]] = Field(default_factory=list)
     high_risk_detected: bool = False
+    out_of_scope: bool = False
     diagnosis_payload: Optional[TeamworkDiagnosis] = None
     retrieved_evidence: list[RetrievedEvidence] = Field(default_factory=list)
     retrieval_sufficient: bool = False

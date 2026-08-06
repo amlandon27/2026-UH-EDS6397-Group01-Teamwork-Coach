@@ -36,9 +36,13 @@ def _privacy_boundary(state: Any) -> dict[str, Any]:
     return update
 
 
-def _route_after_privacy(state: AgentState) -> Literal["escalation", "diagnosis_retrieval"]:
+def _route_after_privacy(
+    state: AgentState,
+) -> Literal["escalation", "fallback", "diagnosis_retrieval"]:
     if state.escalation_required or state.high_risk_detected:
         return "escalation"
+    if state.out_of_scope:
+        return "fallback"
     return "diagnosis_retrieval"
 
 
@@ -88,6 +92,7 @@ def build_graph():
         _route_after_privacy,
         {
             "escalation": "escalation",
+            "fallback": "fallback",
             "diagnosis_retrieval": "diagnosis_retrieval",
         },
     )

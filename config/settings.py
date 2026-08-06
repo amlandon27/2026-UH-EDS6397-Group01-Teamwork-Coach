@@ -18,6 +18,15 @@ class Settings(BaseSettings):
 
     google_api_key: str = ""
     gemini_model: str = "gemini-3.5-flash"
+
+    # LLM routing: "ollama" (local) or "gemini"
+    llm_provider: str = "ollama"
+    # Optional secondary provider if primary fails (e.g. gemini quota → ollama)
+    llm_fallback_provider: str = "ollama"
+
+    ollama_host: str = "http://localhost:11434"
+    ollama_model: str = "llama3.1:8b"
+
     embedding_model: str = "sentence-transformers/all-MiniLM-L6-v2"
     chroma_persist_dir: str = str(ROOT_DIR / ".chroma")
     chroma_collection: str = "teamwork_evidence"

@@ -166,7 +166,11 @@ def build_scorecard_from_reports_dir(report_dir: Path) -> Scorecard:
     compare = None
     no_rag_path = report_dir / "latest_no_rag.json"
     if no_rag_path.exists():
-        from evaluation.report import write_compare_report
+        from evaluation.report import (
+            build_pairwise_from_reports_dir,
+            write_compare_report,
+            write_pairwise_report,
+        )
         from evaluation.runner import _compare_rows
 
         no_rag = EvalReport.model_validate(
@@ -180,6 +184,7 @@ def build_scorecard_from_reports_dir(report_dir: Path) -> Scorecard:
             no_rag=no_rag,
         )
         write_compare_report(compare, report_dir)
+        write_pairwise_report(build_pairwise_from_reports_dir(report_dir), report_dir)
     else:
         compare_path = report_dir / "latest_compare.json"
         if compare_path.exists():

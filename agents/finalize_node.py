@@ -8,6 +8,14 @@ from agents.state_utils import state_get
 from contract import FinalResponse, RetrievedEvidence
 
 
+def _strip_wrapping_quotes(text: str) -> str:
+    """Normalize so UI can always wrap example phrases in quotation marks."""
+    cleaned = (text or "").strip()
+    if len(cleaned) >= 2 and cleaned[0] == cleaned[-1] and cleaned[0] in {'"', "'"}:
+        return cleaned[1:-1].strip()
+    return cleaned
+
+
 def finalize_coaching_node(state: Any) -> dict[str, Any]:
     recommendation = state_get(state, "draft_recommendation")
     diagnosis = state_get(state, "diagnosis_payload")
@@ -50,7 +58,10 @@ def finalize_coaching_node(state: Any) -> dict[str, Any]:
         *[f"- {item}" for item in recommendation.what_you_could_do_next],
         "",
         "## How you might say it",
-        *[f"- {item}" for item in recommendation.how_you_might_say_it],
+        *[
+            f'- "{_strip_wrapping_quotes(item)}"'
+            for item in recommendation.how_you_might_say_it
+        ],
         "",
         "## Why this may help",
         recommendation.why_this_may_help,

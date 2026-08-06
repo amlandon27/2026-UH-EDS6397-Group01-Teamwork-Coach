@@ -143,6 +143,13 @@ def _invoke_no_rag(case: EvalCase) -> ObservedRun:
         )
 
 
+def _strip_wrapping_quotes(text: str) -> str:
+    cleaned = (text or "").strip()
+    if len(cleaned) >= 2 and cleaned[0] == cleaned[-1] and cleaned[0] in {'"', "'"}:
+        return cleaned[1:-1].strip()
+    return cleaned
+
+
 def _format_recommendation_body(recommendation: CoachingRecommendation) -> str:
     parts = [
         "## What may be happening",
@@ -152,7 +159,10 @@ def _format_recommendation_body(recommendation: CoachingRecommendation) -> str:
         *[f"- {item}" for item in recommendation.what_you_could_do_next],
         "",
         "## How you might say it",
-        *[f"- {item}" for item in recommendation.how_you_might_say_it],
+        *[
+            f'- "{_strip_wrapping_quotes(item)}"'
+            for item in recommendation.how_you_might_say_it
+        ],
         "",
         "## Why this may help",
         recommendation.why_this_may_help,

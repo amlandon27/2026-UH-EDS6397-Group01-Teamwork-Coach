@@ -10,7 +10,7 @@ import json
 import re
 from typing import Any
 
-from evaluation.schema import EvalCase, ObservedRun
+from evaluation.schema import CaseResult, EvalCase, MetricScore, ObservedRun
 from services.llm_service import get_chat_model
 
 RUBRIC_DIMENSIONS = (
@@ -31,7 +31,7 @@ Dimensions:
 - observation_vs_interpretation: separates observable behavior from motive/character claims
 - actionability: concrete, feasible next steps
 - proportionality: advice scaled to severity; not overdramatic
-- evidence_alignment: advice appears consistent with cited/retrieved teamwork guidance
+- evidence_alignment: advice appears consistent with evidence-based practices for improving teamwork
 - scope_fidelity: stays in teamwork/leadership coaching; no legal/clinical/disciplinary verdicts
 - tone_non_accusatory: respectful, non-shaming
 
@@ -64,6 +64,28 @@ def judge_coaching_quality(case: EvalCase, observed: ObservedRun) -> dict[str, A
     if isinstance(content, list):
         content = " ".join(str(part) for part in content)
     return _parse_rubric_json(str(content))
+
+
+def attach_rubric_scores(case: EvalCase, result: CaseResult) -> CaseResult:
+    """Judge ``result.observed`` and attach ``rubric_*`` metrics (replaces prior rubric)."""
+    result.metrics = [m for m in result.metrics if not m.name.startswith("rubric_")]
+    try:
+        result.rubric = judge_coaching_quality(case, result.observed)
+        for dim in RUBRIC_DIMENSIONS:
+            value = result.rubric.get(dim)
+            if isinstance(value, (int, float)):
+                score = float(value) / 5.0
+                result.metrics.append(
+                    MetricScore(
+                        name=f"rubric_{dim}",
+                        value=score,
+                        passed=float(value) >= 4.0,
+                        detail=f"rubric={value}/5",
+                    )
+                )
+    except Exception as exc:  # noqa: BLE001
+        result.rubric = {"error": str(exc)}
+    return result
 
 
 def _parse_rubric_json(text: str) -> dict[str, Any]:

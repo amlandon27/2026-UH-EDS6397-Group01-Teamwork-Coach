@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 from evaluation.metrics import aggregate_results, score_case
@@ -293,3 +294,216 @@ def test_scorecard_not_ready_on_gate_failure():
     scorecard = build_scorecard(report)
     assert scorecard.overall_readiness == "not_ready"
     assert any(g.name == "gate_integrity" and g.status == "fail" for g in scorecard.gates)
+
+
+def test_attach_rubric_scores_replaces_prior_metrics(monkeypatch):
+    """attach_rubric_scores writes rubric_* metrics without calling a real LLM."""
+    from evaluation import rubric as rubric_mod
+    from evaluation.schema import CaseResult, MetricScore
+
+    case = EvalCase(
+        case_id="rubric_unit_01",
+        suite="coaching",
+        reflection="Nobody owns the CAD file.",
+        expected=ExpectedOutcome(route="coaching", min_actions=1),
+    )
+    result = CaseResult(
+        case_id=case.case_id,
+        suite="coaching",
+        observed=ObservedRun(
+            route="coaching",
+            student_facing_text="Share a RACI for the CAD deliverable.",
+            body="Share a RACI",
+        ),
+        metrics=[
+            MetricScore(name="actionability", value=1.0, passed=True),
+            MetricScore(name="rubric_actionability", value=0.2, passed=False),
+        ],
+        rubric={"actionability": 1},
+    )
+
+    monkeypatch.setattr(
+        rubric_mod,
+        "judge_coaching_quality",
+        lambda _case, _obs: {
+            "observation_vs_interpretation": 5,
+            "actionability": 4,
+            "proportionality": 4,
+            "evidence_alignment": 3,
+            "scope_fidelity": 5,
+            "tone_non_accusatory": 5,
+            "overall_notes": "unit",
+        },
+    )
+    rubric_mod.attach_rubric_scores(case, result)
+    by_name = {m.name: m for m in result.metrics}
+    assert by_name["actionability"].value == 1.0
+    assert by_name["rubric_actionability"].value == 0.8
+    assert by_name["rubric_actionability"].passed is True
+    assert result.rubric["actionability"] == 4
+    assert sum(1 for m in result.metrics if m.name.startswith("rubric_")) == 6
+
+
+def test_run_rubric_on_reports_offline(tmp_path: Path, monkeypatch):
+    """Offline rubric pass updates saved reports without invoking the coach."""
+    from evaluation import rubric as rubric_mod
+    from evaluation.report import write_report
+    from evaluation.runner import run_rubric_on_reports
+    from evaluation.schema import CaseResult, EvalReport
+
+    case = EvalCase(
+        case_id="offline_rubric_01",
+        suite="coaching",
+        reflection="Nobody owns the CAD deliverable.",
+        student_goal="Clarify ownership.",
+        expected=ExpectedOutcome(route="coaching"),
+    )
+    gated = EvalReport(
+        system="gated_rag",
+        case_count=2,
+        suite_counts={"coaching": 1, "safety": 1},
+        cases=[
+            CaseResult(
+                case_id=case.case_id,
+                suite="coaching",
+                observed=ObservedRun(
+                    route="coaching",
+                    student_facing_text="Gated: share a RACI.",
+                ),
+            ),
+            CaseResult(
+                case_id="safety_skip",
+                suite="safety",
+                observed=ObservedRun(route="escalation", student_facing_text="Escalate."),
+            ),
+        ],
+    )
+    no_rag = EvalReport(
+        system="no_rag",
+        case_count=1,
+        suite_counts={"coaching": 1},
+        cases=[
+            CaseResult(
+                case_id=case.case_id,
+                suite="coaching",
+                observed=ObservedRun(
+                    route="coaching",
+                    student_facing_text="LLM-only: talk to your teammate.",
+                ),
+            )
+        ],
+    )
+    write_report(gated, tmp_path, prefix="eval_gated_rag")
+    write_report(no_rag, tmp_path, prefix="eval_no_rag")
+
+    monkeypatch.setattr(
+        rubric_mod,
+        "judge_coaching_quality",
+        lambda _case, observed: {
+            "observation_vs_interpretation": 5,
+            "actionability": 4 if "RACI" in (observed.student_facing_text or "") else 2,
+            "proportionality": 4,
+            "evidence_alignment": 4,
+            "scope_fidelity": 5,
+            "tone_non_accusatory": 5,
+            "overall_notes": "mocked",
+        },
+    )
+    monkeypatch.setattr(
+        "evaluation.runner.configure_eval_llm",
+        lambda: "gemini",
+    )
+
+    updated = run_rubric_on_reports([case], report_dir=tmp_path)
+    assert {r.system for r in updated} == {"gated_rag", "no_rag"}
+
+    gated_out = EvalReport.model_validate(
+        json.loads((tmp_path / "latest_gated_rag.json").read_text(encoding="utf-8"))
+    )
+    coaching = next(c for c in gated_out.cases if c.case_id == case.case_id)
+    safety = next(c for c in gated_out.cases if c.case_id == "safety_skip")
+    assert coaching.rubric["actionability"] == 4
+    assert any(m.name == "rubric_actionability" for m in coaching.metrics)
+    assert safety.rubric == {}
+    assert any(a.name.startswith("rubric_") for a in gated_out.aggregates)
+    assert (tmp_path / "latest_compare.json").exists()
+    assert (tmp_path / "latest_scorecard.md").exists()
+
+
+def test_pairwise_report_from_eval_reports(tmp_path: Path):
+    """Build human side-by-side artifact from two EvalReports (no API calls)."""
+    from evaluation.report import (
+        build_pairwise_report,
+        render_pairwise_markdown,
+        write_pairwise_report,
+    )
+    from evaluation.schema import CaseResult, EvalCase, EvalReport, ObservedRun
+
+    case = EvalCase(
+        case_id="pair_unit_01",
+        suite="coaching",
+        reflection="Nobody owns the CAD deliverable.",
+        student_goal="Clarify ownership without blaming.",
+        expected=ExpectedOutcome(route="coaching"),
+    )
+    gated = EvalReport(
+        system="gated_rag",
+        case_count=1,
+        suite_counts={"coaching": 1},
+        cases=[
+            CaseResult(
+                case_id=case.case_id,
+                suite="coaching",
+                tags=["role"],
+                observed=ObservedRun(
+                    route="coaching",
+                    student_facing_text="Gated: share a RACI for the CAD file.",
+                    body="share a RACI",
+                ),
+                failure_codes=[],
+            )
+        ],
+    )
+    no_rag = EvalReport(
+        system="no_rag",
+        case_count=1,
+        suite_counts={"coaching": 1},
+        cases=[
+            CaseResult(
+                case_id=case.case_id,
+                suite="coaching",
+                observed=ObservedRun(
+                    route="coaching",
+                    student_facing_text="LLM-only: just talk to your teammate.",
+                    body="just talk",
+                ),
+                failure_codes=["weak_actionability"],
+            )
+        ],
+    )
+
+    pairwise = build_pairwise_report(
+        gated, no_rag, case_inputs={case.case_id: case}
+    )
+    assert pairwise.case_count == 1
+    row = pairwise.cases[0]
+    assert row.reflection == case.reflection
+    assert row.student_goal == case.student_goal
+    assert row.gated_rag.route == "coaching"
+    assert "RACI" in row.gated_rag.student_facing_text
+    assert row.no_rag.failure_codes == ["weak_actionability"]
+
+    md = render_pairwise_markdown(pairwise)
+    assert "pair_unit_01" in md
+    assert "Gated: share a RACI" in md
+    assert "LLM-only: just talk" in md
+    assert "weak_actionability" in md
+
+    json_path, md_path = write_pairwise_report(pairwise, tmp_path)
+    assert json_path.exists()
+    assert md_path.exists()
+    assert (tmp_path / "latest_pairwise.json").exists()
+    assert (tmp_path / "latest_pairwise.md").exists()
+    assert "Nobody owns the CAD deliverable" in (
+        tmp_path / "latest_pairwise.md"
+    ).read_text(encoding="utf-8")

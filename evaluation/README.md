@@ -42,13 +42,16 @@ python -m evaluation
 # No-RAG baseline only
 python -m evaluation --system no_rag
 
-# Head-to-head comparison (writes latest_compare.md)
+# Head-to-head comparison (writes latest_compare.md + latest_pairwise.md)
 python -m evaluation --system compare
 
 # Safety / refusal / privacy only
 python -m evaluation --suites safety,refusal,privacy
 
-# Optional coaching rubric (extra LLM calls)
+# Preferred: LLM rubric on answers already saved in reports (no coach re-run)
+python -m evaluation --system rubric
+
+# Optional: rubric during a live eval (extra tokens; usually unnecessary)
 python -m evaluation --suites coaching --rubric
 
 # Regenerate the golden seed from templates
@@ -58,7 +61,17 @@ python -m evaluation.cases.generate_golden_seed
 python -m evaluation --system scorecard
 ```
 
-Reports land in `evaluation/reports/` (`latest.md`, `latest_no_rag.md`, `latest_compare.md`, `latest_scorecard.md`).
+Reports land in `evaluation/reports/` (`latest.md`, `latest_no_rag.md`, `latest_compare.md`, `latest_pairwise.md`, `latest_scorecard.md`).
+
+## Pairwise human review
+
+`latest_pairwise.md` / `latest_pairwise.json` pair each eval case for side-by-side reading:
+
+- Student reflection / goal
+- Full gated_rag vs no_rag (LLM-only) responses
+- Routes and failure codes per side
+
+Written automatically by `--system compare`. Rebuildable (no model calls) from existing `latest_gated_rag.json` + `latest_no_rag.json` via `--system scorecard`.
 
 ## Scorecard
 
@@ -115,9 +128,9 @@ Chunk-id `retrieval_recall_at_k` / `retrieval_precision_at_k` are **not scored**
 
 `wrong_route`, `wrong_diagnosis`, `missing_citations`, `fabricated_or_off_retrieval_citation`, `unsupported_recommendation`, `weak_actionability`, `pii_detection_mismatch`, `pii_leakage`, `forbidden_phrase`, `unvalidated_display`, `missed_high_risk`
 
-## Optional LLM rubric (`--rubric`)
+## Optional LLM rubric (`--system rubric`)
 
-Scores 1–5 on:
+Scores saved coaching answers 1–5 on:
 
 - observation vs interpretation
 - actionability
@@ -125,6 +138,14 @@ Scores 1–5 on:
 - evidence alignment
 - scope fidelity
 - non-accusatory tone
+
+**Preferred workflow:** run `--system compare` first (writes `latest_gated_rag.json` + `latest_no_rag.json`), then:
+
+```bash
+python -m evaluation --system rubric
+```
+
+That judges both systems’ already-saved answers, writes `rubric_*` metrics back into the reports, and refreshes compare + scorecard. Use `--suites` / `--case-ids` to limit which coaching cases are judged. Live `--rubric` on a coach run still works but re-pays for generation unnecessarily.
 
 **Calibrate** against a human sample (instructor/TA) before treating means as absolute truth. Industry practice treats LLM-as-judge as a scalable proxy, not a replacement for expert review.
 
@@ -138,7 +159,7 @@ Scores 1–5 on:
 ## Recommended study design (course-credible)
 
 1. **Golden set**: stratified cases across coaching, privacy, crisis safety, refusal, and abstention.
-2. **Advice-quality baseline**: `python -m evaluation --system compare` (optionally `--rubric`).
+2. **Advice-quality baseline**: `python -m evaluation --system compare`, then `python -m evaluation --system rubric`.
 3. **Product gates**: scorecard key-gate table for gated RAG only.
 4. **Human spot-check**: 20–30% of coaching outputs on the rubric.
 5. **Safety ASR**: % of safety-suite cases that leak forbidden advice or miss escalation (gated path).

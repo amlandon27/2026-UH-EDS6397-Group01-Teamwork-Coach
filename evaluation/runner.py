@@ -10,7 +10,12 @@ from typing import Iterable, Optional
 from config.settings import get_settings
 from evaluation.baselines import SystemName, invoke_system
 from evaluation.metrics import aggregate_results, count_failure_codes, score_case
-from evaluation.report import write_compare_report, write_report
+from evaluation.report import (
+    build_pairwise_report,
+    write_compare_report,
+    write_pairwise_report,
+    write_report,
+)
 from evaluation.schema import (
     CaseResult,
     CompareReport,
@@ -104,25 +109,9 @@ def run_eval(
             observed = ObservedRun(error=str(exc))
         result = score_case(case, observed, system=system)
         if with_rubric:
-            from evaluation.rubric import RUBRIC_DIMENSIONS, judge_coaching_quality
-            from evaluation.schema import MetricScore
+            from evaluation.rubric import attach_rubric_scores
 
-            try:
-                result.rubric = judge_coaching_quality(case, observed)
-                for dim in RUBRIC_DIMENSIONS:
-                    value = result.rubric.get(dim)
-                    if isinstance(value, (int, float)):
-                        score = float(value) / 5.0
-                        result.metrics.append(
-                            MetricScore(
-                                name=f"rubric_{dim}",
-                                value=score,
-                                passed=float(value) >= 4.0,
-                                detail=f"rubric={value}/5",
-                            )
-                        )
-            except Exception as exc:  # noqa: BLE001
-                result.rubric = {"error": str(exc)}
+            attach_rubric_scores(case, result)
         status = "ok" if not result.failure_codes and not observed.error else (
             f"error={observed.error}" if observed.error else f"fail={result.failure_codes}"
         )
@@ -178,16 +167,147 @@ def run_compare(
         report_dir=report_dir,
         write=True,
     )
+    return _write_compare_artifacts(
+        gated, baseline, cases=cases, report_dir=Path(report_dir)
+    )
+
+
+def load_latest_report(report_dir: Path, system: str) -> EvalReport | None:
+    """Load ``latest_{system}.json``; gated_rag also falls back to ``latest.json``."""
+    path = report_dir / f"latest_{system}.json"
+    if not path.exists() and system == "gated_rag":
+        path = report_dir / "latest.json"
+    if not path.exists():
+        return None
+    return EvalReport.model_validate(json.loads(path.read_text(encoding="utf-8")))
+
+
+def run_rubric_on_reports(
+    cases: list[EvalCase],
+    *,
+    report_dir: Path | str = DEFAULT_REPORT_DIR,
+    suites: Optional[set[str]] = None,
+    case_ids: Optional[set[str]] = None,
+    systems: tuple[str, ...] = ("gated_rag", "no_rag"),
+) -> list[EvalReport]:
+    """Apply LLM rubric to coaching answers already saved in report JSON.
+
+    Does not re-invoke the coach. Rebuilds compare + scorecard when both
+    gated_rag and no_rag reports are available after judging.
+    """
+    from evaluation.rubric import attach_rubric_scores
+    from evaluation.schema import ExpectedOutcome
+
+    configure_eval_llm()
+    out = Path(report_dir)
+    case_map = {c.case_id: c for c in cases}
+    updated: list[EvalReport] = []
+
+    for system in systems:
+        report = load_latest_report(out, system)
+        if report is None:
+            print(f"[rubric] skip {system}: no latest report under {out}", flush=True)
+            continue
+
+        eligible = [
+            result
+            for result in report.cases
+            if result.observed.route == "coaching"
+            and not result.observed.error
+            and (not suites or result.suite in suites)
+            and (not case_ids or result.case_id in case_ids)
+        ]
+        total = len(eligible)
+        print(
+            f"\n[rubric] {system}: judging {total} coaching answer(s) "
+            f"(of {report.case_count} saved case(s))...",
+            flush=True,
+        )
+        by_id = {r.case_id: r for r in report.cases}
+        for index, result in enumerate(eligible, start=1):
+            case = case_map.get(result.case_id)
+            if case is None:
+                reflection = (result.observed.redacted_input or "").strip()
+                if not reflection:
+                    print(
+                        f"[rubric] {system} {index}/{total} {result.case_id} "
+                        "SKIPPED: case not in golden set and no redacted_input",
+                        flush=True,
+                    )
+                    continue
+                case = EvalCase(
+                    case_id=result.case_id,
+                    suite=result.suite,
+                    reflection=reflection,
+                    expected=ExpectedOutcome(route="coaching"),
+                )
+            print(
+                f"[rubric] {system} {index}/{total} {result.case_id} ...",
+                flush=True,
+            )
+            attach_rubric_scores(case, result)
+            dims = [
+                f"{k}={v}"
+                for k, v in result.rubric.items()
+                if isinstance(v, (int, float))
+            ]
+            status = (
+                f"error={result.rubric.get('error')}"
+                if result.rubric.get("error")
+                else (", ".join(dims) if dims else "no scores")
+            )
+            print(
+                f"[rubric] {system} {index}/{total} done {status}",
+                flush=True,
+            )
+            by_id[result.case_id] = result
+
+        report.cases = [by_id[r.case_id] for r in report.cases]
+        report.aggregates = aggregate_results(report.cases)
+        report.failure_code_counts = count_failure_codes(report.cases)
+        write_report(report, out, prefix=f"eval_{system}")
+        updated.append(report)
+
+    gated = next((r for r in updated if r.system == "gated_rag"), None)
+    baseline = next((r for r in updated if r.system == "no_rag"), None)
+    if gated is None:
+        gated = load_latest_report(out, "gated_rag")
+    if baseline is None:
+        baseline = load_latest_report(out, "no_rag")
+    if gated is not None and baseline is not None:
+        _write_compare_artifacts(
+            gated, baseline, cases=cases, report_dir=out
+        )
+    elif gated is not None:
+        write_scorecard(build_scorecard(gated), out)
+
+    return updated
+
+
+def _write_compare_artifacts(
+    gated: EvalReport,
+    baseline: EvalReport,
+    *,
+    cases: list[EvalCase],
+    report_dir: Path,
+) -> CompareReport:
     compare = CompareReport(
-        case_count=len(cases),
+        case_count=gated.case_count,
         suite_counts=dict(gated.suite_counts),
         rows=_compare_rows(gated, baseline),
         gated_rag=gated,
         no_rag=baseline,
     )
-    out = Path(report_dir)
-    write_compare_report(compare, out)
-    write_scorecard(build_scorecard(gated, compare=compare), out)
+    write_compare_report(compare, report_dir)
+    write_pairwise_report(
+        build_pairwise_report(
+            gated,
+            baseline,
+            case_inputs={c.case_id: c for c in cases},
+        ),
+        report_dir,
+    )
+    write_scorecard(build_scorecard(gated, compare=compare), report_dir)
     return compare
 
 

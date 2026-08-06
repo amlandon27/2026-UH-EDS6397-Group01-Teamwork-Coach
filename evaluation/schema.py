@@ -127,3 +127,36 @@ class CompareReport(BaseModel):
     gated_rag: EvalReport
     no_rag: EvalReport
 
+
+class PairwiseSide(BaseModel):
+    """One system's observed response + scoring for a paired case review."""
+
+    route: Optional[str] = None
+    title: str = ""
+    body: str = ""
+    student_facing_text: str = ""
+    failure_codes: list[str] = Field(default_factory=list)
+    error: Optional[str] = None
+    latency_ms: float = 0.0
+
+
+class PairwiseCase(BaseModel):
+    """Side-by-side human review of one eval case across gated_rag vs no_rag."""
+
+    case_id: str
+    suite: SuiteName
+    tags: list[str] = Field(default_factory=list)
+    reflection: str = ""
+    student_goal: Optional[str] = None
+    gated_rag: PairwiseSide
+    no_rag: PairwiseSide
+
+
+class PairwiseReport(BaseModel):
+    """Paired full-text responses for human review (not aggregate metrics)."""
+
+    version: str = "1.0"
+    case_count: int = 0
+    suite_counts: dict[str, int] = Field(default_factory=dict)
+    cases: list[PairwiseCase] = Field(default_factory=list)
+

@@ -259,6 +259,9 @@ def test_finalize_only_surfaces_cited_chunks():
     final = out["final_response"]
     assert [e.chunk_id for e in final.supporting_evidence] == ["chk_accountability_01"]
     assert [c.source_id for c in final.citations] == ["src_catme_dimensions"]
+    assert (
+        '- "Could we assign owners for each deliverable?"' in final.body
+    )
 
 
 def test_finalize_does_not_dump_all_evidence_when_cites_missing():

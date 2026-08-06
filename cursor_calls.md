@@ -57,11 +57,20 @@ Decisions made while building the MVP. Keep entries short and dated.
 | Metrics core | Deterministic first (route, retrieval, citations, PII, gates) | Reliable CI; no judge drift |
 | LLM rubric | Optional `--rubric` only | Costly; needs human calibration |
 | State capture | Invoke full LangGraph state (not FinalResponse-only) | Needed for retrieval + validation metrics |
-| Seed size | 72 stratified synthetic cases (generator script) | Course-credible coverage across taxonomy + safety |
+| Seed size | 84 stratified synthetic cases (generator script) | Course-credible coverage across taxonomy + safety + gap scenarios |
 | Baseline | LLM-only advice-quality compare (`actionability`, phrases, optional rubric) | Avoid fake wins on citation/retrieval/gates |
 | Scorecard | `latest_scorecard.md` with readiness + gates + suite rollup | One-page stakeholder summary; rebuild with `--system scorecard` |
-| Active corpus for eval | Restore hand-tagged 10/5 MVP under `corpus/` | Golden-set `gold_chunk_ids` must resolve |
+| Active corpus for eval | Instructor-promoted builder export under `corpus/` | No fixed `gold_chunk_ids`; IR metrics retired |
 | Builder dump | Keep under `corpus/expanded_from_builder/` | Promote after review without breaking eval |
+
+## 2026-08-05 — Active corpus = builder export
+
+| Decision | Choice | Rationale |
+| --- | --- | --- |
+| Active corpus | Builder export (353 chunks / 22 sources) in `corpus/` | Placeholder MVP corpus retired; builder drops into the corpus the coach uses |
+| Parking folder | Removed `corpus/expanded_from_builder/` | Single source of truth; promote = replace + `build_index` |
+| Eval gold IDs | Deferred update | Retrieval IR metrics need relabel; other suites still valid |
+| `human_reviewed` | Many builder chunks still `false` | Contract test checks field type only until review catches up |
 
 ## 2026-08-04 — Knowledge Corpus Builder
 

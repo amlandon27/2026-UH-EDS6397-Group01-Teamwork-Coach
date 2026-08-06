@@ -22,7 +22,9 @@ Rules:
 - REQUIRED: how_you_might_say_it must include at least 1 example phrase.
 - REQUIRED: cited_source_ids must include ONLY ids from the evidence list (copy them exactly).
 - REQUIRED: cited_chunk_ids must include ONLY chunk_ids from the evidence list (copy them exactly).
-- Prefer citing 1-3 of the provided sources.
+- REQUIRED: cite 1-3 chunks that actually support your advice (same vocabulary/ideas as the chunk text).
+- Do not cite every retrieved item by default — only chunks you used.
+- Each cited_chunk_id's source_id must appear in cited_source_ids.
 - Note when to involve an instructor/advisor without determining fault.
 """
 
@@ -67,22 +69,26 @@ def _ensure_recommendation_completeness(
     recommendation: CoachingRecommendation,
     evidence: list[RetrievedEvidence],
 ) -> CoachingRecommendation:
-    """Fill gaps common with smaller local models so validation can pass."""
-    data = recommendation.model_dump()
-    allowed_sources = [e.source_id for e in evidence if e.source_id]
-    allowed_chunks = [e.chunk_id for e in evidence if e.chunk_id]
+    """Drop hallucinated citation ids; fill thin non-citation fields for small models.
 
-    cited_sources = [
-        sid for sid in data.get("cited_source_ids", []) if sid in allowed_sources
-    ]
+    Never invent citations — missing or empty cites must fail validation / repair.
+    """
+    data = recommendation.model_dump()
+    allowed_sources = {e.source_id for e in evidence if e.source_id}
+    allowed_chunks = {e.chunk_id for e in evidence if e.chunk_id}
+    chunk_to_source = {e.chunk_id: e.source_id for e in evidence if e.chunk_id}
+
     cited_chunks = [
         cid for cid in data.get("cited_chunk_ids", []) if cid in allowed_chunks
     ]
-
-    if not cited_sources and allowed_sources:
-        cited_sources = list(dict.fromkeys(allowed_sources))[:3]
-    if not cited_chunks and allowed_chunks:
-        cited_chunks = allowed_chunks[:3]
+    # Keep model-chosen sources that are retrieved; also include sources of kept chunks.
+    cited_sources = [
+        sid for sid in data.get("cited_source_ids", []) if sid in allowed_sources
+    ]
+    for cid in cited_chunks:
+        sid = chunk_to_source.get(cid)
+        if sid and sid not in cited_sources:
+            cited_sources.append(sid)
 
     actions = [a.strip() for a in data.get("what_you_could_do_next", []) if str(a).strip()]
     if len(actions) < 2:

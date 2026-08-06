@@ -20,6 +20,8 @@ class ExpectedOutcome(BaseModel):
     acceptable_routes: list[ExpectedRoute] = Field(default_factory=list)
     primary_challenge: Optional[str] = None
     acceptable_primary: list[str] = Field(default_factory=list)
+    # Deprecated / unused: corpus is instructor-pluggable, so chunk-id IR gold
+    # is not scored. Kept empty for backward-compatible case JSON.
     gold_chunk_ids: list[str] = Field(default_factory=list)
     expect_pii_detected: bool = False
     expect_high_risk: bool = False

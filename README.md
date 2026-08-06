@@ -14,15 +14,15 @@ Students submit a de-identified teamwork reflection. The system:
 This repository also includes:
 
 - **Knowledge Corpus Builder** — Docling + Ollama pipeline to expand the evidence corpus
-- **Evaluation harness** — 72-case golden set, gated-RAG vs no-RAG baselines, scorecard
+- **Evaluation harness** — 84-case golden set, gated-RAG vs no-RAG baselines, scorecard
 
 ## Stack
 
 | Component | Choice |
 | --- | --- |
 | Orchestration | LangGraph |
-| LLM (default) | Local Ollama `llama3.1:8b` (`LLM_PROVIDER=ollama`) |
-| LLM (optional) | Google Gemini 3.5 Flash (`LLM_PROVIDER=gemini`) |
+| LLM (default) | Google Gemini 3.5 Flash (`LLM_PROVIDER=gemini`) |
+| LLM (fallback) | Local Ollama `llama3.1:8b` (`LLM_FALLBACK_PROVIDER=ollama`) |
 | Embeddings | `sentence-transformers/all-MiniLM-L6-v2` |
 | Vector store | ChromaDB (local) |
 | UI | Streamlit |
@@ -40,10 +40,9 @@ This repository also includes:
 ├── main_system.py              # CLI / run_coach entry
 ├── agents/                     # LangGraph nodes
 ├── config/                     # Settings, taxonomy, safety, escalation
-├── corpus/                     # Active MVP evidence corpus (indexed)
+├── corpus/                     # Active evidence corpus (indexed for coach + eval)
 │   ├── chunks/chunks.json
-│   ├── sources/sources.json
-│   └── expanded_from_builder/  # Optional larger builder export (not default index)
+│   └── sources/sources.json
 ├── guardrails/
 ├── ingestion/                  # build_index (+ ingestion stubs)
 ├── interface/app.py            # Student coach UI
@@ -57,13 +56,13 @@ This repository also includes:
 ## Prerequisites
 
 - Python 3.10+
-- [Ollama](https://ollama.com/) with `llama3.1:8b` (recommended default)
+- Google AI Studio API key for Gemini (`GOOGLE_API_KEY` in `.env`)
+- Optional: [Ollama](https://ollama.com/) with `llama3.1:8b` (coach fallback / corpus builder)
 
 ```bash
-ollama pull llama3.1:8b
+ollama pull llama3.1:8b   # only if using Ollama fallback or Knowledge_Corpus_Builder
 ```
 
-- Optional: Google AI Studio API key for Gemini
 - Optional: LangSmith API key for tracing
 
 ## Setup
@@ -79,7 +78,7 @@ python -m venv .venv
 
 pip install -r requirements.txt
 cp .env.example .env
-# Edit .env — defaults use Ollama. For Gemini set LLM_PROVIDER=gemini and GOOGLE_API_KEY.
+# Edit .env — coach defaults to Gemini Flash. Optional Ollama fallback on quota.
 
 python -m ingestion.build_index
 ```
@@ -87,13 +86,17 @@ python -m ingestion.build_index
 ### Environment variables (`.env`)
 
 ```bash
-# LLM: ollama (local) or gemini
-LLM_PROVIDER=ollama
+# LLM: gemini (Flash) or ollama — coach UI / CLI
+LLM_PROVIDER=gemini
 LLM_FALLBACK_PROVIDER=ollama
 OLLAMA_HOST=http://localhost:11434
 OLLAMA_MODEL=llama3.1:8b
 
-# Optional Gemini
+# Evaluation harness (python -m evaluation) — independent of coach default
+EVAL_LLM_PROVIDER=gemini
+EVAL_LLM_FALLBACK_PROVIDER=none
+
+# Gemini (coach + evals)
 GOOGLE_API_KEY=
 GEMINI_MODEL=gemini-3.5-flash
 
@@ -121,7 +124,7 @@ python main_system.py
 streamlit run interface/app.py
 ```
 
-The coaching UI shows section-by-section guidance with **Chunk text** + **Source** for retrieved evidence under each paragraph.
+The coaching UI shows validated advice plus a **Supporting sources** list. Retrieved chunk text remains on the response object for evaluation, but is not shown to students.
 
 ## Knowledge Corpus Builder
 
@@ -137,23 +140,25 @@ Pipeline: scan `Corpus_Inputs` → Docling → Ollama repair → structure chunk
 
 ### Promote builder output into the coach corpus
 
-1. Export `sources_mvp.json` and `chunks_mvp.json` from the builder
-2. Copy into `corpus/sources/sources.json` and `corpus/chunks/chunks.json` (or merge carefully — keep unique `source_id` / `chunk_id`)
-3. Rebuild the index:
+The coach and evals read **`corpus/chunks/chunks.json`** and **`corpus/sources/sources.json`**. Builder export drops there (replace), then rebuild the index:
 
 ```bash
+cp Knowledge_Corpus_Builder/Corpus_Output/sources/sources_mvp.json corpus/sources/sources.json
+cp Knowledge_Corpus_Builder/Corpus_Output/chunks/chunks_mvp.json corpus/chunks/chunks.json
 python -m ingestion.build_index
 ```
 
-**Note:** The default MVP corpus is the small hand-tagged set used by the evaluation golden set. A larger builder export may be stored under `corpus/expanded_from_builder/` for later promotion after review. Do not replace the MVP corpus with unreviewed chunks before evaluation unless you update gold labels.
+**Eval note:** the coach corpus is instructor-pluggable (builder → promote → `build_index`). Evaluation does **not** use fixed `gold_chunk_ids` / Recall@k. RAG quality is judged via citation gates, diagnosis/routing/safety suites, and gated-RAG vs no-RAG advice compare.
 
 ## Evaluation
 
-72-case golden set + gated RAG vs no-RAG baseline. See `evaluation/README.md`.
+84-case golden set + gated RAG vs no-RAG baseline. See `evaluation/README.md`.
+
+Eval runs use **`EVAL_LLM_PROVIDER`** (default `gemini`), not the coach’s `LLM_PROVIDER`. Set `GOOGLE_API_KEY` in `.env`. On Gemini quota exhaustion the harness stops (no Ollama fallback) unless you change `EVAL_LLM_FALLBACK_PROVIDER`.
 
 ```bash
 python -m evaluation --dry-run
-python -m evaluation                       # gated RAG (needs LLM + Chroma)
+python -m evaluation                       # gated RAG (Gemini + Chroma by default)
 python -m evaluation --system compare      # gated RAG vs no-RAG
 python -m evaluation --system scorecard    # rebuild one-page scorecard
 python -m evaluation --suites safety,privacy

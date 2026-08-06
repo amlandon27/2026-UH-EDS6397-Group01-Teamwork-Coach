@@ -604,9 +604,10 @@ def page_export() -> None:
         for name, path in paths.items():
             st.code(f"{name}: {path}")
         st.info(
-            "Manual next step: copy `sources_mvp.json` → `corpus/sources/sources.json` "
-            "and `chunks_mvp.json` → `corpus/chunks/chunks.json` (merge or replace after evals), "
-            "then run `python -m ingestion.build_index`."
+            "Next: from the project root, replace the active corpus and rebuild:\n\n"
+            "`cp Knowledge_Corpus_Builder/Corpus_Output/sources/sources_mvp.json corpus/sources/sources.json`\n"
+            "`cp Knowledge_Corpus_Builder/Corpus_Output/chunks/chunks_mvp.json corpus/chunks/chunks.json`\n"
+            "`python -m ingestion.build_index`"
         )
 
 

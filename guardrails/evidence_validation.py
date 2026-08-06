@@ -10,6 +10,7 @@ from config.safety_policy import (
     PROHIBITED_ADVICE_PATTERNS,
 )
 from contract import CoachingRecommendation, RetrievedEvidence, ValidationResult
+from guardrails.citation_validation import validate_citations
 from guardrails.pii_redaction import contains_pii
 
 
@@ -31,24 +32,13 @@ def validate_recommendation(
             checks={"escalation_clear": False},
         )
 
-    retrieved_source_ids = {e.source_id for e in evidence}
-    retrieved_chunk_ids = {e.chunk_id for e in evidence}
-
     checks["has_evidence"] = len(evidence) > 0
     if not checks["has_evidence"]:
         reasons.append("No retrieved evidence available.")
 
-    checks["citations_from_retrieved_sources"] = all(
-        sid in retrieved_source_ids for sid in recommendation.cited_source_ids
-    ) and len(recommendation.cited_source_ids) > 0
-    if not checks["citations_from_retrieved_sources"]:
-        reasons.append("Citations missing or not limited to retrieved sources.")
-
-    checks["cited_chunks_from_retrieved"] = all(
-        cid in retrieved_chunk_ids for cid in recommendation.cited_chunk_ids
-    )
-    if recommendation.cited_chunk_ids and not checks["cited_chunks_from_retrieved"]:
-        reasons.append("Cited chunk ids are not in retrieved evidence.")
+    citation_checks, citation_reasons = validate_citations(recommendation, evidence)
+    checks.update(citation_checks)
+    reasons.extend(citation_reasons)
 
     full_text = _flatten(recommendation)
     checks["no_pii"] = not contains_pii(full_text)
@@ -81,8 +71,11 @@ def validate_recommendation(
         "no_motive_claims",
     ]
     repairable_keys = [
+        "citations_present",
         "citations_from_retrieved_sources",
         "cited_chunks_from_retrieved",
+        "cited_sources_match_chunks",
+        "citations_lexically_grounded",
         "no_pii",
         "not_overconfident",
         "has_actions",

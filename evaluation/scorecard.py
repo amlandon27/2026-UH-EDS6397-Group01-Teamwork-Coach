@@ -20,7 +20,6 @@ from pydantic import BaseModel, Field
 # Headline metrics for the gated product path (scorecard body).
 KEY_METRICS = (
     "route_match",
-    "retrieval_recall_at_k",
     "citation_present",
     "citation_from_retrieved",
     "gate_integrity",

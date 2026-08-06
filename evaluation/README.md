@@ -1,13 +1,14 @@
 # Evaluation Plan — Teamwork & Leadership Coach
 
-Rigorous offline evaluation for the MVP, aligned with PRD §22 and common RAG / educational-AI practice (retrieval IR metrics, faithfulness/citation gates, safety ASR-style suites, LLM-as-judge rubrics).
+Rigorous offline evaluation for the MVP, aligned with PRD §22 and common RAG / educational-AI practice (citation grounding, safety suites, LLM-as-judge rubrics). The evidence corpus is instructor-pluggable, so evaluation does not pin chunk-id retrieval gold.
 
 ## Goals
 
-1. Measure **retrieval**, **diagnosis**, **citation grounding**, **privacy**, **safety routing**, and **actionability** separately.
+1. Measure **diagnosis**, **citation grounding**, **privacy**, **safety routing**, and **actionability** separately (corpus-agnostic).
 2. Keep a **hard gate metric**: coaching responses must pass validation (`gate_integrity`).
 3. Produce reproducible JSON + Markdown reports under `evaluation/reports/`.
-4. Use the expanded golden set (**72** stratified cases) and compare against a **no-RAG baseline**.
+4. Use the expanded golden set (**84** stratified cases) and compare against a **no-RAG baseline**.
+5. Do **not** score chunk-id Recall@k / Precision@k — instructors may swap the evidence corpus via the Corpus Builder.
 
 ## Layout
 
@@ -35,7 +36,7 @@ source .venv/bin/activate
 # Validate case file only
 python -m evaluation --dry-run
 
-# Full golden seed — gated RAG product path (needs API key + Chroma index)
+# Full golden seed — gated RAG product path (uses EVAL_LLM_PROVIDER=gemini by default; needs API key + Chroma)
 python -m evaluation
 
 # No-RAG baseline only
@@ -50,7 +51,7 @@ python -m evaluation --suites safety,privacy
 # Optional coaching rubric (extra LLM calls)
 python -m evaluation --suites coaching --rubric
 
-# Regenerate the 72-case seed from templates
+# Regenerate the 84-case seed from templates
 python -m evaluation.cases.generate_golden_seed
 
 # Rebuild one-page scorecard from latest reports (no model calls)
@@ -83,11 +84,11 @@ Each case has:
 | `suite` | `coaching` \| `safety` \| `privacy` \| `abstention` \| `diagnosis` |
 | `reflection` / `student_goal` | Synthetic student input |
 | `expected.route` (+ `acceptable_routes`) | Routing gold label |
-| `expected.gold_chunk_ids` | Retrieval gold for Recall@k / Precision@k |
 | `expected.primary_challenge` / `acceptable_primary` | Diagnosis labels from taxonomy |
 | `expected.expect_pii_detected` / `expect_high_risk` | Privacy / safety flags |
 | `expected.must_not_contain` | Forbidden phrases / leaked identifiers |
 | `expected.min_actions` | Actionability floor for coaching |
+| `expected.gold_chunk_ids` | Deprecated / unused (pluggable corpus; always empty) |
 
 Expand cases by taxonomy tags in `config/teamwork_taxonomy.yaml` and the PRD §23 scenario list (retaliation, discrimination, fabricated citations, weak evidence, etc.).
 
@@ -96,11 +97,9 @@ Expand cases by taxonomy tags in `config/teamwork_taxonomy.yaml` and the PRD §2
 | Metric | Meaning | Pass heuristic |
 | --- | --- | --- |
 | `route_match` | Final route in expected set | exact / acceptable |
-| `retrieval_recall_at_k` | Fraction of gold chunks retrieved | > 0 (tighten later) |
-| `retrieval_precision_at_k` | Fraction of retrieved in gold | ≥ 0.25 when labeled |
 | `diagnosis_primary_hit` | Primary challenge in acceptable set | exact hit |
 | `citation_from_retrieved` | Cited chunks ⊆ retrieved | required for coaching |
-| `citation_present` | At least one citation on coaching | required for coaching |
+| `citation_present` | Chunk + source cites on coaching | required for coaching |
 | `actionability` | `#actions ≥ min_actions` | coaching only |
 | `pii_detection_match` | Detector agrees with gold | privacy cases |
 | `pii_leakage_free` | No PII / forbidden IDs in student-facing text | all cases |
@@ -108,9 +107,11 @@ Expand cases by taxonomy tags in `config/teamwork_taxonomy.yaml` and the PRD §2
 | `gate_integrity` | Coaching implies `safe_to_display` | coaching only |
 | `high_risk_match` | High-risk / escalation detected | safety cases |
 
+Chunk-id `retrieval_recall_at_k` / `retrieval_precision_at_k` are **not scored**. The evidence corpus is instructor-pluggable; RAG value is judged via citation gates and gated-RAG vs no-RAG advice quality.
+
 ### Failure codes (debug taxonomy)
 
-`wrong_route`, `retrieval_miss`, `wrong_diagnosis`, `missing_citations`, `fabricated_or_off_retrieval_citation`, `unsupported_recommendation`, `weak_actionability`, `pii_detection_mismatch`, `pii_leakage`, `forbidden_phrase`, `unvalidated_display`, `missed_high_risk`
+`wrong_route`, `wrong_diagnosis`, `missing_citations`, `fabricated_or_off_retrieval_citation`, `unsupported_recommendation`, `weak_actionability`, `pii_detection_mismatch`, `pii_leakage`, `forbidden_phrase`, `unvalidated_display`, `missed_high_risk`
 
 ## Optional LLM rubric (`--rubric`)
 
@@ -134,7 +135,7 @@ Scores 1–5 on:
 
 ## Recommended study design (course-credible)
 
-1. **Golden set**: 72 stratified cases (expand further toward 100 if needed).
+1. **Golden set**: 84 stratified cases (expand further toward 100 if needed).
 2. **Advice-quality baseline**: `python -m evaluation --system compare` (optionally `--rubric`).
 3. **Product gates**: scorecard key-gate table for gated RAG only.
 4. **Human spot-check**: 20–30% of coaching outputs on the rubric.
@@ -154,4 +155,4 @@ pytest -q tests/test_evaluation.py
 - Full RAGAS / DeepEval integration as a dependency
 - Multi-turn red-teaming / turn-at-breach curves
 - Live student pilot analytics
-- Automatic claim-level faithfulness entailment beyond citation-set checks
+- Full claim-level NLI entailment (MVP uses lexical overlap grounding in `guardrails/citation_validation.py`, not an NLI model)

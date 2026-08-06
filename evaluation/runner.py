@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 from typing import Iterable, Optional
 
+from config.settings import get_settings
 from evaluation.baselines import SystemName, invoke_system
 from evaluation.metrics import aggregate_results, count_failure_codes, score_case
 from evaluation.report import write_compare_report, write_report
@@ -22,6 +24,27 @@ from evaluation.scorecard import build_scorecard, write_scorecard
 ROOT = Path(__file__).resolve().parent
 DEFAULT_CASES = ROOT / "cases" / "golden_seed.json"
 DEFAULT_REPORT_DIR = ROOT / "reports"
+
+
+def configure_eval_llm() -> str:
+    """Point coach LLM calls at EVAL_LLM_PROVIDER for this process.
+
+    Coach UI keeps ``LLM_PROVIDER`` (default Ollama). Eval defaults to Gemini
+    via ``EVAL_LLM_PROVIDER``, with fallback disabled so quota errors stop the run.
+    """
+    settings = get_settings()
+    provider = (settings.eval_llm_provider or "gemini").strip().lower()
+    fallback = (settings.eval_llm_fallback_provider or "none").strip().lower()
+    os.environ["LLM_PROVIDER"] = provider
+    os.environ["LLM_FALLBACK_PROVIDER"] = fallback
+    print(
+        f"[eval] using LLM_PROVIDER={provider} "
+        f"LLM_FALLBACK_PROVIDER={fallback} "
+        f"(coach default remains in .env as LLM_PROVIDER)",
+        flush=True,
+    )
+    return provider
+
 
 
 def load_cases(path: Path | str) -> list[EvalCase]:
@@ -54,6 +77,7 @@ def run_eval(
     write: bool = True,
 ) -> EvalReport:
     """Execute cases on one system, score, optionally LLM-judge, write report."""
+    configure_eval_llm()
     results: list[CaseResult] = []
     total = len(cases)
     print(f"\n[{system}] running {total} case(s)...", flush=True)

@@ -19,10 +19,16 @@ class Settings(BaseSettings):
     google_api_key: str = ""
     gemini_model: str = "gemini-3.5-flash"
 
-    # LLM routing: "ollama" (local) or "gemini"
-    llm_provider: str = "ollama"
+    # LLM routing: "gemini" or "ollama" — used by coach UI / CLI
+    llm_provider: str = "gemini"
     # Optional secondary provider if primary fails (e.g. gemini quota → ollama)
+    # Use "none" to disable fallback.
     llm_fallback_provider: str = "ollama"
+
+    # Evaluation harness overrides (python -m evaluation). Default: Gemini.
+    eval_llm_provider: str = "gemini"
+    # "none" stops the eval cleanly on Gemini quota instead of falling back to Ollama.
+    eval_llm_fallback_provider: str = "none"
 
     ollama_host: str = "http://localhost:11434"
     ollama_model: str = "llama3.1:8b"

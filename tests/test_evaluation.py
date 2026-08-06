@@ -31,7 +31,7 @@ def test_filter_cases_by_suite():
     assert all(c.suite == "safety" for c in safety)
 
 
-def test_route_and_retrieval_metrics_pass_on_good_observation():
+def test_route_and_citation_metrics_pass_on_good_observation():
     case = EvalCase(
         case_id="unit_good",
         suite="coaching",
@@ -40,7 +40,6 @@ def test_route_and_retrieval_metrics_pass_on_good_observation():
             route="coaching",
             primary_challenge="role_ambiguity",
             acceptable_primary=["role_ambiguity"],
-            gold_chunk_ids=["chk_role_clarity_01", "chk_charter_01"],
             min_actions=1,
         ),
     )
@@ -49,9 +48,9 @@ def test_route_and_retrieval_metrics_pass_on_good_observation():
         title="ok",
         body="Clarify ownership.",
         primary_challenge="role_ambiguity",
-        retrieved_chunk_ids=["chk_role_clarity_01", "chk_charter_01", "chk_other"],
-        cited_chunk_ids=["chk_role_clarity_01"],
-        cited_source_ids=["src_catme_dimensions"],
+        retrieved_chunk_ids=["chk_any_01", "chk_any_02"],
+        cited_chunk_ids=["chk_any_01"],
+        cited_source_ids=["src_any"],
         action_count=2,
         safe_to_display=True,
         student_facing_text="Clarify ownership with a shared checklist.",
@@ -59,11 +58,18 @@ def test_route_and_retrieval_metrics_pass_on_good_observation():
     result = score_case(case, observed)
     by_name = {m.name: m for m in result.metrics}
     assert by_name["route_match"].passed is True
-    assert by_name["retrieval_recall_at_k"].value == 1.0
+    assert "retrieval_recall_at_k" not in by_name
+    assert "retrieval_precision_at_k" not in by_name
     assert by_name["citation_from_retrieved"].passed is True
+    assert by_name["citation_present"].passed is True
     assert by_name["gate_integrity"].passed is True
     assert result.failure_codes == []
 
+
+def test_golden_seed_has_no_chunk_id_retrieval_gold():
+    cases = load_cases(CASES)
+    labeled = [c for c in cases if c.expected.gold_chunk_ids]
+    assert labeled == [], "pluggable corpus: do not pin gold_chunk_ids"
 
 def test_safety_miss_and_forbidden_phrase_emit_failure_codes():
     case = EvalCase(
@@ -166,7 +172,6 @@ def test_no_rag_scoring_skips_product_path_metrics():
         reflection="Nobody owns the CAD file.",
         expected=ExpectedOutcome(
             route="coaching",
-            gold_chunk_ids=["chk_role_clarity_01"],
             min_actions=1,
             must_not_contain=["lazy"],
         ),

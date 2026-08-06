@@ -28,10 +28,10 @@ ADVICE_QUALITY_METRICS = frozenset(
 )
 
 # Product-path metrics scored only for gated_rag (expected N/A for LLM-only).
+# Chunk-id Recall@k / Precision@k are intentionally omitted: the corpus is
+# instructor-pluggable, so fixed gold_chunk_ids are not a product acceptance metric.
 PRODUCT_PATH_METRICS = frozenset(
     {
-        "retrieval_recall_at_k",
-        "retrieval_precision_at_k",
         "citation_from_retrieved",
         "citation_present",
         "gate_integrity",
@@ -61,8 +61,6 @@ def score_case(
 
     if not advice_only:
         metrics.append(_route_match(case, observed, failures))
-        metrics.append(_retrieval_recall(case, observed, failures))
-        metrics.append(_retrieval_precision(case, observed))
         metrics.append(_diagnosis_primary_hit(case, observed, failures))
         metrics.append(_citation_from_retrieved(observed, failures))
         metrics.append(_citation_present_when_coaching(observed, failures))
@@ -134,49 +132,6 @@ def _route_match(case: EvalCase, observed: ObservedRun, failures: list[str]) -> 
         value=1.0 if hit else 0.0,
         passed=hit,
         detail=f"observed={observed.route!r} expected_in={sorted(expected)}",
-    )
-
-
-def _retrieval_recall(case: EvalCase, observed: ObservedRun, failures: list[str]) -> MetricScore:
-    gold = list(case.expected.gold_chunk_ids)
-    if not gold:
-        return MetricScore(
-            name="retrieval_recall_at_k",
-            value=None,
-            passed=None,
-            detail="no gold chunks labeled",
-        )
-    retrieved = set(observed.retrieved_chunk_ids)
-    hits = sum(1 for cid in gold if cid in retrieved)
-    score = hits / len(gold)
-    passed = score > 0.0
-    if not passed:
-        failures.append("retrieval_miss")
-    return MetricScore(
-        name="retrieval_recall_at_k",
-        value=score,
-        passed=passed,
-        detail=f"hits={hits}/{len(gold)} retrieved={observed.retrieved_chunk_ids}",
-    )
-
-
-def _retrieval_precision(case: EvalCase, observed: ObservedRun) -> MetricScore:
-    gold = set(case.expected.gold_chunk_ids)
-    retrieved = list(observed.retrieved_chunk_ids)
-    if not gold or not retrieved:
-        return MetricScore(
-            name="retrieval_precision_at_k",
-            value=None,
-            passed=None,
-            detail="skipped (needs gold + retrieved)",
-        )
-    hits = sum(1 for cid in retrieved if cid in gold)
-    score = hits / len(retrieved)
-    return MetricScore(
-        name="retrieval_precision_at_k",
-        value=score,
-        passed=score >= 0.25,
-        detail=f"hits={hits}/{len(retrieved)}",
     )
 
 
@@ -252,7 +207,8 @@ def _citation_present_when_coaching(
             passed=None,
             detail="only scored for coaching route",
         )
-    present = bool(observed.cited_source_ids or observed.cited_chunk_ids)
+    # Require chunk cites (sources alone are not enough — matches product validation).
+    present = bool(observed.cited_chunk_ids) and bool(observed.cited_source_ids)
     if not present:
         failures.append("unsupported_recommendation")
     return MetricScore(

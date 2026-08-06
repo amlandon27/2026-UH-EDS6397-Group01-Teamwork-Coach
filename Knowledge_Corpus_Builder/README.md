@@ -121,17 +121,15 @@ Generated `Corpus_Output` JSON and markdown are gitignored; keep `Corpus_Inputs`
 
 1. Finish review (prefer approving chunks you want in the coach)
 2. Export (optionally “only approved”)
-3. From project root, copy MVP files:
+3. From project root, **replace** the active corpus and rebuild:
 
-```powershell
-Copy-Item "Knowledge_Corpus_Builder\Corpus_Output\sources\sources_mvp.json" "corpus\sources\sources.json" -Force
-Copy-Item "Knowledge_Corpus_Builder\Corpus_Output\chunks\chunks_mvp.json" "corpus\chunks\chunks.json" -Force
+```bash
+cp Knowledge_Corpus_Builder/Corpus_Output/sources/sources_mvp.json corpus/sources/sources.json
+cp Knowledge_Corpus_Builder/Corpus_Output/chunks/chunks_mvp.json corpus/chunks/chunks.json
 python -m ingestion.build_index
 ```
 
-**Important for evaluation:** the golden-set eval expects the small hand-tagged MVP corpus (`chk_role_clarity_01`, etc.). Replacing it with a large unreviewed builder dump will break gold chunk IDs. Prefer merging carefully, or keep builder dumps under `corpus/expanded_from_builder/` until gold labels are updated.
-
-Correct mapping:
+That is the corpus the coach and evals use. There is no separate “expanded” parking folder.
 
 | Builder export | Coach path |
 | --- | --- |
@@ -139,6 +137,8 @@ Correct mapping:
 | `Corpus_Output/sources/sources_mvp.json` | `corpus/sources/sources.json` |
 
 Do **not** copy `sources_mvp.json` into `chunks.json`.
+
+**Eval note:** evaluation does not pin `gold_chunk_ids` to specific chunks. After promoting a new corpus, rebuild the index (`python -m ingestion.build_index`) and re-run evals; citation / routing / safety / no-RAG compare still apply.
 
 ## Schema
 

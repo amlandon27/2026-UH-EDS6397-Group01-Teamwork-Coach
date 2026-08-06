@@ -53,8 +53,8 @@ SAFE_FALLBACK_MESSAGE = (
 OUT_OF_SCOPE_MESSAGE = (
     "This tool only provides coaching on teamwork and leadership situations "
     "for engineering student teams. "
-    "Your message does not look like a teamwork reflection "
-    "(for example: greetings, random text, or requests to reveal system prompts). "
+    "Your message looks empty, too short, or like a prompt-injection attempt "
+    "rather than a teamwork reflection. "
     "Please describe an observable team situation—what happened, when, and how it affected the work—"
     "without personal identifiers."
 )

@@ -1,4 +1,4 @@
-"""Scope gate: reject jailbreaks, greetings, and off-topic inputs."""
+"""Scope gate: reject jailbreaks, greetings, and spam — not topic keywords."""
 
 from agents.coordinator import _route_after_privacy
 from agents.fallback_node import fallback_node
@@ -18,10 +18,16 @@ def test_jailbreak_system_prompt_request_is_out_of_scope():
     assert any("jailbreak" in r.lower() or "prompt" in r.lower() for r in result.reasons)
 
 
-def test_random_prompt_without_team_signals_is_out_of_scope():
+def test_long_off_topic_text_passes_hard_gate():
+    """Topic filtering is soft (diagnosis/retrieval), not a keyword allowlist."""
     result = assess_reflection_scope(
         "Random prompts about the weather and cooking pasta tonight please."
     )
+    assert result.in_scope is True
+
+
+def test_repeated_spam_is_out_of_scope():
+    result = assess_reflection_scope("asdf asdf asdf asdf asdf asdf asdf asdf")
     assert result.in_scope is False
 
 
@@ -29,6 +35,16 @@ def test_valid_teamwork_reflection_is_in_scope():
     result = assess_reflection_scope(
         "In our capstone team, tasks keep falling through because nobody is sure "
         "who owns the CAD and the report. Deadlines slip and meetings go in circles."
+    )
+    assert result.in_scope is True
+
+
+def test_group_quality_disagreement_is_in_scope():
+    result = assess_reflection_scope(
+        "Two people in our group want to get the highest possible grade, but another "
+        "person keeps saying that passing is good enough. We keep arguing about how "
+        "much time to spend improving the design. I understand that everyone has "
+        "different priorities, but we cannot agree on what quality level we are aiming for."
     )
     assert result.in_scope is True
 

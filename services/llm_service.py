@@ -153,6 +153,21 @@ def _invoke_structured(
             raise second_exc from first_exc
 
 
+def _resolve_fallback(settings: Settings) -> tuple[str | None, bool]:
+    """Return (explicit_fallback, allow_auto_ollama_on_gemini_quota).
+
+    ``LLM_FALLBACK_PROVIDER=none|off|disabled`` disables all fallback (eval default).
+    An explicit provider name is used as-is.
+    When unset, interactive Gemini may auto-fall back to Ollama on quota.
+    """
+    raw = (settings.llm_fallback_provider or "").strip().lower()
+    if raw in ("none", "off", "disabled"):
+        return None, False
+    if raw:
+        return raw, False
+    return None, True
+
+
 @traceable(name="structured_llm_invoke", run_type="llm")
 def structured_invoke(
     schema: Type[T],
@@ -162,7 +177,7 @@ def structured_invoke(
 ) -> T:
     settings = settings or get_settings()
     primary = (settings.llm_provider or "ollama").strip().lower()
-    fallback = (settings.llm_fallback_provider or "").strip().lower() or None
+    fallback, allow_auto_ollama = _resolve_fallback(settings)
 
     started = time.perf_counter()
     try:
@@ -170,8 +185,7 @@ def structured_invoke(
             schema, system_prompt, user_prompt, provider=primary, settings=settings
         )
     except GeminiQuotaExceeded:
-        # Prefer Ollama fallback for interactive coaching; re-raise for eval if no fallback
-        if primary == "gemini":
+        if allow_auto_ollama and primary == "gemini":
             fallback = fallback or "ollama"
         if not fallback or fallback == primary:
             raise
@@ -180,7 +194,8 @@ def structured_invoke(
         )
     except Exception as exc:
         if primary == "gemini" and _is_quota_error(exc):
-            fallback = fallback or "ollama"
+            if allow_auto_ollama:
+                fallback = fallback or "ollama"
             if fallback and fallback != primary:
                 result = _invoke_structured(
                     schema,

@@ -22,24 +22,22 @@ def finalize_coaching_node(state: Any) -> dict[str, Any]:
     seen_chunks: set[str] = set()
 
     for item in evidence:
-        # Prefer explicitly cited chunks; otherwise keep cited sources.
-        cited = (
-            (item.chunk_id and item.chunk_id in cited_chunk_ids)
-            or (item.source_id in cited_source_ids)
-        )
-        if not cited:
+        # Only surface chunks the model explicitly cited — never invent grounding.
+        if not (item.chunk_id and item.chunk_id in cited_chunk_ids):
             continue
-        if item.chunk_id and item.chunk_id not in seen_chunks:
+        if item.chunk_id not in seen_chunks:
             supporting.append(item)
             seen_chunks.add(item.chunk_id)
         if item.citation and item.source_id not in seen_sources:
             citations.append(item.citation)
             seen_sources.add(item.source_id)
 
-    # If model cited poorly, still surface retrieved evidence for UI grounding
-    if not supporting and evidence:
-        supporting = list(evidence)
+    # If chunk cites are missing but source cites remain (should not pass validation),
+    # still attach citation metadata without dumping uncited chunk text.
+    if not supporting and cited_source_ids:
         for item in evidence:
+            if item.source_id not in cited_source_ids:
+                continue
             if item.citation and item.source_id not in seen_sources:
                 citations.append(item.citation)
                 seen_sources.add(item.source_id)

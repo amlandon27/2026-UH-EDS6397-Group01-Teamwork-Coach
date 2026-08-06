@@ -5,7 +5,6 @@ from types import SimpleNamespace
 from interface.app import (
     _citation_label,
     _citation_target,
-    _evidence_for_section,
     _format_tag,
     _public_body,
 )
@@ -147,23 +146,3 @@ def test_citation_label_prefers_authors_year_title():
         _citation_label(citation)
         == "Edmondson, A. (1999). Psychological safety and learning"
     )
-
-
-def test_evidence_for_section_prefers_overlapping_chunk():
-    evidence = [
-        SimpleNamespace(
-            text="Psychological safety helps people speak up in meetings.",
-            score=0.2,
-        ),
-        SimpleNamespace(
-            text="Clarify roles and ownership to reduce duplicated CAD work.",
-            score=0.9,
-        ),
-    ]
-    picked = _evidence_for_section(
-        "Role ambiguity is causing duplicated work on CAD tasks.",
-        evidence,
-        limit=1,
-    )
-    assert len(picked) == 1
-    assert "Clarify roles" in picked[0].text

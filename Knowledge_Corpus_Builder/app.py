@@ -597,7 +597,7 @@ def page_export() -> None:
     st.write(f"Output root: `{dirs['root']}`")
     st.write(f"Sources in workspace: {len(ws.sources)} · Chunks: {len(ws.chunks)}")
 
-    only_approved = st.checkbox("Export only approved chunks", value=False)
+    only_approved = st.checkbox("Export only approved chunks", value=True)
     if st.button("Write Corpus_Output JSON", type="primary"):
         paths = export_corpus(ws, include_builder_fields=True, only_approved=only_approved, settings=settings)
         st.success("Export complete.")

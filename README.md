@@ -14,7 +14,7 @@ Students submit a de-identified teamwork reflection. The system:
 This repository also includes:
 
 - **Knowledge Corpus Builder** — Docling + Ollama pipeline to expand the evidence corpus
-- **Evaluation harness** — 84-case golden set, gated-RAG vs no-RAG baselines, scorecard
+- **Evaluation harness** — stratified golden set, gated-RAG vs no-RAG baselines, scorecard
 
 ## Stack
 
@@ -148,11 +148,11 @@ cp Knowledge_Corpus_Builder/Corpus_Output/chunks/chunks_mvp.json corpus/chunks/c
 python -m ingestion.build_index
 ```
 
-**Eval note:** the coach corpus is instructor-pluggable (builder → promote → `build_index`). Evaluation does **not** use fixed `gold_chunk_ids` / Recall@k. RAG quality is judged via citation gates, diagnosis/routing/safety suites, and gated-RAG vs no-RAG advice compare.
+**Eval note:** the coach corpus is instructor-pluggable (builder → promote → `build_index`). Evaluation does **not** use fixed `gold_chunk_ids` / Recall@k. RAG quality is judged via citation gates, routing/safety/refusal suites, and gated-RAG vs no-RAG advice compare.
 
 ## Evaluation
 
-84-case golden set + gated RAG vs no-RAG baseline. See `evaluation/README.md`.
+Stratified golden set + gated RAG vs no-RAG baseline. See `evaluation/README.md`.
 
 Eval runs use **`EVAL_LLM_PROVIDER`** (default `gemini`), not the coach’s `LLM_PROVIDER`. Set `GOOGLE_API_KEY` in `.env`. On Gemini quota exhaustion the harness stops (no Ollama fallback) unless you change `EVAL_LLM_FALLBACK_PROVIDER`.
 

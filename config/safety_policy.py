@@ -14,7 +14,6 @@ HIGH_RISK_KEYWORDS: list[str] = [
     "kill them",
     "kill him",
     "kill her",
-    "shoot",
     "weapon",
     "gun",
     "bomb",
@@ -41,10 +40,24 @@ HIGH_RISK_KEYWORDS: list[str] = [
     "fabricate data",
     "lawsuit",
     "lawyer",
-    "illegal",
     "overdose",
     "psychiatric",
     "mental breakdown",
+]
+
+# Ambiguous tokens ("shoot", "illegal") use phrase patterns so classroom idioms
+# like "shoot for an A" / "illegal to ignore" do not falsely escalate.
+HIGH_RISK_PATTERNS: list[tuple[str, str]] = [
+    (
+        r"\bshoot(?:ing)?\s+(?:(?:at|up)\s+)?"
+        r"(?:someone|somebody|him|her|them|myself|people|"
+        r"(?:a|my|the)\s+(?:person|teammate|classmate|student|partner))\b",
+        "shoot",
+    ),
+    (r"\billegal\s+(?:way|access|activity|means|entry)\b", "illegal"),
+    (r"\b(?:do|doing|did)\s+something\s+illegal\b", "illegal"),
+    (r"\bsomething\s+illegal\b", "illegal"),
+    (r"\billegally\b", "illegal"),
 ]
 
 PROHIBITED_ADVICE_PATTERNS: list[str] = [

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import re
+
 from Knowledge_Corpus_Builder.config.settings import BuilderSettings, get_settings
 from Knowledge_Corpus_Builder.pipeline.ollama_client import ollama_chat
 
@@ -17,6 +19,63 @@ Rules:
 - Do NOT summarize away important detail; repair and clean, do not rewrite as a short abstract.
 - Output ONLY the cleaned markdown. No preamble.
 """
+
+_HERE_CLEANED = re.compile(r"(?im)^here is the cleaned markdown:?\s*$")
+_NOTE_REMOVED = re.compile(r"(?im)^note:\s*i removed\b.*$")
+_I_ALSO_FIXED = re.compile(r"(?im)^i also fixed\b.*$")
+_SURE_PREAMBLE = re.compile(r"(?im)^sure[,!]?\s*(?:here(?:'s| is).*?)?$")
+_PREAMBLE_HEADING = re.compile(r"(?im)^#{1,6}\s+preamble\s*$")
+_FENCE = re.compile(r"(?im)^```(?:markdown)?\s*$")
+_META_BULLET = re.compile(
+    r"(?im)^(?:[-*]|\d+\.)\s+(?:"
+    r"electronic supplementary|acknowledgments?|author contributions?|"
+    r"funding|data availability|code availability|conflict of interest|"
+    r"ethical approval|informed consent|shazib|figure\s+\d+|table\s+[ivx\d]+|"
+    r"navigation menu|social share|cookie|biography"
+    r").*$"
+)
+
+
+def strip_repair_artifacts(text: str) -> str:
+    """Remove Ollama/Docling meta-preamble that leaks into repaired markdown."""
+    if not text or not text.strip():
+        return ""
+
+    lines = text.replace("\r\n", "\n").splitlines()
+    out: list[str] = []
+    skipping_note_block = False
+
+    for line in lines:
+        stripped = line.strip()
+
+        if _FENCE.match(stripped):
+            continue
+        if _HERE_CLEANED.match(stripped) or _I_ALSO_FIXED.match(stripped) or _SURE_PREAMBLE.match(stripped):
+            skipping_note_block = False
+            continue
+        if _NOTE_REMOVED.match(stripped):
+            skipping_note_block = True
+            continue
+        if skipping_note_block:
+            if not stripped:
+                continue
+            if stripped.startswith(("-", "*", "•")) or re.match(r"^\d+\.", stripped):
+                continue
+            if _META_BULLET.match(stripped):
+                continue
+            # Real content resumed
+            skipping_note_block = False
+
+        if not out and _PREAMBLE_HEADING.match(stripped):
+            continue
+        if not out and not stripped:
+            continue
+
+        out.append(line)
+
+    cleaned = "\n".join(out)
+    cleaned = re.sub(r"\n{3,}", "\n\n", cleaned).strip()
+    return cleaned
 
 
 def repair_markdown(
@@ -60,7 +119,7 @@ def _repair_once(
         f"Source title hint: {source_title or '(unknown)'}\n\n"
         f"Clean this markdown:\n\n{markdown}"
     )
-    return ollama_chat(
+    repaired = ollama_chat(
         [
             {"role": "system", "content": REPAIR_SYSTEM},
             {"role": "user", "content": user},
@@ -69,3 +128,4 @@ def _repair_once(
         temperature=0.1,
         format_json=False,
     ).strip()
+    return strip_repair_artifacts(repaired)

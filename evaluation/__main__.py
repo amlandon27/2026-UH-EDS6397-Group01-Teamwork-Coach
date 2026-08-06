@@ -37,7 +37,7 @@ def main(argv: list[str] | None = None) -> int:
         "--suites",
         type=str,
         default="",
-        help="Comma-separated suites to run (coaching,safety,privacy,abstention,diagnosis)",
+        help="Comma-separated suites to run (coaching,safety,privacy,abstention,refusal)",
     )
     parser.add_argument(
         "--case-ids",

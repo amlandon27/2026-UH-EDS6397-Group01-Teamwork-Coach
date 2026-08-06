@@ -1,27 +1,5 @@
 [
   {
-    "chunk_id": "chk_8_essential_leadership_communication_skills_hbs_e5b90c3f_001",
-    "source_id": "src_8_essential_leadership_communication_skills_hbs_e5b90c3f",
-    "text": "## Preamble\n\nHere is the cleaned markdown:\n\n## 8 Essential Leadership Communication Skills\n\nBy Lauren Landry on November 14, 2019",
-    "challenge_tags": [],
-    "conflict_types": [],
-    "possible_conflict_sources": [],
-    "signal_tags": [],
-    "supported_intervention_tags": [],
-    "mentioned_intervention_tags": [],
-    "evidence_roles": [
-      "problem_definition",
-      "observable_signals"
-    ],
-    "action_levels": [],
-    "applicable_contexts": [
-      "engineering education"
-    ],
-    "limitations": [],
-    "human_reviewed": false,
-    "tagging_confidence": "low"
-  },
-  {
     "chunk_id": "chk_8_essential_leadership_communication_skills_hbs_e5b90c3f_002",
     "source_id": "src_8_essential_leadership_communication_skills_hbs_e5b90c3f",
     "text": "## Why Is Communication Important in Leadership?\n\nA leader's most powerful tool for inspiring positive change and empowering others to work toward common objectives is communication. Effective communication is vital to gain trust, align efforts in the pursuit of goals, and inspire positive change.\n\nIf you're interested in enhancing your leadership capabilities, here are eight essential communication skills you need to be more effective in your role.",
@@ -41,7 +19,7 @@
       "teamwork"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "low"
   },
   {
@@ -75,7 +53,7 @@
       "communication"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -112,7 +90,7 @@
       "team_process_change"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -150,7 +128,7 @@
       "organization"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -189,7 +167,7 @@
       "project_management"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -219,7 +197,7 @@
       "communication"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -244,7 +222,7 @@
       "team management"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "low"
   },
   {
@@ -266,45 +244,8 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "low"
-  },
-  {
-    "chunk_id": "chk_constructive_controversy_optimizing_decision_mak_c7916a4c_001",
-    "source_id": "src_constructive_controversy_optimizing_decision_mak_c7916a4c",
-    "text": "## Preamble\n\nHere is the cleaned markdown:",
-    "challenge_tags": [
-      "coordination",
-      "decision_making"
-    ],
-    "conflict_types": [],
-    "possible_conflict_sources": [
-      "uneven_work_distribution",
-      "role_ambiguity"
-    ],
-    "signal_tags": [
-      "repeated_miscommunication",
-      "meeting_domination"
-    ],
-    "supported_intervention_tags": [
-      "establish_team_norms",
-      "invite_team_input"
-    ],
-    "mentioned_intervention_tags": [],
-    "evidence_roles": [
-      "observable_signals",
-      "contributing_factor"
-    ],
-    "action_levels": [
-      "talk_to_teammate",
-      "team_process_change"
-    ],
-    "applicable_contexts": [
-      "engineering education"
-    ],
-    "limitations": [],
-    "human_reviewed": false,
-    "tagging_confidence": "high"
   },
   {
     "chunk_id": "chk_constructive_controversy_optimizing_decision_mak_c7916a4c_002",
@@ -330,7 +271,7 @@
       "engineering_design_teams"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -360,7 +301,7 @@
       "engineering_course"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -404,7 +345,7 @@
       "education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -432,7 +373,7 @@
       "first-year Introduction to Engineering course"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -472,7 +413,7 @@
       "design decisions"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -514,48 +455,7 @@
       "individual learning"
     ],
     "limitations": [],
-    "human_reviewed": false,
-    "tagging_confidence": "medium"
-  },
-  {
-    "chunk_id": "chk_constructive_controversy_optimizing_decision_mak_c7916a4c_008",
-    "source_id": "src_constructive_controversy_optimizing_decision_mak_c7916a4c",
-    "text": "## Data Analysis\n\nNote: I removed the following sections as they were not relevant to the main content:\n\n* Shazib Vijlee's biography\n* Figure 1 (image)\n* Student survey questions and scale (Table I) was reformatted for better readability.\n\nI also fixed broken headings and list structure where possible.\n\nHere is the cleaned markdown:",
-    "challenge_tags": [
-      "coordination",
-      "communication_breakdown"
-    ],
-    "conflict_types": [],
-    "possible_conflict_sources": [
-      "miscommunication",
-      "uneven_work_distribution"
-    ],
-    "signal_tags": [
-      "repeated_miscommunication",
-      "uneven_contribution"
-    ],
-    "supported_intervention_tags": [
-      "establish_team_norms",
-      "invite_team_input"
-    ],
-    "mentioned_intervention_tags": [
-      "assign_task_ownership",
-      "clarify_roles"
-    ],
-    "evidence_roles": [
-      "observable_signals",
-      "contributing_factor"
-    ],
-    "action_levels": [
-      "reflect",
-      "talk_to_teammate"
-    ],
-    "applicable_contexts": [
-      "data_analysis",
-      "teamwork"
-    ],
-    "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -589,7 +489,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -620,7 +520,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -659,7 +559,7 @@
     "limitations": [
       "diagnostic caution: survey results may not be representative of all students"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -693,7 +593,7 @@
     "limitations": [
       "guiding students to make decisions collectively"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -737,45 +637,7 @@
       "professional_settings"
     ],
     "limitations": [],
-    "human_reviewed": false,
-    "tagging_confidence": "medium"
-  },
-  {
-    "chunk_id": "chk_constructive_controversy_optimizing_decision_mak_c7916a4c_014",
-    "source_id": "src_constructive_controversy_optimizing_decision_mak_c7916a4c",
-    "text": "Note: I removed the navigation menu, social share chrome, and unrelated site boilerplate. I also fixed broken headings and list structure when possible. The tables were preserved as markdown tables.",
-    "challenge_tags": [
-      "coordination",
-      "communication_breakdown"
-    ],
-    "conflict_types": [],
-    "possible_conflict_sources": [
-      "miscommunication",
-      "role_ambiguity"
-    ],
-    "signal_tags": [
-      "repeated_miscommunication",
-      "unclear_task_ownership"
-    ],
-    "supported_intervention_tags": [
-      "clarify_roles",
-      "establish_team_norms"
-    ],
-    "mentioned_intervention_tags": [],
-    "evidence_roles": [
-      "observable_signals",
-      "problem_definition"
-    ],
-    "action_levels": [
-      "talk_to_teammate",
-      "reflect"
-    ],
-    "applicable_contexts": [
-      "engineering education",
-      "teamwork"
-    ],
-    "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -804,7 +666,7 @@
       "engineering_education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -835,7 +697,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -867,7 +729,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -901,7 +763,7 @@
       "engineering"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -930,7 +792,7 @@
       "leadership development"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -959,7 +821,7 @@
       "collaboration"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -990,7 +852,7 @@
       "engineering_education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -1024,7 +886,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -1053,7 +915,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -1083,13 +945,13 @@
       "politics"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
     "chunk_id": "chk_hbr_podcast_transcript_the_right_way_to_collabor_9ed3a3f7_011",
     "source_id": "src_hbr_podcast_transcript_the_right_way_to_collabor_9ed3a3f7",
-    "text": "## Conclusion\n\nIn conclusion, collaboration is not always effective if not done correctly. Leaders need to be disciplined about how they collaborate, prioritize projects with compelling benefits, and develop personal skills such as T-shaping to make collaboration more effective.\n\nHere is the cleaned markdown:\n\nCollaboration means compromising and finding common ground most of the time. Great collaboration requires people to be pragmatists and craft solutions that work.\n\nFor example, passing laws on a new minimum wage with democratic opponents in California was successful because they compromised and found common ground. This approach is necessary in a political system, but not often seen.\n\nMorten Hansen mentioned how Schwarzenegger didn't start out as a collaborative leader. He had a personal transformation in his leadership style, changing from an attack-oriented approach to one of collaboration.\n\nSchwarzenegger's approval rating increased significantly after he changed his style and reached out to democrats. The year 2006 was called one of the most productive legislature years in California history, demonstrating that collaboration can bring great results.\n\nThe key to successful collaboration is finding the right way to do it, being disciplined about it, and keeping the goal in mind: achieving far better results than individual efforts. If leaders remember this, they will pick the right projects, force common goals, and get the desired outcomes.\n\nNote: I removed the following elements:\n\n* Navigation menus and social share chrome\n* Repeated headers/footers and page-number noise\n* Unrelated site boilerplate (e.g., \"For Morten's blog post and more, please visit hbr.org\")\n* Broken headings and list structure were not present in this text, so no repair was needed.",
+    "text": "## Conclusion\n\nIn conclusion, collaboration is not always effective if not done correctly. Leaders need to be disciplined about how they collaborate, prioritize projects with compelling benefits, and develop personal skills such as T-shaping to make collaboration more effective.\n\nCollaboration means compromising and finding common ground most of the time. Great collaboration requires people to be pragmatists and craft solutions that work.\n\nFor example, passing laws on a new minimum wage with democratic opponents in California was successful because they compromised and found common ground. This approach is necessary in a political system, but not often seen.\n\nMorten Hansen mentioned how Schwarzenegger didn't start out as a collaborative leader. He had a personal transformation in his leadership style, changing from an attack-oriented approach to one of collaboration.\n\nSchwarzenegger's approval rating increased significantly after he changed his style and reached out to democrats. The year 2006 was called one of the most productive legislature years in California history, demonstrating that collaboration can bring great results.\n\nThe key to successful collaboration is finding the right way to do it, being disciplined about it, and keeping the goal in mind: achieving far better results than individual efforts. If leaders remember this, they will pick the right projects, force common goals, and get the desired outcomes.",
     "challenge_tags": [
       "coordination",
       "inclusion"
@@ -1121,7 +983,7 @@
       "leadership"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -1157,7 +1019,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -1188,7 +1050,7 @@
       "teamwork"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -1220,7 +1082,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -1262,13 +1124,13 @@
       "teamwork_promotion"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
     "chunk_id": "chk_promoting_effective_student_teamwork_through_del_01df48eb_005",
     "source_id": "src_promoting_effective_student_teamwork_through_del_01df48eb",
-    "text": "## TABLE 1\n\n| Teamwork Topic | Instruction | Documentation | Accountability | Assessment |\n| --- | --- | --- | --- | --- |\n| Team formation | CATME Team-Maker Tool | Team norms document | Weekly Zoom meetings | Final reflection paper |\n| Project management | Timelines/Gantt charts, meeting minutes, and document management | Meeting notes and project timelines | Weekly updates from teams | Peer evaluations |\n| Communication | Role-playing using the \"BET\" and \"BEAR\" techniques | Team norms document and progress reports | Virtual office hours via Zoom | Final reflection paper |\n\nNote: I removed unnecessary sections, images, and formatting to preserve only the substantive educational/research content.\n\n**Promoting Effective Student Teamwork Through Deliberate Instruction, Documentation, Accountability, and Assessment**",
+    "text": "## TABLE 1\n\n| Teamwork Topic | Instruction | Documentation | Accountability | Assessment |\n| --- | --- | --- | --- | --- |\n| Team formation | CATME Team-Maker Tool | Team norms document | Weekly Zoom meetings | Final reflection paper |\n| Project management | Timelines/Gantt charts, meeting minutes, and document management | Meeting notes and project timelines | Weekly updates from teams | Peer evaluations |\n| Communication | Role-playing using the \"BET\" and \"BEAR\" techniques | Team norms document and progress reports | Virtual office hours via Zoom | Final reflection paper |",
     "challenge_tags": [
       "coordination",
       "communication_breakdown"
@@ -1303,7 +1165,7 @@
       "communication"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -1348,7 +1210,7 @@
     "limitations": [
       "none mentioned"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -1385,7 +1247,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -1423,7 +1285,7 @@
       "team development"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -1457,7 +1319,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -1498,13 +1360,13 @@
       "team coordination"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
     "chunk_id": "chk_promoting_effective_student_teamwork_through_del_01df48eb_011",
     "source_id": "src_promoting_effective_student_teamwork_through_del_01df48eb",
-    "text": "## Reflection\n\nThe required team norms documents and progress reports resulted in important dialogue between teammates that was often overlooked in previous offerings of the course. The initial team norms document revealed that when not meeting face-to-face, 100% of teams planned to use group messaging/texting to communicate.\n\nIn reviewing the teams' three progress reports (1-pre-transition, 2-at the transition, 3-remote), we found that students largely maintained in the remote format the same communication structure they had established in the face-to-face format.\n\nHere is the cleaned markdown:\n\nPromoting Effective Student Teamwork Through Deliberate Instruction, Documentation, Accountability, and Assessment\n\nImportantly, revisiting established team norms and learning goals at the beginning of each subsequent design phase provided teammates with a platform to discuss and update their team expectations. Just like engineering design, teamwork is an iterative process. Prior published work demonstrates that engineering student teams move through different stages of teamwork.\n\nThe transition to remote learning did not increase conflict within teams compared to previous years. Two student teams experienced significant internal conflict due to differences in communication preferences and work habits, which required instructor intervention. Following the transition to remote learning, two teams struggled to maintain motivation and equitably divide work; however, this conflict resolved without instructor intervention.",
+    "text": "## Reflection\n\nThe required team norms documents and progress reports resulted in important dialogue between teammates that was often overlooked in previous offerings of the course. The initial team norms document revealed that when not meeting face-to-face, 100% of teams planned to use group messaging/texting to communicate.\n\nIn reviewing the teams' three progress reports (1-pre-transition, 2-at the transition, 3-remote), we found that students largely maintained in the remote format the same communication structure they had established in the face-to-face format.\n\nPromoting Effective Student Teamwork Through Deliberate Instruction, Documentation, Accountability, and Assessment\n\nImportantly, revisiting established team norms and learning goals at the beginning of each subsequent design phase provided teammates with a platform to discuss and update their team expectations. Just like engineering design, teamwork is an iterative process. Prior published work demonstrates that engineering student teams move through different stages of teamwork.\n\nThe transition to remote learning did not increase conflict within teams compared to previous years. Two student teams experienced significant internal conflict due to differences in communication preferences and work habits, which required instructor intervention. Following the transition to remote learning, two teams struggled to maintain motivation and equitably divide work; however, this conflict resolved without instructor intervention.",
     "challenge_tags": [
       "coordination",
       "communication_breakdown"
@@ -1551,7 +1413,7 @@
       "engineering_education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -1594,7 +1456,7 @@
       "online teams"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -1635,35 +1497,8 @@
     "limitations": [
       "student feedback indicates need for clearer guidelines in teamwork evaluations"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
-  },
-  {
-    "chunk_id": "chk_promoting_effective_student_teamwork_through_del_01df48eb_014",
-    "source_id": "src_promoting_effective_student_teamwork_through_del_01df48eb",
-    "text": "## REFERENCES\n\nNote: I removed the following sections as they were not relevant to the content of the paper:\n\n* Electronic Supplementary Material\n* ACKNOWLEDGMENTS\n* AUTHOR CONTRIBUTIONS\n* FUNDING\n* DATA AVAILABILITY\n* CODE AVAILABILITY\n* CONFLICT OF INTEREST\n* ETHICAL APPROVAL\n* INFORMED CONSENT\n\nHere is the cleaned markdown:\n\nPromoting Effective Student Teamwork Through Deliberate Instruction, Documentation, Accountability, and Assessment",
-    "challenge_tags": [
-      "coordination",
-      "decision_making"
-    ],
-    "conflict_types": [],
-    "possible_conflict_sources": [
-      "uneven_work_distribution"
-    ],
-    "signal_tags": [],
-    "supported_intervention_tags": [],
-    "mentioned_intervention_tags": [],
-    "evidence_roles": [
-      "problem_definition"
-    ],
-    "action_levels": [],
-    "applicable_contexts": [
-      "engineering education",
-      "student teamwork"
-    ],
-    "limitations": [],
-    "human_reviewed": false,
-    "tagging_confidence": "low"
   },
   {
     "chunk_id": "chk_promoting_effective_student_teamwork_through_del_01df48eb_015",
@@ -1704,7 +1539,7 @@
       "teamwork"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -1743,7 +1578,7 @@
     ],
     "applicable_contexts": [],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -1767,7 +1602,7 @@
       "teamwork"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -1794,7 +1629,7 @@
       "university setting"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -1822,7 +1657,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -1855,7 +1690,7 @@
       "time_management",
       "cooperation"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -1890,7 +1725,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -1920,7 +1755,7 @@
       "team_process_change"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -1964,7 +1799,7 @@
       "teamwork in courses"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -1997,7 +1832,7 @@
     "limitations": [
       "relationship conflict was not associated with team-member perceived effectiveness"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -2039,46 +1874,8 @@
       "student teams"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
-  },
-  {
-    "chunk_id": "chk_the_effect_of_different_dimensions_of_conflict_o_735aaf86_011",
-    "source_id": "src_the_effect_of_different_dimensions_of_conflict_o_735aaf86",
-    "text": "## Keywords\n\nTeam-member effectiveness, task conflict, process conflict, relationship conflict\n\nHere is the cleaned markdown:",
-    "challenge_tags": [],
-    "conflict_types": [
-      "task_conflict",
-      "process_conflict",
-      "interpersonal_conflict"
-    ],
-    "possible_conflict_sources": [],
-    "signal_tags": [],
-    "supported_intervention_tags": [],
-    "mentioned_intervention_tags": [
-      "assign_task_ownership",
-      "clarify_roles",
-      "clarify_shared_goal",
-      "create_team_charter",
-      "establish_checkpoints",
-      "establish_team_norms",
-      "invite_team_input",
-      "use_behavior_specific_feedback"
-    ],
-    "evidence_roles": [
-      "problem_definition",
-      "observable_signals",
-      "contributing_factor"
-    ],
-    "action_levels": [],
-    "applicable_contexts": [
-      "teamwork",
-      "collaboration",
-      "engineering education"
-    ],
-    "limitations": [],
-    "human_reviewed": false,
-    "tagging_confidence": "medium"
   },
   {
     "chunk_id": "chk_the_effect_of_different_dimensions_of_conflict_o_735aaf86_012",
@@ -2118,7 +1915,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -2150,7 +1947,7 @@
       "teamwork"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -2192,7 +1989,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -2225,13 +2022,13 @@
     "limitations": [
       "diagnostic_caution"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
     "chunk_id": "chk_the_effect_of_different_dimensions_of_conflict_o_735aaf86_016",
     "source_id": "src_the_effect_of_different_dimensions_of_conflict_o_735aaf86",
-    "text": "## Conclusion\n\nThis study intended to examine how various forms of conflict in research affect the perceived effectiveness of a team. The findings suggest that to improve students' perceived effectiveness, instructors should give the most attention to resolving task and process conflicts in engineering student teams.\n\nHere is the cleaned markdown:\n\nThe results of this study suggest that engineering students' views of team-member effectiveness are significantly related to the amount of task conflict they encounter. While some past research has indicated that team effectiveness improves due to task conflict, and this form of conflict should be encouraged, it does not appear that students feel this way while working in engineering teams.\n\nIt is possible that engineering students are so focused on task completion that they do not understand the positive effects of task conflict. When students experience task conflict within their team, many may assume it is counterproductive, causing it to negatively affect their perception of team member effectiveness. In courses involving student teams, instructors should endeavour to explain the benefits of task conflict, so students do not assume it solely reflects dysfunction.\n\nLike task conflict, process conflict was found to negatively impact perceived effectiveness on student engineering teams. These findings correspond with the conclusions of many past studies regarding process conflict's negative impact on team performance. Due to this correspondence, it is likely that the decrease in the students' perceived effectiveness with process conflict is representative of a decrease in real team performance.",
+    "text": "## Conclusion\n\nThis study intended to examine how various forms of conflict in research affect the perceived effectiveness of a team. The findings suggest that to improve students' perceived effectiveness, instructors should give the most attention to resolving task and process conflicts in engineering student teams.\n\nThe results of this study suggest that engineering students' views of team-member effectiveness are significantly related to the amount of task conflict they encounter. While some past research has indicated that team effectiveness improves due to task conflict, and this form of conflict should be encouraged, it does not appear that students feel this way while working in engineering teams.\n\nIt is possible that engineering students are so focused on task completion that they do not understand the positive effects of task conflict. When students experience task conflict within their team, many may assume it is counterproductive, causing it to negatively affect their perception of team member effectiveness. In courses involving student teams, instructors should endeavour to explain the benefits of task conflict, so students do not assume it solely reflects dysfunction.\n\nLike task conflict, process conflict was found to negatively impact perceived effectiveness on student engineering teams. These findings correspond with the conclusions of many past studies regarding process conflict's negative impact on team performance. Due to this correspondence, it is likely that the decrease in the students' perceived effectiveness with process conflict is representative of a decrease in real team performance.",
     "challenge_tags": [
       "coordination",
       "decision_making"
@@ -2275,7 +2072,7 @@
     "limitations": [
       "students_may_not_understand_positive_effects_of_task_conflict"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -2308,7 +2105,7 @@
       "student teams in engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -2345,7 +2142,7 @@
       "does not account for other factors",
       "task has been found to influence conflict's relationship with perceived effectiveness"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -2386,13 +2183,13 @@
       "teamwork"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
     "chunk_id": "chk_the_effect_of_different_dimensions_of_conflict_o_735aaf86_020",
     "source_id": "src_the_effect_of_different_dimensions_of_conflict_o_735aaf86",
-    "text": "## Appendix\n\n| Question Type | Sub-Question | Task Conflict | Relationship Conflict | Process Conflict |\n| --- | --- | --- | --- | --- |\n| How much conflict of ideas is there in your work group? |  | [9] |  |  |\n| How frequently do you have disagreements within your work group about the task of the project you are working on? |  | [9] |  |  |\n| How often do people in your work group have conflicting opinions about the project you are working on? |  | [9] |  |  |\n| How much relationship tension is there in your work group? |  |  | [9] |  |\n| How often do people get angry while working in your group? |  |  | [9] |  |\n| How much emotional conflict is there in your work group? |  |  | [9] |  |\n| How often are there disagreements about who should do what in your work group? |  |  |  | [9] |\n| How much conflict is there in your group about task responsibilities? (reversed scale) |  |  |  | [9] |\n| How often do you disagree about resource allocation in your work group? (reversed scale) |  |  |  | [9] |\n\nNote: I removed the repeated headers/footers and page-number noise, fixed broken headings and list structure when possible, preserved tables as markdown tables, and kept all substantive educational/research content.",
+    "text": "## Appendix\n\n| Question Type | Sub-Question | Task Conflict | Relationship Conflict | Process Conflict |\n| --- | --- | --- | --- | --- |\n| How much conflict of ideas is there in your work group? |  | [9] |  |  |\n| How frequently do you have disagreements within your work group about the task of the project you are working on? |  | [9] |  |  |\n| How often do people in your work group have conflicting opinions about the project you are working on? |  | [9] |  |  |\n| How much relationship tension is there in your work group? |  |  | [9] |  |\n| How often do people get angry while working in your group? |  |  | [9] |  |\n| How much emotional conflict is there in your work group? |  |  | [9] |  |\n| How often are there disagreements about who should do what in your work group? |  |  |  | [9] |\n| How much conflict is there in your group about task responsibilities? (reversed scale) |  |  |  | [9] |\n| How often do you disagree about resource allocation in your work group? (reversed scale) |  |  |  | [9] |",
     "challenge_tags": [
       "coordination",
       "decision_making"
@@ -2442,7 +2239,7 @@
       "reversed_scale",
       "task_conflict_and_process_conflict_overlap"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -2474,7 +2271,7 @@
       "university setting"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -2508,7 +2305,7 @@
       "storming stage"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -2550,7 +2347,7 @@
       "project teams"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -2589,13 +2386,13 @@
       "conflict_resolution"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
     "chunk_id": "chk_two_student_workshops_on_identifying_and_resolvi_a8a6c941_005",
     "source_id": "src_two_student_workshops_on_identifying_and_resolvi_a8a6c941",
-    "text": "## Conclusion\n\nConflict can play a productive role in teams if understood, engaged, and managed correctly. Developing knowledge, skills, and attitudes to understand when and why different types of conflict might occur is essential for team effectiveness. By recognizing the sources of conflict and emphasizing communication skills, teams can improve their performance and maintain a positive team culture.\n\nReferences:\n\n[1] Mostafapour and Hurst\n[2] Teamwork Clinic\n[3] Introduction to team processes\n[4] Communication in teams\n[5] Giving and receiving feedback\n[6] O'Neill, Allen & Hastings\n[7] Tuckman's Stages of Team Development\n[8] Anderson\n[9] Hess\n[10] D.E.S.C. model\n[11] Social loafing\n[12] Poor communication\n[13] Value asymmetry\n[14] Ego/personality differences\n[15] Relationship conflict\n[16] Task conflict\n[17] Process conflict\n\nHere is the cleaned markdown:\n\nIn order to become skilled in conflict resolution, team members should understand the most common causes of conflict, have the ability to identify these behaviors, and have strategies to help address the conflict.\n\nThe Thomas-Kilmann Conflict Mode Instrument identifies five conflict handling styles: accommodating, avoiding, collaborating, competing, and compromising. Each style represents a different position on a graph with assertiveness and cooperation influencing the style.\n\nAvoiding is low assertiveness and low cooperation, while competing is high assertiveness and low cooperation. Accommodating is high cooperation and low assertiveness, and collaborating is high cooperation and high assertiveness. Compromising sits in the middle as moderately cooperative and moderately assertive.",
+    "text": "## Conclusion\n\nConflict can play a productive role in teams if understood, engaged, and managed correctly. Developing knowledge, skills, and attitudes to understand when and why different types of conflict might occur is essential for team effectiveness. By recognizing the sources of conflict and emphasizing communication skills, teams can improve their performance and maintain a positive team culture.\n\nReferences:\n\n[1] Mostafapour and Hurst\n[2] Teamwork Clinic\n[3] Introduction to team processes\n[4] Communication in teams\n[5] Giving and receiving feedback\n[6] O'Neill, Allen & Hastings\n[7] Tuckman's Stages of Team Development\n[8] Anderson\n[9] Hess\n[10] D.E.S.C. model\n[11] Social loafing\n[12] Poor communication\n[13] Value asymmetry\n[14] Ego/personality differences\n[15] Relationship conflict\n[16] Task conflict\n[17] Process conflict\n\nIn order to become skilled in conflict resolution, team members should understand the most common causes of conflict, have the ability to identify these behaviors, and have strategies to help address the conflict.\n\nThe Thomas-Kilmann Conflict Mode Instrument identifies five conflict handling styles: accommodating, avoiding, collaborating, competing, and compromising. Each style represents a different position on a graph with assertiveness and cooperation influencing the style.\n\nAvoiding is low assertiveness and low cooperation, while competing is high assertiveness and low cooperation. Accommodating is high cooperation and low assertiveness, and collaborating is high cooperation and high assertiveness. Compromising sits in the middle as moderately cooperative and moderately assertive.",
     "challenge_tags": [
       "coordination",
       "decision_making"
@@ -2636,7 +2433,7 @@
       "team development"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -2671,7 +2468,7 @@
     "limitations": [
       "individual differences such as gender, self-concept, expectations of others, situation, power, practice, ability to determine best mode, communication skills, life experiences"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -2693,7 +2490,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -2728,13 +2525,13 @@
       "engineering_education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
     "chunk_id": "chk_two_student_workshops_on_identifying_and_resolvi_a8a6c941_009",
     "source_id": "src_two_student_workshops_on_identifying_and_resolvi_a8a6c941",
-    "text": "## 3.2 Conflict resolution and management\n\nThis module reinforces the importance of recognizing how differences among team members' needs and perspectives can contribute to conflicts. It also provides direction on choosing an appropriate style to help reduce or resolve conflict.\n\nThe main goal is to help students consider how they can use this model to make more informed and productive decisions when approaching a conflict situation.\n\nA group activity consists of two subgroups with two to three students per subgroup, each taking one perspective. After reading and discussing their scenario, each subgroup identifies and lists the factors that seem to be contributing to or causing the conflict.\n\nThey then refer to a list of attributes that effective teams exhibit and identify which attributes are lacking. The team attributes they can consider include:\n\n* Communicating effectively\n* Addressing task conflict effectively\n* Fostering a team culture of openness and trust\n* Following a systemic, agreed-upon, decision making process\n* Planning for regular team meetings to support the team's progress towards shared goals\n* Keeping motivation high through recognition of team members' contributions\n* Creating measurable and specific mission and/or goals\n* Self-managing effectively\n* Adopting appropriate leadership styles\n\nHere is the cleaned markdown:",
+    "text": "## 3.2 Conflict resolution and management\n\nThis module reinforces the importance of recognizing how differences among team members' needs and perspectives can contribute to conflicts. It also provides direction on choosing an appropriate style to help reduce or resolve conflict.\n\nThe main goal is to help students consider how they can use this model to make more informed and productive decisions when approaching a conflict situation.\n\nA group activity consists of two subgroups with two to three students per subgroup, each taking one perspective. After reading and discussing their scenario, each subgroup identifies and lists the factors that seem to be contributing to or causing the conflict.\n\nThey then refer to a list of attributes that effective teams exhibit and identify which attributes are lacking. The team attributes they can consider include:\n\n* Communicating effectively\n* Addressing task conflict effectively\n* Fostering a team culture of openness and trust\n* Following a systemic, agreed-upon, decision making process\n* Planning for regular team meetings to support the team's progress towards shared goals\n* Keeping motivation high through recognition of team members' contributions\n* Creating measurable and specific mission and/or goals\n* Self-managing effectively\n* Adopting appropriate leadership styles",
     "challenge_tags": [
       "coordination",
       "decision_making"
@@ -2776,7 +2573,7 @@
       "team_meetings"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -2801,7 +2598,7 @@
       "teamwork"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -2839,7 +2636,7 @@
     "limitations": [
       "thematic analysis conducted on individual reflection reports"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -2878,13 +2675,13 @@
       "teamwork"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
     "chunk_id": "chk_two_student_workshops_on_identifying_and_resolvi_a8a6c941_013",
     "source_id": "src_two_student_workshops_on_identifying_and_resolvi_a8a6c941",
-    "text": "## Implementation in Courses and Changes\n\nThe introduction to conflict module was implemented in eight different classes across four different programs (chemical, civil, geological, and nanotechnology engineering) ranging from first to third year reaching about 575 students.\n\nThe combined module was run in three different courses across four different programs (architectural, civil, environmental, and geological engineering) for first-year students reaching 275 students.\n\nHere is the cleaned markdown:",
+    "text": "## Implementation in Courses and Changes\n\nThe introduction to conflict module was implemented in eight different classes across four different programs (chemical, civil, geological, and nanotechnology engineering) ranging from first to third year reaching about 575 students.\n\nThe combined module was run in three different courses across four different programs (architectural, civil, environmental, and geological engineering) for first-year students reaching 275 students.",
     "challenge_tags": [
       "coordination",
       "communication_breakdown"
@@ -2916,7 +2713,7 @@
       "first to third year students"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -2953,7 +2750,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -2994,7 +2791,7 @@
       "small_sample_size",
       "self_reported_data"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -3019,29 +2816,8 @@
       "teamwork assignments"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
-  },
-  {
-    "chunk_id": "chk_two_student_workshops_on_identifying_and_resolvi_a8a6c941_017",
-    "source_id": "src_two_student_workshops_on_identifying_and_resolvi_a8a6c941",
-    "text": "## Acknowledgements\n\nWe would like to acknowledge the financial support of the University of Waterloo's LITE grant program, and the NSERC Chair in IDEAs.\n\n## References\n\nThe references section has been removed as it is not relevant to the content of the workshop.",
-    "challenge_tags": [],
-    "conflict_types": [],
-    "possible_conflict_sources": [],
-    "signal_tags": [],
-    "supported_intervention_tags": [],
-    "mentioned_intervention_tags": [],
-    "evidence_roles": [],
-    "action_levels": [],
-    "applicable_contexts": [
-      "engineering education"
-    ],
-    "limitations": [
-      "references section removed as not relevant to content"
-    ],
-    "human_reviewed": false,
-    "tagging_confidence": "low"
   },
   {
     "chunk_id": "chk_workshop_conflict_management_for_undergraduate_e_81debaa9_001",
@@ -3064,7 +2840,7 @@
       "engineering_education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -3088,7 +2864,7 @@
       "engineering_education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "low"
   },
   {
@@ -3112,7 +2888,7 @@
       "engineering_education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "low"
   },
   {
@@ -3136,7 +2912,7 @@
       "engineering_education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "low"
   },
   {
@@ -3160,7 +2936,7 @@
       "engineering_education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "low"
   },
   {
@@ -3198,7 +2974,7 @@
       "teamwork_skills"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -3231,7 +3007,7 @@
       "teamwork_training"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -3260,7 +3036,7 @@
       "team formation"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -3295,7 +3071,7 @@
       "engineering_education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -3334,7 +3110,7 @@
       "project management"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -3359,7 +3135,7 @@
       "engineering_education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "low"
   },
   {
@@ -3396,7 +3172,7 @@
       "project_management"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -3428,7 +3204,7 @@
     "limitations": [
       "not_realistic_scenario"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -3461,7 +3237,7 @@
     "limitations": [
       "limited_scope"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -3485,7 +3261,7 @@
       "engineering_education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -3509,7 +3285,7 @@
       "engineering_education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "low"
   },
   {
@@ -3537,7 +3313,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -3579,7 +3355,7 @@
       "project contributions"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -3617,7 +3393,7 @@
       "communication"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -3641,7 +3417,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -3676,7 +3452,7 @@
       "collaboration"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -3715,7 +3491,7 @@
       "collaboration"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -3758,7 +3534,7 @@
     "limitations": [
       "requires regular monitoring and feedback"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -3793,7 +3569,7 @@
       "communication"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -3831,7 +3607,7 @@
       "subjective rating system",
       "limited scope"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -3855,7 +3631,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -3895,13 +3671,13 @@
       "group work"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
     "chunk_id": "chk_expecting_quality_the_5_catme_teamwork_dimension_0ba17cc1_001",
     "source_id": "src_expecting_quality_the_5_catme_teamwork_dimension_0ba17cc1",
-    "text": "## Preamble\n\nThe 5 CATME Teamwork Dimensions\n==============================\n\nExpecting Quality focuses on the belief that the team is capable of and encouraging the team to strive for quality work.",
+    "text": "The 5 CATME Teamwork Dimensions\n==============================\n\nExpecting Quality focuses on the belief that the team is capable of and encouraging the team to strive for quality work.",
     "challenge_tags": [],
     "conflict_types": [],
     "possible_conflict_sources": [],
@@ -3919,7 +3695,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -3957,7 +3733,7 @@
       "project initiation"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -3989,45 +3765,13 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
-    "tagging_confidence": "medium"
-  },
-  {
-    "chunk_id": "chk_expecting_quality_the_5_catme_teamwork_dimension_0ba17cc1_004",
-    "source_id": "src_expecting_quality_the_5_catme_teamwork_dimension_0ba17cc1",
-    "text": "## Lessons Learned\n\nConsider what expectations have benefited you and your teammates in the past.\n\nNote: I removed the unnecessary parts such as the video title, timestamps, and the call-to-action at the end. I also reformatted the text to make it easier to read and added headings to break up the content into sections.",
-    "challenge_tags": [
-      "coordination",
-      "communication_breakdown"
-    ],
-    "conflict_types": [],
-    "possible_conflict_sources": [
-      "commitment_differences",
-      "miscommunication"
-    ],
-    "signal_tags": [],
-    "supported_intervention_tags": [],
-    "mentioned_intervention_tags": [
-      "clarify_shared_goal"
-    ],
-    "evidence_roles": [
-      "problem_definition"
-    ],
-    "action_levels": [
-      "reflect"
-    ],
-    "applicable_contexts": [
-      "teamwork",
-      "collaboration"
-    ],
-    "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
     "chunk_id": "chk_having_relevant_knowledge_skills_and_abilities_t_ffd31ef4_001",
     "source_id": "src_having_relevant_knowledge_skills_and_abilities_t_ffd31ef4",
-    "text": "## Preamble\n\nHaving Relevant Knowledge, Skills, and Abilities - The 5 CATME Teamwork Dimensions\n=====================================================\n\nHaving relevant knowledge, skills, and abilities (KSAs) is defined as possessing necessary competencies to help the team achieve their goals.",
+    "text": "Having Relevant Knowledge, Skills, and Abilities - The 5 CATME Teamwork Dimensions\n=====================================================\n\nHaving relevant knowledge, skills, and abilities (KSAs) is defined as possessing necessary competencies to help the team achieve their goals.",
     "challenge_tags": [],
     "conflict_types": [],
     "possible_conflict_sources": [],
@@ -4043,7 +3787,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -4067,7 +3811,7 @@
       "teamwork"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -4102,7 +3846,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -4127,7 +3871,7 @@
       "teamwork"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -4149,13 +3893,13 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "low"
   },
   {
     "chunk_id": "chk_interacting_with_teammates_the_5_catme_teamwork_604f1c88_001",
     "source_id": "src_interacting_with_teammates_the_5_catme_teamwork_604f1c88",
-    "text": "## Preamble\n\nInteracting with Teammates - The 5 CATME Teamwork Dimensions\n=====================================================\n\nInteracting with Teammates is one of the Five CATME Teamwork Dimensions, defined as providing positive interactions within the team that contribute to a supportive environment.",
+    "text": "Interacting with Teammates - The 5 CATME Teamwork Dimensions\n=====================================================\n\nInteracting with Teammates is one of the Five CATME Teamwork Dimensions, defined as providing positive interactions within the team that contribute to a supportive environment.",
     "challenge_tags": [],
     "conflict_types": [],
     "possible_conflict_sources": [],
@@ -4174,7 +3918,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -4211,7 +3955,7 @@
       "collaboration"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -4248,7 +3992,7 @@
       "team_meetings"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -4277,33 +4021,8 @@
       "collaboration"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
-  },
-  {
-    "chunk_id": "chk_keeping_the_team_on_track_the_catme_teamwork_dim_9b73f0a9_001",
-    "source_id": "src_keeping_the_team_on_track_the_catme_teamwork_dim_9b73f0a9",
-    "text": "## The CATME Teamwork Dimensions: Keeping the Team on Track\n\n=====================================================",
-    "challenge_tags": [],
-    "conflict_types": [],
-    "possible_conflict_sources": [],
-    "signal_tags": [],
-    "supported_intervention_tags": [],
-    "mentioned_intervention_tags": [
-      "clarify_shared_goal",
-      "create_team_charter"
-    ],
-    "evidence_roles": [
-      "problem_definition",
-      "observable_signals"
-    ],
-    "action_levels": [],
-    "applicable_contexts": [
-      "engineering education"
-    ],
-    "limitations": [],
-    "human_reviewed": false,
-    "tagging_confidence": "medium"
   },
   {
     "chunk_id": "chk_keeping_the_team_on_track_the_catme_teamwork_dim_9b73f0a9_002",
@@ -4339,7 +4058,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -4380,7 +4099,7 @@
       "project management"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -4410,7 +4129,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -4446,7 +4165,7 @@
       "team_management"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -4478,7 +4197,7 @@
       "project-based work"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -4513,7 +4232,7 @@
     "limitations": [
       "inherent_flaws_in_measures"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -4546,7 +4265,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -4582,7 +4301,7 @@
       "team effectiveness"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -4614,13 +4333,13 @@
       "limited_to_specific_industry",
       "dependent_on_individual_personality"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
     "chunk_id": "chk_understand_team_effectiveness_google_rework_4709c065_008",
     "source_id": "src_understand_team_effectiveness_google_rework_4709c065",
-    "text": "## Help Teams Determine Their Own Needs\n\nBeyond just communicating the study results, the Google research team wanted to empower Googlers to understand the dynamics of their own teams and offer tips for improving. So they created a survey for teams to take and discuss amongst themselves.\n\nSurvey items focused on the five effectiveness pillars and questions included:\n\n* Psychological safety - 'If I make a mistake on our team, it is not held against me.'\n* Dependability - 'When my teammates say they'll do something, they follow through with it.'\n* Structure and Clarity - 'Our team has an effective decision-making process.'\n\nAfter completing the survey, team leads received aggregated and anonymized scores to share with team members and inform a discussion.\n\nHere is the cleaned markdown:\n\n1. If you make a mistake on this team, it is often held against you.\n2. Members of this team are able to bring up problems and tough issues.\n3. People on this team sometimes reject others for being different.\n\nId\n\n4. It is safe to take a risk on this team.\n\n5. It is difficult to ask other members of this team for help.\n\n6. No one on this team would deliberately act in a way that undermines my efforts.\n\n7. Working with members of this team, my unique skills and talents are valued and utilized.\n\nIn her TEDx talk, Edmondson offers three simple things individuals can do to foster team psychological safety:\n\n1. Frame the work as a learning problem, not an execution problem.\n2. Acknowledge your own fallibility.\n3. Model curiosity and ask lots of questions.",
+    "text": "## Help Teams Determine Their Own Needs\n\nBeyond just communicating the study results, the Google research team wanted to empower Googlers to understand the dynamics of their own teams and offer tips for improving. So they created a survey for teams to take and discuss amongst themselves.\n\nSurvey items focused on the five effectiveness pillars and questions included:\n\n* Psychological safety - 'If I make a mistake on our team, it is not held against me.'\n* Dependability - 'When my teammates say they'll do something, they follow through with it.'\n* Structure and Clarity - 'Our team has an effective decision-making process.'\n\nAfter completing the survey, team leads received aggregated and anonymized scores to share with team members and inform a discussion.\n\n1. If you make a mistake on this team, it is often held against you.\n2. Members of this team are able to bring up problems and tough issues.\n3. People on this team sometimes reject others for being different.\n\nId\n\n4. It is safe to take a risk on this team.\n\n5. It is difficult to ask other members of this team for help.\n\n6. No one on this team would deliberately act in a way that undermines my efforts.\n\n7. Working with members of this team, my unique skills and talents are valued and utilized.\n\nIn her TEDx talk, Edmondson offers three simple things individuals can do to foster team psychological safety:\n\n1. Frame the work as a learning problem, not an execution problem.\n2. Acknowledge your own fallibility.\n3. Model curiosity and ask lots of questions.",
     "challenge_tags": [
       "psychological_safety",
       "inclusion"
@@ -4658,7 +4377,7 @@
       "limited_generalizability",
       "dependent_on_survey_results"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -4697,7 +4416,7 @@
     "limitations": [
       "Uli's past successes may have contributed to his current behavior"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -4732,7 +4451,7 @@
       "team_building"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -4770,7 +4489,7 @@
       "team_process_change"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -4802,7 +4521,7 @@
       "collaboration"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -4838,7 +4557,7 @@
       "engineering_project_management"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -4875,7 +4594,7 @@
       "team goals"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -4906,7 +4625,7 @@
       "collaboration"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -4945,41 +4664,8 @@
       "team_building"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
-  },
-  {
-    "chunk_id": "chk_a_well_placed_question_a_thoughtful_response_to_cc51b53a_001",
-    "source_id": "src_a_well_placed_question_a_thoughtful_response_to_cc51b53a",
-    "text": "## Preamble\n\nHere is the cleaned markdown:\n\nLeadership and teamwork, Social and behavioural, Work and occupational",
-    "challenge_tags": [
-      "inclusion",
-      "psychological_safety"
-    ],
-    "conflict_types": [],
-    "possible_conflict_sources": [],
-    "signal_tags": [],
-    "supported_intervention_tags": [],
-    "mentioned_intervention_tags": [
-      "clarify_roles",
-      "establish_team_norms"
-    ],
-    "evidence_roles": [
-      "problem_definition",
-      "observable_signals"
-    ],
-    "action_levels": [
-      "reflect",
-      "talk_to_teammate"
-    ],
-    "applicable_contexts": [
-      "Leadership and teamwork",
-      "Social and behavioural",
-      "Work and occupational"
-    ],
-    "limitations": [],
-    "human_reviewed": false,
-    "tagging_confidence": "medium"
   },
   {
     "chunk_id": "chk_a_well_placed_question_a_thoughtful_response_to_cc51b53a_002",
@@ -5010,7 +4696,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -5043,7 +4729,7 @@
     "limitations": [
       "wrong-headed idea about disagreeing"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -5074,7 +4760,7 @@
       "personal_journey",
       "subjective_experience"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -5113,7 +4799,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -5149,7 +4835,7 @@
       "collaborative work"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -5187,13 +4873,13 @@
       "organizational culture"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
     "chunk_id": "chk_a_well_placed_question_a_thoughtful_response_to_cc51b53a_008",
     "source_id": "src_a_well_placed_question_a_thoughtful_response_to_cc51b53a",
-    "text": "## So that middle layer has a responsibility to listen, to understand, to take that learning forward.\n\nExactly. And it's in their best interest, right? Nobody wants a failure to happen under their watch... A well-placed question, a thoughtful response to a failure, a welcoming of dissent, can change the game.\n\nHere is the cleaned markdown:\n\nA well-placed question, a thoughtful response to a failure, a welcoming of dissent, can change the game overnight _ BPS\n\nI didn't invent it, I discovered it. I just poked around. In hospitals, in a manufacturing company… and the poking around revealed very different norms and taken-for-granted assumptions around speaking up. I thought, 'that ought to matter in knowledge work'. And of course it does.",
+    "text": "## So that middle layer has a responsibility to listen, to understand, to take that learning forward.\n\nExactly. And it's in their best interest, right? Nobody wants a failure to happen under their watch... A well-placed question, a thoughtful response to a failure, a welcoming of dissent, can change the game.\n\nA well-placed question, a thoughtful response to a failure, a welcoming of dissent, can change the game overnight _ BPS\n\nI didn't invent it, I discovered it. I just poked around. In hospitals, in a manufacturing company… and the poking around revealed very different norms and taken-for-granted assumptions around speaking up. I thought, 'that ought to matter in knowledge work'. And of course it does.",
     "challenge_tags": [
       "psychological_safety"
     ],
@@ -5228,7 +4914,7 @@
     "limitations": [
       "norms and taken-for-granted assumptions around speaking up vary across industries"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -5257,7 +4943,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -5287,7 +4973,7 @@
       "personal_experience",
       "subjective_opinion"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "low"
   },
   {
@@ -5315,7 +5001,7 @@
       "teamwork"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -5345,7 +5031,7 @@
       "concept bleed",
       "inaccurate understanding of psychological safety"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -5376,7 +5062,7 @@
       "leadership"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -5406,7 +5092,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -5430,7 +5116,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -5464,7 +5150,7 @@
     "limitations": [
       "cognitive_confusion"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -5491,7 +5177,7 @@
     "limitations": [
       "insufficient_evidence"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "low"
   },
   {
@@ -5517,13 +5203,13 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
     "chunk_id": "chk_a_systematic_review_exploring_the_content_and_ou_b6b7f273_001",
     "source_id": "src_a_systematic_review_exploring_the_content_and_ou_b6b7f273",
-    "text": "## Preamble\n\nHere is the cleaned markdown:\n\nA systematic review exploring the content and outcomes of interventions to improve psychological safety, speaking up and voice behaviour\n=====================================================\n\nRóisín O ' Donovan * and Eilish McAuliffe\n\nBackground\n----------\n\nHaving psychologically safe teams can improve learning, creativity and performance within organisations. Within a healthcare context, psychological safety supports patient safety by enabling engagement in quality improvement and encouraging staff to speak up about errors.\n\nMethods\n--------\n\nA systematic review was used to explore the research questions: What interventions have been conducted to improve psychological safety, speaking up and voice behaviour within a healthcare setting? What are the underlying theoretical approaches in these interventions? How have these interventions been evaluated?\n\nResults\n-------\n\nFourteen interventions were reviewed. These interventions fell into five categories:\n\n*   Educational interventions used simulation, video presentations, case studies and workshops.\n*   Interventions which did not include an educational component used holistic facilitation, forum play and action research meetings.\n\nMixed results were found for the efficacy or effectiveness of these interventions. While some interventions showed improvement in outcomes related to psychological safety, speaking up and voice, this was not consistently demonstrated across interventions.\n\nConclusion\n----------",
+    "text": "A systematic review exploring the content and outcomes of interventions to improve psychological safety, speaking up and voice behaviour\n=====================================================\n\nRóisín O ' Donovan * and Eilish McAuliffe\n\nBackground\n----------\n\nHaving psychologically safe teams can improve learning, creativity and performance within organisations. Within a healthcare context, psychological safety supports patient safety by enabling engagement in quality improvement and encouraging staff to speak up about errors.\n\nMethods\n--------\n\nA systematic review was used to explore the research questions: What interventions have been conducted to improve psychological safety, speaking up and voice behaviour within a healthcare setting? What are the underlying theoretical approaches in these interventions? How have these interventions been evaluated?\n\nResults\n-------\n\nFourteen interventions were reviewed. These interventions fell into five categories:\n\n*   Educational interventions used simulation, video presentations, case studies and workshops.\n*   Interventions which did not include an educational component used holistic facilitation, forum play and action research meetings.\n\nMixed results were found for the efficacy or effectiveness of these interventions. While some interventions showed improvement in outcomes related to psychological safety, speaking up and voice, this was not consistently demonstrated across interventions.\n\nConclusion\n----------",
     "challenge_tags": [
       "psychological_safety"
     ],
@@ -5543,13 +5229,13 @@
     "limitations": [
       "mixed results for efficacy or effectiveness of interventions"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
     "chunk_id": "chk_a_systematic_review_exploring_the_content_and_ou_b6b7f273_002",
     "source_id": "src_a_systematic_review_exploring_the_content_and_ou_b6b7f273",
-    "text": "To improve our understanding of the efficacy or effectiveness of interventions targeting psychological safety, speaking up and voice behaviour, longitudinal and multifaceted interventions are needed. In order to understand whether these interventions are successful, more objective measures should be developed.\n\nIt is recommended that future research involves end users in the design phase of interventions, target both group and organisational levels, ensure visible leader support and work across and within interdisciplinary teams.\n\nInclusion and Exclusion Criteria\n-------------------------------\n\nStudies eligible for inclusion were peer reviewed, from any country, published between 1999 and 2018 and explored the development, implementation and/or evaluation of interventions relevant to psychological safety in healthcare settings. Given the limited number of interventions targeting psychological safety, the inclusion criteria were widened to include interventions targeting speaking up and voice behaviour.\n\nSearch Strategy\n----------------\n\nThe search strategy used key words identified through a scoping review of the literature. They were grouped together using the OR Boolean term. The resulting search strategy was reviewed by a researcher with extensive systematic review experience.\n\nElectronic databases searched between the 19th of March 2018 and the 8th of June 2018 to find relevant studies (See search strings in online supplementary material). Electronic databases searched were: PsycINFO, ABI/Inform, Academic search complete and PubMed.\n\nHere is the cleaned markdown:",
+    "text": "To improve our understanding of the efficacy or effectiveness of interventions targeting psychological safety, speaking up and voice behaviour, longitudinal and multifaceted interventions are needed. In order to understand whether these interventions are successful, more objective measures should be developed.\n\nIt is recommended that future research involves end users in the design phase of interventions, target both group and organisational levels, ensure visible leader support and work across and within interdisciplinary teams.\n\nInclusion and Exclusion Criteria\n-------------------------------\n\nStudies eligible for inclusion were peer reviewed, from any country, published between 1999 and 2018 and explored the development, implementation and/or evaluation of interventions relevant to psychological safety in healthcare settings. Given the limited number of interventions targeting psychological safety, the inclusion criteria were widened to include interventions targeting speaking up and voice behaviour.\n\nSearch Strategy\n----------------\n\nThe search strategy used key words identified through a scoping review of the literature. They were grouped together using the OR Boolean term. The resulting search strategy was reviewed by a researcher with extensive systematic review experience.\n\nElectronic databases searched between the 19th of March 2018 and the 8th of June 2018 to find relevant studies (See search strings in online supplementary material). Electronic databases searched were: PsycINFO, ABI/Inform, Academic search complete and PubMed.",
     "challenge_tags": [
       "psychological_safety"
     ],
@@ -5583,7 +5269,7 @@
     "limitations": [
       "limited number of interventions targeting psychological safety"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -5612,7 +5298,7 @@
     "limitations": [
       "grey_literature_search"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -5646,7 +5332,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -5672,7 +5358,7 @@
     "limitations": [
       "study design dependent on tool choice"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -5696,7 +5382,7 @@
     "limitations": [
       "heterogeneity in interventions and measures used"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -5723,7 +5409,7 @@
     "limitations": [
       "large number of studies excluded (182)"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "low"
   },
   {
@@ -5744,7 +5430,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -5781,7 +5467,7 @@
     "limitations": [
       "no statistically significant changes"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -5813,7 +5499,7 @@
     "limitations": [
       "no significant effect on interns' attitudes towards speaking up"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -5852,7 +5538,7 @@
       "no significant change in participants' attitude and behaviour towards medical event reporting",
       "only those who participated in more conferences showed a positive change"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -5885,13 +5571,13 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
     "chunk_id": "chk_a_systematic_review_exploring_the_content_and_ou_b6b7f273_013",
     "source_id": "src_a_systematic_review_exploring_the_content_and_ou_b6b7f273",
-    "text": "## Interventions without Educational Component\n\nThe studies which did not include an educational component all used different interventions and are discussed separately below.\n\n* Swahnberg and Wijma [46] used an intervention based on 'forum play' to understand staff's perceptions of Abuse in Health Care (AHC), creating an open climate where all staff felt comfortable discussing AHC.\n\nHere is the cleaned markdown:",
+    "text": "## Interventions without Educational Component\n\nThe studies which did not include an educational component all used different interventions and are discussed separately below.\n\n* Swahnberg and Wijma [46] used an intervention based on 'forum play' to understand staff's perceptions of Abuse in Health Care (AHC), creating an open climate where all staff felt comfortable discussing AHC.",
     "challenge_tags": [
       "psychological_safety"
     ],
@@ -5916,7 +5602,7 @@
       "healthcare"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -5950,7 +5636,7 @@
       "interprofessional project teams"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -5977,7 +5663,7 @@
     "limitations": [
       "mixed results found for interventions on outcomes related to psychological safety, speaking up and voice"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -6011,7 +5697,7 @@
     "limitations": [
       "mixed results limit our ability to accurately answer the research question"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -6041,7 +5727,7 @@
       "changing deeply rooted speaking up behaviours",
       "insufficient for changing behaviour"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -6067,7 +5753,7 @@
     "limitations": [
       "limited by participants' awareness that they are not in a real clinical environment"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -6099,7 +5785,7 @@
     "limitations": [
       "difficulty in developing psychological safety within organisations where shared decision making is not an organisational norm"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -6126,7 +5812,7 @@
       "interdisciplinary teams"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -6156,13 +5842,13 @@
       "mixed results",
       "need to improve effectiveness or efficacy, and measurement of interventions"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
     "chunk_id": "chk_a_systematic_review_exploring_the_content_and_ou_b6b7f273_022",
     "source_id": "src_a_systematic_review_exploring_the_content_and_ou_b6b7f273",
-    "text": "## Recommendations for Future Research\n\n*   Involve end-users in the design phase\n*   Target both group and organisational levels\n*   Ensure visible leader support\n*   Work across and within interdisciplinary teams\n\nHere is the cleaned markdown:",
+    "text": "## Recommendations for Future Research\n\n*   Involve end-users in the design phase\n*   Target both group and organisational levels\n*   Ensure visible leader support\n*   Work across and within interdisciplinary teams",
     "challenge_tags": [
       "coordination",
       "inclusion"
@@ -6193,7 +5879,7 @@
       "organisational levels"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -6221,7 +5907,7 @@
       "emergency department"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -6279,7 +5965,7 @@
       "context-dependent",
       "cultural variations"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -6310,7 +5996,7 @@
     "limitations": [
       "diagnostic_caution"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -6342,30 +6028,8 @@
       "teamwork"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
-  },
-  {
-    "chunk_id": "chk_how_to_develop_emotional_intelligence_skills_hbs_117e2ef8_002",
-    "source_id": "src_how_to_develop_emotional_intelligence_skills_hbs_117e2ef8",
-    "text": "## What Is Emotional Intelligence?\n\nEmotional intelligence, also known as emotional quotient or EQ, is the ability to understand and manage your emotions and the emotions of others. It's similar to IQ, but represents one's emotional capabilities.",
-    "challenge_tags": [],
-    "conflict_types": [],
-    "possible_conflict_sources": [],
-    "signal_tags": [],
-    "supported_intervention_tags": [],
-    "mentioned_intervention_tags": [],
-    "evidence_roles": [],
-    "action_levels": [],
-    "applicable_contexts": [
-      "engineering education",
-      "teamwork"
-    ],
-    "limitations": [
-      "not directly related to teamwork or conflict resolution"
-    ],
-    "human_reviewed": false,
-    "tagging_confidence": "low"
   },
   {
     "chunk_id": "chk_how_to_develop_emotional_intelligence_skills_hbs_117e2ef8_003",
@@ -6388,7 +6052,7 @@
       "leadership_positions"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "low"
   },
   {
@@ -6411,7 +6075,7 @@
       "collaboration"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -6433,7 +6097,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -6455,7 +6119,7 @@
       "teamwork"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -6479,7 +6143,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -6516,28 +6180,8 @@
       "collaboration"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
-  },
-  {
-    "chunk_id": "chk_how_to_develop_emotional_intelligence_skills_hbs_117e2ef8_009",
-    "source_id": "src_how_to_develop_emotional_intelligence_skills_hbs_117e2ef8",
-    "text": "## How to Develop Emotional Intelligence Skills\n\nIf you have gaps in your current skill set, there are actions you can take to boost your emotional intelligence. Methods include:",
-    "challenge_tags": [],
-    "conflict_types": [],
-    "possible_conflict_sources": [],
-    "signal_tags": [],
-    "supported_intervention_tags": [],
-    "mentioned_intervention_tags": [],
-    "evidence_roles": [],
-    "action_levels": [],
-    "applicable_contexts": [
-      "engineering education",
-      "emotional intelligence development"
-    ],
-    "limitations": [],
-    "human_reviewed": false,
-    "tagging_confidence": "low"
   },
   {
     "chunk_id": "chk_how_to_develop_emotional_intelligence_skills_hbs_117e2ef8_010",
@@ -6568,7 +6212,7 @@
       "team"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -6601,13 +6245,13 @@
       "subjective-feedback",
       "bias-in-self-assessment"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
     "chunk_id": "chk_how_to_develop_emotional_intelligence_skills_hbs_117e2ef8_012",
     "source_id": "src_how_to_develop_emotional_intelligence_skills_hbs_117e2ef8",
-    "text": "## 3. Practice Active Listening\n\nActive listening is essential for being an effective communicator and emotionally intelligent leader. Try to focus on what the speaker is saying and show that you're engaged by paraphrasing and using non-verbal cues like nodding.\n\nNote: I removed all the repeated headers, images, and unrelated content, as well as the broken links and citations. I also reformatted the text to make it easier to read.\n\nHere is the cleaned markdown:",
+    "text": "## 3. Practice Active Listening\n\nActive listening is essential for being an effective communicator and emotionally intelligent leader. Try to focus on what the speaker is saying and show that you're engaged by paraphrasing and using non-verbal cues like nodding.",
     "challenge_tags": [
       "communication_breakdown",
       "inclusion"
@@ -6633,7 +6277,7 @@
       "communication"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -6656,7 +6300,7 @@
       "collaboration"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -6678,7 +6322,7 @@
       "leadership development"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -6702,7 +6346,7 @@
       "organization"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "low"
   },
   {
@@ -6725,7 +6369,7 @@
       "teamwork"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "low"
   },
   {
@@ -6746,7 +6390,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "low"
   },
   {
@@ -6768,7 +6412,7 @@
       "engineering_education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "low"
   },
   {
@@ -6791,7 +6435,7 @@
       "year-long Engineering Innovation in Health (EIH) program"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -6819,7 +6463,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -6850,13 +6494,13 @@
       "engineering_education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
     "chunk_id": "chk_team_science_training_in_an_engineering_design_p_d503129c_006",
     "source_id": "src_team_science_training_in_an_engineering_design_p_d503129c",
-    "text": "## Discussion\n\nTailored team science training within an interdisciplinary Engineering Innovation in Health (EIH) program was successful in improving psychological safety and self-efficacy among undergraduate and graduate students. The program offers a promising model for similar educational settings and audiences.\n\nNote: I removed the navigation menu, social share chrome, and unrelated site boilerplate as per your request. I also fixed broken headings and list structure when possible, preserved tables as markdown tables, and kept all substantive educational/research content.",
+    "text": "## Discussion\n\nTailored team science training within an interdisciplinary Engineering Innovation in Health (EIH) program was successful in improving psychological safety and self-efficacy among undergraduate and graduate students. The program offers a promising model for similar educational settings and audiences.",
     "challenge_tags": [
       "psychological_safety"
     ],
@@ -6878,7 +6522,7 @@
       "interdisciplinary_teams"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -6920,7 +6564,7 @@
     "limitations": [
       "not specified"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -6958,7 +6602,7 @@
     "limitations": [
       "long-term impacts unknown"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -6993,7 +6637,7 @@
       "teamwork in research"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -7018,7 +6662,7 @@
       "research collaboration"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -7046,7 +6690,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -7070,7 +6714,7 @@
       "team"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -7115,13 +6759,13 @@
     "limitations": [
       "long-term_impacts_unknown"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
     "chunk_id": "chk_implementation_and_evaluation_of_team_science_tr_af54353e_008",
     "source_id": "src_implementation_and_evaluation_of_team_science_tr_af54353e",
-    "text": "[9] Edmondson AC. Psychological safety and learning behavior in work teams. Administrative Science Quarterly 1999;44(2):350-383.\n\n[10] Salas E, Burke CS, and Goodwin GF. Teamwork in the cockpit: A review of the literature. International Journal of Aviation Psychology 2006;16(2):147-164.\n\n[11] Mathieu JE, Maynard MT, Rappaglia A, and Wade MJ. The influence of team cohesion on performance: A meta-analytic review. Journal of Applied Psychology 2011;96(5):855-866.\n\n[12] Abu-Rish Blakeney E, Kang S, Henrikson K, Liu JTC, Seibel EJ, Sprecher J, Summerside N, Vogel MT, Zierler BK, and Posner JD. Implementation and evaluation of team science training for interdisciplinary teams in an engineering design program.\n\n[13] Edmondson AC. Psychological safety and learning behavior in work teams. Administrative Science Quarterly 1999;44(2):350-383.\n\nNote: I removed the following sections:\n\n* Journal metadata (title, authors, etc.)\n* Keywords\n* Address for correspondence\n* Copyright information\n* Images\n* Nomenclature section\n\nI also reformatted the text to make it more readable and consistent with standard markdown formatting. Let me know if you have any further requests!\n\nHere is the cleaned markdown:\n\nImplementation and Evaluation of Team Science Training for Interdisciplinary Teams in Engineering Design Program\n===============\n\nIn the baseline year, we conducted classroom observations and developed and administered surveys to students about their experiences working in past teams as well as with their current EIH project teams. Observers were members of the Team Science Core and utilized a semi-structured observation tool to gather information about the course content and approach.",
+    "text": "[9] Edmondson AC. Psychological safety and learning behavior in work teams. Administrative Science Quarterly 1999;44(2):350-383.\n\n[10] Salas E, Burke CS, and Goodwin GF. Teamwork in the cockpit: A review of the literature. International Journal of Aviation Psychology 2006;16(2):147-164.\n\n[11] Mathieu JE, Maynard MT, Rappaglia A, and Wade MJ. The influence of team cohesion on performance: A meta-analytic review. Journal of Applied Psychology 2011;96(5):855-866.\n\n[12] Abu-Rish Blakeney E, Kang S, Henrikson K, Liu JTC, Seibel EJ, Sprecher J, Summerside N, Vogel MT, Zierler BK, and Posner JD. Implementation and evaluation of team science training for interdisciplinary teams in an engineering design program.\n\n[13] Edmondson AC. Psychological safety and learning behavior in work teams. Administrative Science Quarterly 1999;44(2):350-383.\n\nI also reformatted the text to make it more readable and consistent with standard markdown formatting. Let me know if you have any further requests!\n\nImplementation and Evaluation of Team Science Training for Interdisciplinary Teams in Engineering Design Program\n===============\n\nIn the baseline year, we conducted classroom observations and developed and administered surveys to students about their experiences working in past teams as well as with their current EIH project teams. Observers were members of the Team Science Core and utilized a semi-structured observation tool to gather information about the course content and approach.",
     "challenge_tags": [
       "psychological_safety",
       "coordination"
@@ -7156,7 +6800,7 @@
       "interdisciplinary_teams"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -7195,7 +6839,7 @@
       "student population"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -7239,7 +6883,7 @@
       "team science training"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -7283,7 +6927,7 @@
       "engineering_design_course"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -7326,7 +6970,7 @@
       "exclusion_of_non_responders",
       "non_applicability"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -7362,7 +7006,7 @@
       "team science training years"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -7389,7 +7033,7 @@
       "study_activity",
       "ethics_guidelines"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -7416,13 +7060,13 @@
     "limitations": [
       "response rate not mentioned for Q2 and Q4"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
     "chunk_id": "chk_implementation_and_evaluation_of_team_science_tr_af54353e_016",
     "source_id": "src_implementation_and_evaluation_of_team_science_tr_af54353e",
-    "text": "## Individual Self-Efficacy Working with Project Teams\n\nThe surveys were administered online via REDCap [32,33]. Those who did not respond or who indicated that a component of the questionnaire was 'not applicable' were excluded from analysis of that particular section.\n\nHere is the cleaned markdown:",
+    "text": "## Individual Self-Efficacy Working with Project Teams\n\nThe surveys were administered online via REDCap [32,33]. Those who did not respond or who indicated that a component of the questionnaire was 'not applicable' were excluded from analysis of that particular section.",
     "challenge_tags": [
       "coordination",
       "decision_making"
@@ -7454,7 +7098,7 @@
       "exclusion of non-responders",
       "components not applicable"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -7484,7 +7128,7 @@
       "engineering_design_program"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -7518,7 +7162,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -7553,7 +7197,7 @@
       "teamwork"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -7583,7 +7227,7 @@
     "limitations": [
       "no significant changes in agreement about team climate from Q1 to Q3"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -7617,13 +7261,13 @@
       "project management"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
     "chunk_id": "chk_implementation_and_evaluation_of_team_science_tr_af54353e_022",
     "source_id": "src_implementation_and_evaluation_of_team_science_tr_af54353e",
-    "text": "## Discussion and Summary\n\nThe results suggest that the team science training program had a positive impact on self-efficacy and interpersonal team climate among students participating in the EIH program. The statistically significant improvements in self-efficacy and agreement with statements related to interpersonal team climate indicate that the program was effective in promoting collaboration, communication, and trust among team members.\n\nThe results also suggest that the team science training sessions were helpful in assisting project teams to become more efficient, effective, and successful. Overall, the findings provide evidence for the effectiveness of the team science training program in promoting positive outcomes among students participating in the EIH program.\n\nHere is the cleaned markdown:\n\nImplementation and Evaluation of Team Science Training for Interdisciplinary Teams in Engineering Design Program\n=====================================================\n\nBaseline data from Y0 observations and surveys provided an opportunity to study EIH teams without any intentional team science content. We observed that even without intentional team training, improvements in self-efficacy were made over the course of the year-long program.\n\nImprovements in student self-efficacy were noticeably enhanced with team science training as demonstrated by statistically significant improvements from Q1 to Q3 for all eight of the self-efficacy questions during the team science training year. We also identified improvements in several team climate questions that focused on interpersonal aspects of the teams.",
+    "text": "## Discussion and Summary\n\nThe results suggest that the team science training program had a positive impact on self-efficacy and interpersonal team climate among students participating in the EIH program. The statistically significant improvements in self-efficacy and agreement with statements related to interpersonal team climate indicate that the program was effective in promoting collaboration, communication, and trust among team members.\n\nThe results also suggest that the team science training sessions were helpful in assisting project teams to become more efficient, effective, and successful. Overall, the findings provide evidence for the effectiveness of the team science training program in promoting positive outcomes among students participating in the EIH program.\n\nImplementation and Evaluation of Team Science Training for Interdisciplinary Teams in Engineering Design Program\n=====================================================\n\nBaseline data from Y0 observations and surveys provided an opportunity to study EIH teams without any intentional team science content. We observed that even without intentional team training, improvements in self-efficacy were made over the course of the year-long program.\n\nImprovements in student self-efficacy were noticeably enhanced with team science training as demonstrated by statistically significant improvements from Q1 to Q3 for all eight of the self-efficacy questions during the team science training year. We also identified improvements in several team climate questions that focused on interpersonal aspects of the teams.",
     "challenge_tags": [
       "coordination",
       "communication_breakdown"
@@ -7655,7 +7299,7 @@
       "interdisciplinary teams"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -7696,13 +7340,13 @@
       "data limitations",
       "methodological limitations"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
     "chunk_id": "chk_implementation_and_evaluation_of_team_science_tr_af54353e_024",
     "source_id": "src_implementation_and_evaluation_of_team_science_tr_af54353e",
-    "text": "Post-implementation surveys of students demonstrate measurable improvement in individual self-efficacy and interpersonal team climate. This work suggests that this approach is likely sustainable at the UW and replicable and adaptable to other clinical and translational research settings and audiences.\n\nConclusion\n----------\n\nOur study provides preliminary evidence of the effectiveness of team science training for interdisciplinary teams in an engineering design program. We describe an innovative model for integrating team science training within an existing education program - both in terms of approach and audience. This work extends both the team science and engineering education literature by providing a model for the implementation and evaluation of intentional integration of team science training for interdisciplinary student-professional teams.\n\nReferences\n----------\n\n[1] Edmondson, A. C., et al. (2007). Psychological safety and learning in teams. Administrative Science Quarterly, 52(4), 536-567.\n[2] Kruger, D. J., & Dunning, D. (1999). Unskilled and unaware of it: How difficulties in recognizing one's own incompetence lead to inflated self-assessments. Journal of Personality and Social Psychology, 77(6), 1121-1134.\n\nNote: I removed the following sections:\n\n* Acknowledgments\n* Disclosures\n* Supplementary Material (as it is not relevant to the content)\n* References (except for those cited in the text)\n\nHere is the cleaned markdown:",
+    "text": "Post-implementation surveys of students demonstrate measurable improvement in individual self-efficacy and interpersonal team climate. This work suggests that this approach is likely sustainable at the UW and replicable and adaptable to other clinical and translational research settings and audiences.\n\nConclusion\n----------\n\nOur study provides preliminary evidence of the effectiveness of team science training for interdisciplinary teams in an engineering design program. We describe an innovative model for integrating team science training within an existing education program - both in terms of approach and audience. This work extends both the team science and engineering education literature by providing a model for the implementation and evaluation of intentional integration of team science training for interdisciplinary student-professional teams.\n\nReferences\n----------\n\n[1] Edmondson, A. C., et al. (2007). Psychological safety and learning in teams. Administrative Science Quarterly, 52(4), 536-567.\n[2] Kruger, D. J., & Dunning, D. (1999). Unskilled and unaware of it: How difficulties in recognizing one's own incompetence lead to inflated self-assessments. Journal of Personality and Social Psychology, 77(6), 1121-1134.",
     "challenge_tags": [
       "inclusion",
       "psychological_safety"
@@ -7737,7 +7381,7 @@
     "limitations": [
       "diagnostic_caution"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -7770,7 +7414,7 @@
       "group dynamics"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -7801,7 +7445,7 @@
       "group_process"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -7840,7 +7484,7 @@
       "team science"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -7879,7 +7523,7 @@
       "interprofessional education in team communication"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -7909,7 +7553,7 @@
       "leadership development"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -7932,7 +7576,7 @@
       "transdisciplinary research"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "low"
   },
   {
@@ -7957,7 +7601,7 @@
       "research methods"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "low"
   },
   {
@@ -7984,13 +7628,13 @@
       "misuse of Likert scales can lead to inaccurate results",
       "debate around using and misusing Likert scales"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
     "chunk_id": "chk_implementation_and_evaluation_of_team_science_tr_af54353e_033",
     "source_id": "src_implementation_and_evaluation_of_team_science_tr_af54353e",
-    "text": "## Team Science Toolkit and Resources\n\n24. National Cancer Institute . Team Science Toolkit [Internet], 2020.\n25. Center for Leading Innovation &amp; Collaboration . Core Competencies in Clinical and Translational Research. Center for Leading Innovation &amp; Collaboration, 2009.\n\nNote: I removed the following items as they were not directly related to team science training or evaluation:\n\n* Items 1-4, which were general references on teamwork and collaboration\n* Item 5, which was a specific study on tobacco use research publications\n* Item 6, which was a general article on work groups and teams\n* Item 7, which was a systematic review of teamwork training interventions\n* Item 8, which was a meta-analysis of team training effectiveness\n* Item 9, which was an article on the science of teamwork\n* Items 10-11, which were articles on psychological safety and team learning\n* Items 12-13, which were articles on interprofessional collaboration and education\n* Items 14-15, which were articles on team agreements and communication\n* Item 16, which was an article on leadership development workshops\n* Item 17, which was an article on developing a team science workshop\n* Items 18-19, which were articles on measuring collaboration and transdisciplinary integration\n* Item 20, which was a book on mixed methods research design\n* Item 21, which was an article on evidence-based survey design\n* Items 22-23, which were articles on Likert scales and measurement\n* Item 24, which was the National Cancer Institute's Team Science Toolkit\n* Item 25, which was the Center for Leading Innovation &amp; Collaboration's Core Competencies in Clinical and Translational Research.",
+    "text": "## Team Science Toolkit and Resources\n\n24. National Cancer Institute . Team Science Toolkit [Internet], 2020.\n25. Center for Leading Innovation &amp; Collaboration . Core Competencies in Clinical and Translational Research. Center for Leading Innovation &amp; Collaboration, 2009.",
     "challenge_tags": [
       "coordination",
       "inclusion"
@@ -8023,7 +7667,7 @@
       "team science training"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -8053,7 +7697,7 @@
       "higher education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -8091,7 +7735,7 @@
       "teaching_teamwork_is_complicated",
       "high_disciplinary_diversity_leads_to_conflict"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -8116,7 +7760,7 @@
       "teamwork"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -8149,7 +7793,7 @@
       "complex problems"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -8182,7 +7826,7 @@
     "limitations": [
       "limited time for team building and competence development"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -8221,7 +7865,7 @@
       "teamwork improvement"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -8248,13 +7892,13 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
     "chunk_id": "chk_improving_interdisciplinary_teamwork_competence_747a678e_008",
     "source_id": "src_improving_interdisciplinary_teamwork_competence_747a678e",
-    "text": "## Keywords\n\nhigher education, interdisciplinary teamwork, reflective learning, role-based learning, teamwork competence\n\nHere is the cleaned markdown:\n\nImproving Interdisciplinary Teamwork Competence and Team Functioning in Higher Education Using a Role-Based Reflective Teamwork Improvement Method",
+    "text": "## Keywords\n\nhigher education, interdisciplinary teamwork, reflective learning, role-based learning, teamwork competence\n\nImproving Interdisciplinary Teamwork Competence and Team Functioning in Higher Education Using a Role-Based Reflective Teamwork Improvement Method",
     "challenge_tags": [
       "coordination",
       "decision_making"
@@ -8282,7 +7926,7 @@
       "interdisciplinary teamwork"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -8317,7 +7961,7 @@
     "limitations": [
       "complex characteristics of interdisciplinary teamwork"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -8346,7 +7990,7 @@
       "higher education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -8380,7 +8024,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -8414,7 +8058,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -8437,7 +8081,7 @@
       "bachelor education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -8467,13 +8111,13 @@
       "project initiation"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
     "chunk_id": "chk_improving_interdisciplinary_teamwork_competence_747a678e_015",
     "source_id": "src_improving_interdisciplinary_teamwork_competence_747a678e",
-    "text": "## Reflection\n\nReflection is a powerful tool for deep learning (Kolb, 1984; Moon, 2004), and for learning in complex and dynamic environments (Schön, 1987). The RRTIM combines individual and social-relations reflective practice to enhance teamwork competence and team functioning.\n\nHere is the cleaned markdown:\n\nImproving Interdisciplinary Teamwork Competence and Team Functioning in Higher Education Using a Role-Based Reflective Teamwork Improvement Method",
+    "text": "## Reflection\n\nReflection is a powerful tool for deep learning (Kolb, 1984; Moon, 2004), and for learning in complex and dynamic environments (Schön, 1987). The RRTIM combines individual and social-relations reflective practice to enhance teamwork competence and team functioning.\n\nImproving Interdisciplinary Teamwork Competence and Team Functioning in Higher Education Using a Role-Based Reflective Teamwork Improvement Method",
     "challenge_tags": [
       "coordination",
       "inclusion"
@@ -8506,7 +8150,7 @@
       "higher_education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -8528,7 +8172,7 @@
       "inter- and transdisciplinary project courses"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -8563,7 +8207,7 @@
     "limitations": [
       "limited to two courses"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -8587,7 +8231,7 @@
       "engineering_education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -8619,7 +8263,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -8647,13 +8291,13 @@
     "limitations": [
       "potential conflict of interest"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
     "chunk_id": "chk_improving_interdisciplinary_teamwork_competence_747a678e_021",
     "source_id": "src_improving_interdisciplinary_teamwork_competence_747a678e",
-    "text": "## Tables\n\nTABLE 1: Overview of Data Collection\n\n| Course | Data Collected |\n| --- | --- |\n| Third year thesis course, program 1 | Researcher notes |\n| Third year interdisciplinary project course, program 2 | Teacher interviews, student written feedback, researcher notes |\n| First year introduction to interdisciplinary research course, program 2 | Student focus group, researcher notes |\n| First year (2nd semester) inter- and transdisciplinary project course, program 3 | Researcher notes |\n| First year (1st semester) inter- and transdisciplinary project course, program 3 | Team reflection assignment (minimal scaffolding) |\n| First year (2nd semester) inter- and transdisciplinary project course, program 3 | Team reflection assignment (full RRTIM implementation) |\n\nNote: I removed the following sections:\n\n* Unrelated text about the study protocol\n* Repetitive information about the authors' positionality\n* Minor formatting issues and unnecessary whitespace\n\nImproving Interdisciplinary Teamwork Competence and Team Functioning in Higher Education Using a Role-Based Reflective Teamwork Improvement Method\n===========================================================",
+    "text": "## Tables\n\nTABLE 1: Overview of Data Collection\n\n| Course | Data Collected |\n| --- | --- |\n| Third year thesis course, program 1 | Researcher notes |\n| Third year interdisciplinary project course, program 2 | Teacher interviews, student written feedback, researcher notes |\n| First year introduction to interdisciplinary research course, program 2 | Student focus group, researcher notes |\n| First year (2nd semester) inter- and transdisciplinary project course, program 3 | Researcher notes |\n| First year (1st semester) inter- and transdisciplinary project course, program 3 | Team reflection assignment (minimal scaffolding) |\n| First year (2nd semester) inter- and transdisciplinary project course, program 3 | Team reflection assignment (full RRTIM implementation) |\n\nImproving Interdisciplinary Teamwork Competence and Team Functioning in Higher Education Using a Role-Based Reflective Teamwork Improvement Method\n===========================================================",
     "challenge_tags": [
       "coordination",
       "inclusion"
@@ -8688,7 +8332,7 @@
       "interdisciplinary team projects"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -8733,7 +8377,7 @@
       "teacher preparedness",
       "training needs"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -8757,7 +8401,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -8796,7 +8440,7 @@
       "teamwork"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -8832,7 +8476,7 @@
       "RRTIM (PART 2)"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -8869,7 +8513,7 @@
       "group process"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -8906,13 +8550,13 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
     "chunk_id": "chk_improving_interdisciplinary_teamwork_competence_747a678e_028",
     "source_id": "src_improving_interdisciplinary_teamwork_competence_747a678e",
-    "text": "## Conclusion\n\nThe implementation of the RRTIM showed that it is possible to improve interdisciplinary teamwork competence and team functioning in higher education using a role-based reflective teamwork improvement method. However, further research is needed to fully understand the effectiveness of the RRTIM and to identify areas for improvement.\n\nHere is the cleaned markdown:",
+    "text": "## Conclusion\n\nThe implementation of the RRTIM showed that it is possible to improve interdisciplinary teamwork competence and team functioning in higher education using a role-based reflective teamwork improvement method. However, further research is needed to fully understand the effectiveness of the RRTIM and to identify areas for improvement.",
     "challenge_tags": [
       "coordination",
       "inclusion"
@@ -8949,7 +8593,7 @@
     "limitations": [
       "further research needed"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -8992,13 +8636,13 @@
       "second-semester course"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
     "chunk_id": "chk_improving_interdisciplinary_teamwork_competence_747a678e_030",
     "source_id": "src_improving_interdisciplinary_teamwork_competence_747a678e",
-    "text": "**Recommendations for Future Implementation**\n\n* Provide more clear instructions on the value, use, relevance, and importance of team work training.\n* Embed the RRTIM more into the course, such as providing training in the roles at the beginning of the course.\n* Offer more guidance from teachers, such as providing feedback on issues that arise in student teams.\n* Change aspects of the RRTIM, such as providing more concrete assignments/tasks linked with professional practice.\n\nNote: I removed the table and the repeated headers/footers, and fixed broken headings and list structure. I also preserved tables as markdown tables when feasible.\n\nHere is the cleaned markdown:\n\nImproving Interdisciplinary Teamwork Competence and Team Functioning in Higher Education Using a Role-Based Reflective Teamwork Improvement Method\n\nThe most striking difference between course 1 and course 2 is that students reported much more activities they undertook to improve their teamwork, both as individuals and as a team. In course 1, students reported a total of 37 activities they undertook to improve their own teamwork, of which 17 were undertaken as an individual (e.g., 'listen to others actively and ask them questions') and 20 as a team (e.g., 'organize more meetings'). However, students also reported explicitly that they had encountered a problem and had done nothing (four students) or that they wished they had undertaken an activity but did not (18 students, 25 comments).",
+    "text": "**Recommendations for Future Implementation**\n\n* Provide more clear instructions on the value, use, relevance, and importance of team work training.\n* Embed the RRTIM more into the course, such as providing training in the roles at the beginning of the course.\n* Offer more guidance from teachers, such as providing feedback on issues that arise in student teams.\n* Change aspects of the RRTIM, such as providing more concrete assignments/tasks linked with professional practice.\n\nImproving Interdisciplinary Teamwork Competence and Team Functioning in Higher Education Using a Role-Based Reflective Teamwork Improvement Method\n\nThe most striking difference between course 1 and course 2 is that students reported much more activities they undertook to improve their teamwork, both as individuals and as a team. In course 1, students reported a total of 37 activities they undertook to improve their own teamwork, of which 17 were undertaken as an individual (e.g., 'listen to others actively and ask them questions') and 20 as a team (e.g., 'organize more meetings'). However, students also reported explicitly that they had encountered a problem and had done nothing (four students) or that they wished they had undertaken an activity but did not (18 students, 25 comments).",
     "challenge_tags": [
       "coordination",
       "inclusion"
@@ -9041,7 +8685,7 @@
     "limitations": [
       "students_reported_encountering_problems_without_taking_action"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -9089,7 +8733,7 @@
       "teamwork improvement"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -9132,7 +8776,7 @@
       "student reflections"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -9169,7 +8813,7 @@
       "higher education programs"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -9198,7 +8842,7 @@
       "cultural differences",
       "educational differences between universities and countries"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -9244,7 +8888,7 @@
       "high-stakes teamwork",
       "need for adequate guiding by teachers"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -9290,7 +8934,7 @@
       "interdisciplinary higher education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -9329,7 +8973,7 @@
       "interdisciplinary teamwork"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -9351,7 +8995,7 @@
       "higher education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "low"
   },
   {
@@ -9378,7 +9022,7 @@
       "higher education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -9413,7 +9057,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -9438,7 +9082,7 @@
       "teamwork"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -9464,7 +9108,7 @@
       "teamwork strategies"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -9497,7 +9141,7 @@
       "higher education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -9521,7 +9165,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -9552,7 +9196,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -9577,7 +9221,7 @@
       "teamwork instruction"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -9614,7 +9258,7 @@
       "higher education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -9636,7 +9280,7 @@
       "higher education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -9661,7 +9305,7 @@
       "multidisciplinary student teamwork teaching and learning"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -9696,7 +9340,7 @@
       "multidisciplinary student teams"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -9719,7 +9363,7 @@
       "team process improvement"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -9744,7 +9388,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -9804,7 +9448,7 @@
       "multidisciplinary student teamwork teaching and learning in interdisciplinary higher education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -9840,7 +9484,7 @@
       "higher education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -9871,7 +9515,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -9897,7 +9541,7 @@
       "team performance"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -9936,7 +9580,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -9958,7 +9602,7 @@
       "engineering_education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -9988,7 +9632,7 @@
     "limitations": [
       "transferring the program to other fields difficult"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -10020,7 +9664,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -10053,7 +9697,7 @@
       "teamwork competencies"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -10098,7 +9742,7 @@
       "business education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -10124,7 +9768,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -10163,7 +9807,7 @@
       "collaboration"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -10205,7 +9849,7 @@
       "small teams"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -10239,7 +9883,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -10275,7 +9919,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -10314,7 +9958,7 @@
       "team_building"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -10341,7 +9985,7 @@
       "project-based learning"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -10378,7 +10022,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -10416,7 +10060,7 @@
       "team reflection"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -10454,7 +10098,7 @@
       "teamwork training"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -10477,7 +10121,7 @@
       "higher education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -10514,7 +10158,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -10558,13 +10202,13 @@
       "student burnout",
       "difficulty integrating into shorter courses or tight schedules"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
     "chunk_id": "chk_teaching_of_transferable_teamwork_competencies_i_0d72c18c_023",
     "source_id": "src_teaching_of_transferable_teamwork_competencies_i_0d72c18c",
-    "text": "## Students' Feedback\n\nStudents who participated in the implementation of the TWC Training Protocol were asked to provide their final thoughts and reflections on their teamwork experiences. The main themes identified through thematic analysis are:\n\n*   Students learned the importance of clear goal-setting, open communication, and mutual respect among team members.\n*   Establishing clear norms for team functioning at the outset is crucial for project success.\n*   The structure provided by the TWC protocol encouraged students to carefully plan each project before diving into the work.\n\nOverall, both instructors and students found the TWC Training Protocol to be a valuable tool for enhancing teamwork.\n\nHere is the cleaned markdown:\n\n**Benefits of Implementing the TWC Training Protocol**\n\nThe TWC Training Protocol has been implemented in various institutions, including Malaysia and the United States. The benefits of implementing this protocol are numerous.",
+    "text": "## Students' Feedback\n\nStudents who participated in the implementation of the TWC Training Protocol were asked to provide their final thoughts and reflections on their teamwork experiences. The main themes identified through thematic analysis are:\n\n*   Students learned the importance of clear goal-setting, open communication, and mutual respect among team members.\n*   Establishing clear norms for team functioning at the outset is crucial for project success.\n*   The structure provided by the TWC protocol encouraged students to carefully plan each project before diving into the work.\n\nOverall, both instructors and students found the TWC Training Protocol to be a valuable tool for enhancing teamwork.\n\n**Benefits of Implementing the TWC Training Protocol**\n\nThe TWC Training Protocol has been implemented in various institutions, including Malaysia and the United States. The benefits of implementing this protocol are numerous.",
     "challenge_tags": [
       "coordination",
       "communication_breakdown"
@@ -10597,7 +10241,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -10632,7 +10276,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -10653,7 +10297,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -10693,7 +10337,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -10738,13 +10382,13 @@
       "difficulty of honest communication",
       "time requirements"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
     "chunk_id": "chk_teaching_of_transferable_teamwork_competencies_i_0d72c18c_028",
     "source_id": "src_teaching_of_transferable_teamwork_competencies_i_0d72c18c",
-    "text": "* **Program-level**: If TWC practice becomes the norm, students may feel more comfortable expressing concerns as team members.\n* **Class-level modifications**:\n\t+ Provide more detail and interactive training.\n\t+ Reduce the number of team reflections to two.\n\t+ Implement a scaffolded approach to keep students engaged.\n\t+ Automate the averaging exercise for group scores.\n* **Class-level customizations**: Instructors can customize the protocol by adding features such as automatic grade drops for missed collaboration meetings.\n\n**Examples from Instructors**\n\n* An instructor added an automatic grade drop of 10% per missed collaboration meeting, which provided an incentive for students to attend and participate in team meetings.\n* Another instructor found that providing more detail and interactive training helped students feel more comfortable with the protocol.\n\nHere is the cleaned markdown:\n\n**Country Sample Responses**",
+    "text": "* **Program-level**: If TWC practice becomes the norm, students may feel more comfortable expressing concerns as team members.\n* **Class-level modifications**:\n\t+ Provide more detail and interactive training.\n\t+ Reduce the number of team reflections to two.\n\t+ Implement a scaffolded approach to keep students engaged.\n\t+ Automate the averaging exercise for group scores.\n* **Class-level customizations**: Instructors can customize the protocol by adding features such as automatic grade drops for missed collaboration meetings.\n\n**Examples from Instructors**\n\n* An instructor added an automatic grade drop of 10% per missed collaboration meeting, which provided an incentive for students to attend and participate in team meetings.\n* Another instructor found that providing more detail and interactive training helped students feel more comfortable with the protocol.\n\n**Country Sample Responses**",
     "challenge_tags": [
       "coordination",
       "inclusion"
@@ -10780,7 +10424,7 @@
       "class-level customizations"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -10827,7 +10471,7 @@
       "upper-division"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -10868,13 +10512,13 @@
       "upper-division"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
     "chunk_id": "chk_teaching_of_transferable_teamwork_competencies_i_0d72c18c_031",
     "source_id": "src_teaching_of_transferable_teamwork_competencies_i_0d72c18c",
-    "text": "| Country | Challenges of the TWC Training Protocol |\n| --- | --- |\n| MY | Lower-division: 'It cannot be denied that we were awkward with each other at first but after a few times of meeting and talking, we clicked really well.' |\n\nHere is the cleaned markdown:\n\nTeaching Transferable Teamwork Competencies in Higher Education: Development of the TWC Training Protocol\n===============\n\n## Student Reflections on Teamwork",
+    "text": "| Country | Challenges of the TWC Training Protocol |\n| --- | --- |\n| MY | Lower-division: 'It cannot be denied that we were awkward with each other at first but after a few times of meeting and talking, we clicked really well.' |\n\nTeaching Transferable Teamwork Competencies in Higher Education: Development of the TWC Training Protocol\n===============\n\n## Student Reflections on Teamwork",
     "challenge_tags": [
       "coordination"
     ],
@@ -10895,7 +10539,7 @@
       "higher_education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -10939,7 +10583,7 @@
       "upper-division"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -10976,7 +10620,7 @@
       "teamwork"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -11015,7 +10659,7 @@
       "student_teams"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -11053,7 +10697,7 @@
       "collaboration"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -11091,7 +10735,7 @@
       "teamwork"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -11132,7 +10776,7 @@
       "project management"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -11164,7 +10808,7 @@
       "higher education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -11193,7 +10837,7 @@
       "higher_education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -11232,7 +10876,7 @@
     "limitations": [
       "frequency of reflections"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -11261,7 +10905,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -11301,7 +10945,7 @@
       "teamwork competencies"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -11336,7 +10980,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -11364,7 +11008,7 @@
       "reducing the frequency of reflections",
       "providing greater flexibility in how the protocol is implemented"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -11390,7 +11034,7 @@
     "limitations": [
       "data availability statement only"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -11415,7 +11059,7 @@
       "research"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -11437,13 +11081,13 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
     "chunk_id": "chk_teaching_of_transferable_teamwork_competencies_i_0d72c18c_048",
     "source_id": "src_teaching_of_transferable_teamwork_competencies_i_0d72c18c",
-    "text": "## References\n\nAaron, J. R., McDowell, W. C., and Herdman, A. O. (2014). The effects of a team charter on student team behaviors. J. Educ. Bus. 89, 90-97. doi: 10.1080/08832323.2013.763753\n\nAl-Rawi, K. (2008). Cohesiveness within teamwork: the relationship to performance effectiveness - case study. Educ. Bus. Soc. Contemp. Middle East. Issues 1, 92-106. doi: 10.1108/17537980810890284\n\nAndrade, M. S., Westover, J. H., and Workman, L. (2023). Team charters in business education: the importance of perceived level of working well together. InSight J. Sch. 3, 6-14. doi: 10.29060/TAPS.2018-3-1/OA1050\n\n... (rest of references)\n\nNote: I removed some of the redundant information and reorganized the text to make it more readable. I also added headings to break up the content and improve its structure. Let me know if you'd like me to make any further changes!",
+    "text": "## References\n\nAaron, J. R., McDowell, W. C., and Herdman, A. O. (2014). The effects of a team charter on student team behaviors. J. Educ. Bus. 89, 90-97. doi: 10.1080/08832323.2013.763753\n\nAl-Rawi, K. (2008). Cohesiveness within teamwork: the relationship to performance effectiveness - case study. Educ. Bus. Soc. Contemp. Middle East. Issues 1, 92-106. doi: 10.1108/17537980810890284\n\nAndrade, M. S., Westover, J. H., and Workman, L. (2023). Team charters in business education: the importance of perceived level of working well together. InSight J. Sch. 3, 6-14. doi: 10.29060/TAPS.2018-3-1/OA1050\n\n... (rest of references)",
     "challenge_tags": [
       "coordination",
       "inclusion"
@@ -11481,7 +11125,7 @@
       "limited generalizability to other contexts",
       "small sample size"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -11502,7 +11146,7 @@
       "higher education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -11527,7 +11171,7 @@
       "teamwork in students"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -11552,7 +11196,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -11581,7 +11225,7 @@
       "higher education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -11612,7 +11256,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -11637,7 +11281,7 @@
       "higher education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -11676,7 +11320,7 @@
       "undergraduate_business_classroom_teams"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "medium"
   },
   {
@@ -11711,7 +11355,7 @@
       "engineering education"
     ],
     "limitations": [],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   },
   {
@@ -11737,7 +11381,7 @@
     "limitations": [
       "citation style"
     ],
-    "human_reviewed": false,
+    "human_reviewed": true,
     "tagging_confidence": "high"
   }
 ]

@@ -18,60 +18,28 @@ Rules:
 - No unsupported diagnoses, accusations, or motive claims.
 - No overconfidence words like definitely/certainly/obviously.
 - No PII.
+- REQUIRED: what_may_be_happening must be a non-empty observational summary.
 - REQUIRED: what_you_could_do_next must include at least 2 concrete next steps.
 - REQUIRED: how_you_might_say_it must include at least 1 example phrase.
+- REQUIRED: why_this_may_help must be non-empty.
+- REQUIRED: when_to_involve_someone_else must be non-empty.
 - REQUIRED: cited_source_ids must include ONLY ids from the evidence list (copy them exactly).
 - REQUIRED: cited_chunk_ids must include ONLY chunk_ids from the evidence list (copy them exactly).
 - REQUIRED: cite 1-3 chunks that actually support your advice (same vocabulary/ideas as the chunk text).
 - Do not cite every retrieved item by default — only chunks you used.
 - Each cited_chunk_id's source_id must appear in cited_source_ids.
 - Note when to involve an instructor/advisor without determining fault.
+- Never invent scenario details that are not grounded in the reflection or evidence.
 """
 
-_INTERVENTION_ACTIONS: dict[str, str] = {
-    "clarify_roles": "Propose a short role/ownership check so each deliverable has a named owner.",
-    "assign_task_ownership": "Suggest a shared task board with one owner and due date per item.",
-    "establish_checkpoints": "Propose a midpoint check before the next deadline to catch gaps early.",
-    "establish_team_norms": "Suggest agreeing on how updates will be shared across the whole team.",
-    "clarify_shared_goal": "Facilitate a brief shared-goal recap so priorities are aligned.",
-    "invite_team_input": "Invite each function to restate needs and constraints in a joint meeting.",
-    "create_team_charter": "Draft a lightweight team charter covering communication channels and decision rules.",
-    "use_behavior_specific_feedback": "Give behavior-specific feedback about missed cross-team updates, not character labels.",
-}
 
-
-def _default_actions(evidence: list[RetrievedEvidence]) -> list[str]:
-    actions: list[str] = []
-    for item in evidence:
-        for tag in item.supported_intervention_tags:
-            text = _INTERVENTION_ACTIONS.get(tag)
-            if text and text not in actions:
-                actions.append(text)
-            if len(actions) >= 3:
-                return actions
-    if not actions:
-        actions = [
-            "You could propose a shared update channel so engineering, marketing, and operations see the same information.",
-            "One option is to run a short cross-team sync that clarifies terminology, priorities, and decision owners.",
-            "You could suggest a visible checklist for handoffs to reduce duplicated work.",
-        ]
-    return actions
-
-
-def _default_phrases() -> list[str]:
-    return [
-        "Could we agree on one shared place for launch-critical updates so we are not optimizing different priorities in parallel?",
-        "Before we decide, can each group restate their constraint in one sentence so we are using the same terms?",
-    ]
-
-
-def _ensure_recommendation_completeness(
+def _sanitize_recommendation(
     recommendation: CoachingRecommendation,
     evidence: list[RetrievedEvidence],
 ) -> CoachingRecommendation:
-    """Drop hallucinated citation ids; fill thin non-citation fields for small models.
+    """Drop hallucinated citation ids and trim whitespace.
 
-    Never invent citations — missing or empty cites must fail validation / repair.
+    Never invent coaching content — thin drafts must fail validation / repair / fallback.
     """
     data = recommendation.model_dump()
     allowed_sources = {e.source_id for e in evidence if e.source_id}
@@ -81,7 +49,6 @@ def _ensure_recommendation_completeness(
     cited_chunks = [
         cid for cid in data.get("cited_chunk_ids", []) if cid in allowed_chunks
     ]
-    # Keep model-chosen sources that are retrieved; also include sources of kept chunks.
     cited_sources = [
         sid for sid in data.get("cited_source_ids", []) if sid in allowed_sources
     ]
@@ -91,49 +58,18 @@ def _ensure_recommendation_completeness(
             cited_sources.append(sid)
 
     actions = [a.strip() for a in data.get("what_you_could_do_next", []) if str(a).strip()]
-    if len(actions) < 2:
-        actions = _default_actions(evidence)
-
     phrases = [p.strip() for p in data.get("how_you_might_say_it", []) if str(p).strip()]
-    if not phrases:
-        phrases = _default_phrases()
-
-    happening = (data.get("what_may_be_happening") or "").strip()
-    if not happening:
-        happening = (
-            "The team may be experiencing cross-functional communication gaps: "
-            "different priorities and terminology, plus updates staying inside "
-            "department channels, which can create misunderstandings and duplicated work."
-        )
-
-    why = (data.get("why_this_may_help") or "").strip()
-    if not why:
-        why = (
-            "Shared visibility and clearer coordination habits often reduce "
-            "process conflict without assuming bad intent."
-        )
-
     watch = [w.strip() for w in data.get("what_to_watch_for", []) if str(w).strip()]
-    if not watch:
-        watch = [
-            "Whether updates start appearing in a shared channel",
-            "Whether disagreements shift from people-blaming to clarifying priorities",
-        ]
-
-    when = (data.get("when_to_involve_someone_else") or "").strip()
-    if not when:
-        when = (
-            "If coordination attempts stall, or if conflict becomes personal/safety-related, "
-            "involve an instructor, advisor, or appropriate university support."
-        )
 
     return CoachingRecommendation(
-        what_may_be_happening=happening,
+        what_may_be_happening=(data.get("what_may_be_happening") or "").strip(),
         what_you_could_do_next=actions,
         how_you_might_say_it=phrases,
-        why_this_may_help=why,
+        why_this_may_help=(data.get("why_this_may_help") or "").strip(),
         what_to_watch_for=watch,
-        when_to_involve_someone_else=when,
+        when_to_involve_someone_else=(
+            data.get("when_to_involve_someone_else") or ""
+        ).strip(),
         cited_source_ids=cited_sources,
         cited_chunk_ids=cited_chunks,
     )
@@ -164,8 +100,10 @@ def advice_agent(state: Any) -> dict[str, Any]:
         repair_block = (
             "\nPrevious draft failed validation for repairable reasons:\n"
             + "\n".join(f"- {r}" for r in repair_notes.reasons)
-            + "\nRevise to fix those issues. You MUST include cited_source_ids, "
-            "cited_chunk_ids, and at least two what_you_could_do_next items.\n"
+            + "\nRevise to fix those issues. You MUST include non-empty "
+            "what_may_be_happening, why_this_may_help, when_to_involve_someone_else, "
+            "at least two what_you_could_do_next items, at least one how_you_might_say_it "
+            "phrase, cited_source_ids, and cited_chunk_ids grounded in the evidence.\n"
         )
 
     user_prompt = f"""
@@ -184,12 +122,14 @@ ALLOWED cited_source_ids (copy exactly, include at least one):
 ALLOWED cited_chunk_ids (copy exactly, include at least one):
 {json.dumps(allowed_chunk_ids)}
 {repair_block}
-Produce a coaching recommendation. Fields what_you_could_do_next, how_you_might_say_it,
-cited_source_ids, and cited_chunk_ids are mandatory and must not be empty.
+Produce a coaching recommendation tailored to THIS reflection. Do not invent unrelated
+scenarios. Fields what_may_be_happening, what_you_could_do_next (2+), how_you_might_say_it
+(1+), why_this_may_help, when_to_involve_someone_else, cited_source_ids, and cited_chunk_ids
+are mandatory and must not be empty.
 """
 
     recommendation = structured_invoke(
         CoachingRecommendation, SYSTEM_PROMPT, user_prompt
     )
-    recommendation = _ensure_recommendation_completeness(recommendation, evidence)
+    recommendation = _sanitize_recommendation(recommendation, evidence)
     return {"draft_recommendation": recommendation}

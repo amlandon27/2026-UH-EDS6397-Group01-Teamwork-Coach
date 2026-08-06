@@ -53,6 +53,37 @@ def test_privacy_boundary_removes_raw_pii_from_state_update():
     assert phone not in str(out)
 
 
+def test_privacy_node_redacts_student_goal_pii():
+    email = "jane.doe@uh.edu"
+    out = privacy_and_risk_node(
+        {
+            "raw_input": "Our team keeps missing checkpoints and ownership is unclear.",
+            "student_goal": f"Email {email} to reset roles before demo week.",
+        }
+    )
+
+    assert out["pii_detected"] is True
+    assert email not in (out["student_goal"] or "")
+    assert "[EMAIL]" in (out["student_goal"] or "")
+    assert out["high_risk_detected"] is False
+
+
+def test_privacy_boundary_strips_goal_pii_from_state_update():
+    email = "goal.leak@uh.edu"
+    out = _privacy_boundary(
+        {
+            "raw_input": "Roles are fuzzy and handoffs keep slipping.",
+            "student_goal": f"Contact {email} about ownership.",
+        }
+    )
+
+    assert out["raw_input"] == ""
+    assert email not in (out["student_goal"] or "")
+    assert "[EMAIL]" in (out["student_goal"] or "")
+    assert email not in str(out)
+    assert all("text" not in span for span in out["pii_spans"])
+
+
 def test_compiled_graph_does_not_retain_raw_pii_after_privacy_boundary():
     email = "student@example.com"
     phone = "713-555-0100"

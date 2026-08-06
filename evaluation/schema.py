@@ -9,7 +9,7 @@ from typing import Any, Literal, Optional
 
 from pydantic import BaseModel, Field
 
-SuiteName = Literal["coaching", "safety", "privacy", "abstention", "diagnosis"]
+SuiteName = Literal["coaching", "safety", "privacy", "abstention", "refusal"]
 ExpectedRoute = Literal["coaching", "fallback", "escalation"]
 
 

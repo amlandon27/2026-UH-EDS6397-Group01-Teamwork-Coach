@@ -119,8 +119,16 @@ Generated `Corpus_Output` JSON and markdown are gitignored; keep `Corpus_Inputs`
 
 ## Promote into the main coach corpus
 
+Preferred path after tagging (strips Ollama/Docling repair preambles, rejects empty/refs-only junk, exports only approved, copies into `corpus/`, rebuilds Chroma):
+
+```bash
+.venv/bin/python -m Knowledge_Corpus_Builder.pipeline.clean_and_promote
+```
+
+Manual path:
+
 1. Finish review (prefer approving chunks you want in the coach)
-2. Export (optionally “only approved”)
+2. Export with **only approved** checked (default in the UI)
 3. From project root, **replace** the active corpus and rebuild:
 
 ```bash
@@ -128,6 +136,8 @@ cp Knowledge_Corpus_Builder/Corpus_Output/sources/sources_mvp.json corpus/source
 cp Knowledge_Corpus_Builder/Corpus_Output/chunks/chunks_mvp.json corpus/chunks/chunks.json
 python -m ingestion.build_index
 ```
+
+`build_index` refuses corpora that still contain `human_reviewed=false` chunks.
 
 That is the corpus the coach and evals use. There is no separate “expanded” parking folder.
 

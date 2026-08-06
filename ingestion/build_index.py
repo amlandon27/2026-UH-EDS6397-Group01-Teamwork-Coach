@@ -26,6 +26,12 @@ def load_chunks(corpus_dir: Path) -> list[dict]:
             "Did you copy sources_mvp.json into chunks by mistake? "
             "Use Knowledge_Corpus_Builder/Corpus_Output/chunks/chunks_mvp.json → corpus/chunks/chunks.json"
         )
+    unreviewed = [c.get("chunk_id") for c in data if not c.get("human_reviewed")]
+    if unreviewed:
+        raise ValueError(
+            f"{path} contains {len(unreviewed)} chunk(s) with human_reviewed=false "
+            f"(e.g. {unreviewed[:3]}). Export only approved chunks before indexing."
+        )
     return data
 
 

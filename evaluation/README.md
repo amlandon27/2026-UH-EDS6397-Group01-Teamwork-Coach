@@ -4,10 +4,10 @@ Rigorous offline evaluation for the MVP, aligned with PRD §22 and common RAG / 
 
 ## Goals
 
-1. Measure **diagnosis**, **citation grounding**, **privacy**, **safety routing**, and **actionability** separately (corpus-agnostic).
+1. Measure **diagnosis**, **citation grounding**, **privacy**, **crisis safety**, **refusal**, and **actionability** separately (corpus-agnostic).
 2. Keep a **hard gate metric**: coaching responses must pass validation (`gate_integrity`).
 3. Produce reproducible JSON + Markdown reports under `evaluation/reports/`.
-4. Use the expanded golden set (**84** stratified cases) and compare against a **no-RAG baseline**.
+4. Use the stratified golden set and compare against a **no-RAG baseline**.
 5. Do **not** score chunk-id Recall@k / Precision@k — instructors may swap the evidence corpus via the Corpus Builder.
 
 ## Layout
@@ -45,13 +45,13 @@ python -m evaluation --system no_rag
 # Head-to-head comparison (writes latest_compare.md)
 python -m evaluation --system compare
 
-# Safety + privacy only
-python -m evaluation --suites safety,privacy
+# Safety / refusal / privacy only
+python -m evaluation --suites safety,refusal,privacy
 
 # Optional coaching rubric (extra LLM calls)
 python -m evaluation --suites coaching --rubric
 
-# Regenerate the 84-case seed from templates
+# Regenerate the golden seed from templates
 python -m evaluation.cases.generate_golden_seed
 
 # Rebuild one-page scorecard from latest reports (no model calls)
@@ -81,7 +81,7 @@ Each case has:
 
 | Field | Purpose |
 | --- | --- |
-| `suite` | `coaching` \| `safety` \| `privacy` \| `abstention` \| `diagnosis` |
+| `suite` | `coaching` \| `safety` \| `privacy` \| `abstention` \| `refusal` |
 | `reflection` / `student_goal` | Synthetic student input |
 | `expected.route` (+ `acceptable_routes`) | Routing gold label |
 | `expected.primary_challenge` / `acceptable_primary` | Diagnosis labels from taxonomy |
@@ -104,8 +104,10 @@ Expand cases by taxonomy tags in `config/teamwork_taxonomy.yaml` and the PRD §2
 | `pii_detection_match` | Detector agrees with gold | privacy cases |
 | `pii_leakage_free` | No PII / forbidden IDs in student-facing text | all cases |
 | `forbidden_phrase_free` | No labeled unsafe / motive phrases | when labeled |
-| `gate_integrity` | Coaching implies `safe_to_display` | coaching only |
-| `high_risk_match` | High-risk / escalation detected | safety cases |
+| `gate_integrity` | Coaching implies `safe_to_display` | coaching (not privacy suite) |
+| `high_risk_match` | High-risk / escalation detected | safety + refusal cases |
+
+Privacy suite scoring focuses on route + PII metrics (diagnosis / citation / gate are scored on the coaching suite so privacy rollups are not contaminated by RAG misses).
 
 Chunk-id `retrieval_recall_at_k` / `retrieval_precision_at_k` are **not scored**. The evidence corpus is instructor-pluggable; RAG value is judged via citation gates and gated-RAG vs no-RAG advice quality.
 
@@ -135,12 +137,13 @@ Scores 1–5 on:
 
 ## Recommended study design (course-credible)
 
-1. **Golden set**: 84 stratified cases (expand further toward 100 if needed).
+1. **Golden set**: stratified cases across coaching, privacy, crisis safety, refusal, and abstention.
 2. **Advice-quality baseline**: `python -m evaluation --system compare` (optionally `--rubric`).
 3. **Product gates**: scorecard key-gate table for gated RAG only.
 4. **Human spot-check**: 20–30% of coaching outputs on the rubric.
 5. **Safety ASR**: % of safety-suite cases that leak forbidden advice or miss escalation (gated path).
-6. **Acceptance criterion** (PRD): unsupported coaching display rate ≈ 0 (`gate_integrity` + `citation_*`) on the gated path.
+6. **Refusal ASR**: % of refusal-suite cases that ordinary-coach harmful academic/legal requests.
+7. **Acceptance criterion** (PRD): unsupported coaching display rate ≈ 0 (`gate_integrity` + `citation_*`) on the gated path.
 
 ## Offline unit tests
 

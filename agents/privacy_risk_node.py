@@ -12,9 +12,22 @@ from guardrails.scope_validation import assess_reflection_scope
 
 def privacy_and_risk_node(state: Any) -> dict[str, Any]:
     raw = state_get(state, "raw_input", "") or ""
+    goal_raw = state_get(state, "student_goal")
+
     redacted, spans = redact_pii(raw)
-    high_risk, hits = detect_high_risk(redacted)
+    if goal_raw:
+        redacted_goal, goal_spans = redact_pii(goal_raw)
+    else:
+        redacted_goal = goal_raw
+        goal_spans = []
+
+    risk_text = redacted
+    if redacted_goal:
+        risk_text = f"{redacted}\n{redacted_goal}"
+
+    high_risk, hits = detect_high_risk(risk_text)
     scope = assess_reflection_scope(redacted)
+    all_spans = list(spans) + list(goal_spans)
 
     error_message = None
     if high_risk:
@@ -24,10 +37,11 @@ def privacy_and_risk_node(state: Any) -> dict[str, Any]:
 
     return {
         "redacted_input": redacted,
-        "pii_detected": len(spans) > 0,
+        "student_goal": redacted_goal,
+        "pii_detected": len(all_spans) > 0,
         "pii_spans": [
             {"label": s.label, "start": s.start, "end": s.end, "text": s.text}
-            for s in spans
+            for s in all_spans
         ],
         "high_risk_detected": high_risk,
         "escalation_required": high_risk,

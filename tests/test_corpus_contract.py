@@ -19,6 +19,10 @@ def test_corpus_chunk_source_ids_resolve():
     for chunk in chunks:
         assert chunk["source_id"] in sources
         assert isinstance(chunk.get("human_reviewed"), bool)
+        assert chunk.get("human_reviewed") is True
+        text = chunk.get("text") or ""
+        assert "Here is the cleaned markdown" not in text
+        assert not text.lstrip().startswith("## Preamble\n")
 
 
 def test_agent_state_defaults():

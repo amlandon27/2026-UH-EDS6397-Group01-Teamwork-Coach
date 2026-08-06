@@ -1,12 +1,16 @@
 """Tests for high-risk detection and validation guardrails."""
 
-from contract import CitationMetadata, CoachingRecommendation, RetrievedEvidence
+from agents.advice_agent import _sanitize_recommendation
+from agents.finalize_node import finalize_coaching_node
+from contract import (
+    CitationMetadata,
+    CoachingRecommendation,
+    RetrievedEvidence,
+    TeamworkDiagnosis,
+)
 from guardrails.citation_validation import validate_citations
 from guardrails.evidence_validation import validate_recommendation
 from guardrails.harmful_advice_validation import detect_high_risk
-from agents.advice_agent import _ensure_recommendation_completeness
-from agents.finalize_node import finalize_coaching_node
-from contract import TeamworkDiagnosis
 
 
 def test_high_risk_self_harm():
@@ -21,6 +25,36 @@ def test_ordinary_teamwork_not_high_risk():
     )
     assert flagged is False
     assert hits == []
+
+
+def test_shoot_for_grade_is_not_high_risk():
+    flagged, hits = detect_high_risk(
+        "I want to shoot for an A on the milestone and clarify ownership."
+    )
+    assert flagged is False
+    assert hits == []
+
+
+def test_illegal_to_ignore_policy_is_not_high_risk():
+    flagged, hits = detect_high_risk(
+        "It would be illegal to ignore the syllabus late-work policy."
+    )
+    assert flagged is False
+    assert hits == []
+
+
+def test_illegal_lab_access_is_high_risk():
+    flagged, hits = detect_high_risk(
+        "Is there an illegal way to access the lab overnight without authorization?"
+    )
+    assert flagged is True
+    assert "illegal" in hits
+
+
+def test_shoot_threat_is_high_risk():
+    flagged, hits = detect_high_risk("I want to shoot my teammate after the meeting.")
+    assert flagged is True
+    assert "shoot" in hits
 
 
 def _sample_evidence() -> list[RetrievedEvidence]:
@@ -153,31 +187,61 @@ def test_validation_rejects_ungrounded_cites():
     assert result.repairable is True
 
 
-def test_advice_completeness_does_not_invent_citations():
+def test_advice_sanitize_does_not_invent_content_or_citations():
     thin = CoachingRecommendation(
         what_may_be_happening="",
         what_you_could_do_next=[],
         how_you_might_say_it=[],
+        why_this_may_help="",
+        what_to_watch_for=[],
+        when_to_involve_someone_else="",
         cited_source_ids=[],
         cited_chunk_ids=[],
     )
-    filled = _ensure_recommendation_completeness(thin, _sample_evidence())
-    assert filled.cited_source_ids == []
-    assert filled.cited_chunk_ids == []
-    # Non-citation gaps may still be filled for small models.
-    assert len(filled.what_you_could_do_next) >= 2
+    cleaned = _sanitize_recommendation(thin, _sample_evidence())
+    assert cleaned.cited_source_ids == []
+    assert cleaned.cited_chunk_ids == []
+    assert cleaned.what_may_be_happening == ""
+    assert cleaned.what_you_could_do_next == []
+    assert cleaned.how_you_might_say_it == []
+    assert cleaned.why_this_may_help == ""
+    assert cleaned.when_to_involve_someone_else == ""
 
 
-def test_advice_completeness_drops_hallucinated_ids_only():
+def test_validation_marks_incomplete_coaching_repairable():
+    rec = CoachingRecommendation(
+        what_may_be_happening="",
+        what_you_could_do_next=["Only one step"],
+        how_you_might_say_it=[],
+        why_this_may_help="",
+        when_to_involve_someone_else="",
+        cited_source_ids=["src_catme_dimensions"],
+        cited_chunk_ids=["chk_accountability_01"],
+    )
+    result = validate_recommendation(rec, _sample_evidence())
+    assert result.safe_to_display is False
+    assert result.repairable is True
+    assert result.checks.get("has_observation") is False
+    assert result.checks.get("has_actions") is False
+    assert result.checks.get("has_phrases") is False
+    assert result.checks.get("has_why") is False
+    assert result.checks.get("has_escalation_guidance") is False
+
+
+def test_advice_sanitize_drops_hallucinated_ids_only():
     rec = CoachingRecommendation(
         what_may_be_happening="Roles are fuzzy.",
-        what_you_could_do_next=["Propose owners."],
+        what_you_could_do_next=["Propose owners.", "Add a checkpoint."],
+        how_you_might_say_it=["Could we name owners?"],
+        why_this_may_help="Clear ownership helps.",
+        when_to_involve_someone_else="If process talks stall.",
         cited_source_ids=["src_catme_dimensions", "src_fabricated"],
         cited_chunk_ids=["chk_accountability_01", "chk_fake"],
     )
-    cleaned = _ensure_recommendation_completeness(rec, _sample_evidence())
+    cleaned = _sanitize_recommendation(rec, _sample_evidence())
     assert cleaned.cited_chunk_ids == ["chk_accountability_01"]
     assert cleaned.cited_source_ids == ["src_catme_dimensions"]
+    assert cleaned.what_you_could_do_next == ["Propose owners.", "Add a checkpoint."]
 
 
 def test_finalize_only_surfaces_cited_chunks():

@@ -82,6 +82,9 @@ def structure_chunk_markdown(
     for title, body in sections:
         if not body.strip():
             continue
+        # Skip empty/meta-only Docling preambles (repair artifacts belong in repair strip).
+        if title.strip().lower() == "preamble" and len(body.strip()) < min_chars:
+            continue
         content = f"## {title}\n\n{body}".strip() if title else body.strip()
         for piece in _split_long(content, max_chars):
             raw_chunks.append(piece.strip())

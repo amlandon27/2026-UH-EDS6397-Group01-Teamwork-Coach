@@ -192,10 +192,15 @@ def export_corpus(
     settings: BuilderSettings | None = None,
 ) -> dict[str, Path]:
     dirs = output_dirs(settings)
-    sources = list(state.sources.values())
     chunks = state.chunks
     if only_approved:
         chunks = [c for c in chunks if c.review_status == "approved"]
+
+    if only_approved:
+        used_source_ids = {c.source_id for c in chunks}
+        sources = [s for s in state.sources.values() if s.source_id in used_source_ids]
+    else:
+        sources = list(state.sources.values())
 
     source_payload = [
         _source_for_export(s, include_builder_fields=include_builder_fields) for s in sources

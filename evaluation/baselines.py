@@ -1,7 +1,7 @@
 """Baseline systems for comparative evaluation.
 
 `gated_rag` — full LangGraph coach (default product path).
-`no_rag` — privacy/risk gate retained; coaching from Gemini with no retrieval,
+`no_rag` — privacy/risk gate retained; coaching from Ollama with no retrieval,
 citations, or evidence validation. Used to show the value of gated RAG.
 """
 
@@ -125,7 +125,7 @@ def _invoke_no_rag(case: EvalCase) -> ObservedRun:
             escalation_required=False,
             validation_checks={},
             redacted_input=redacted,
-            student_facing_text=_facing_text(title, body, recommendation),
+            student_facing_text=f"{title}\n{body}".strip(),
             latency_ms=(time.perf_counter() - started) * 1000,
         )
 
@@ -168,16 +168,6 @@ def _format_recommendation_body(recommendation: CoachingRecommendation) -> str:
         recommendation.why_this_may_help,
     ]
     return "\n".join(parts)
-
-
-def _facing_text(
-    title: str, body: str, recommendation: CoachingRecommendation
-) -> str:
-    parts = [title, body, recommendation.what_may_be_happening]
-    parts.extend(recommendation.what_you_could_do_next)
-    parts.extend(recommendation.how_you_might_say_it)
-    parts.append(recommendation.why_this_may_help)
-    return "\n".join(p for p in parts if p)
 
 
 def _observed_from_dict(state: dict[str, Any], *, latency_ms: float) -> ObservedRun:

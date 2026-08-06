@@ -89,7 +89,8 @@ def coach_run_config(
         "metadata": {
             "app": "teamwork-leadership-coach",
             "student_goal_set": student_goal_set,
-            "gemini_model": settings.gemini_model,
+            "llm_provider": "ollama",
+            "ollama_model": settings.ollama_model,
             "embedding_model": settings.embedding_model,
             "sanitized_telemetry": True,
         },

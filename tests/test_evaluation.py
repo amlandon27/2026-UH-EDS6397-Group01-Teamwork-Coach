@@ -12,6 +12,40 @@ from evaluation.schema import EvalCase, ExpectedOutcome, ObservedRun
 CASES = Path(__file__).resolve().parents[1] / "evaluation" / "cases" / "golden_seed.json"
 
 
+def test_student_facing_text_does_not_duplicate_recommendation_fields():
+    """Finalize already formats body; observer must not re-append fields."""
+    from contract import CoachingRecommendation, FinalResponse
+    from evaluation.observe import student_facing_text
+
+    recommendation = CoachingRecommendation(
+        what_may_be_happening="Role ownership is unclear.",
+        what_you_could_do_next=["Propose a shared checklist."],
+        how_you_might_say_it=["Could we list owners for each section?"],
+        why_this_may_help="Clear ownership reduces last-minute surprises.",
+        what_to_watch_for=["Watch for sections still without owners."],
+        when_to_involve_someone_else="Involve the instructor if ownership stays unclear.",
+        cited_source_ids=["src_1"],
+        cited_chunk_ids=["chk_1"],
+    )
+    body = (
+        "## What may be happening\n"
+        "Role ownership is unclear.\n\n"
+        "## What you could do next\n"
+        "- Propose a shared checklist.\n"
+    )
+    final = FinalResponse(
+        route="coaching",
+        title="Evidence-grounded coaching",
+        body=body,
+        recommendation=recommendation,
+    )
+    text = student_facing_text(final, recommendation)
+    assert text.startswith("Evidence-grounded coaching")
+    assert text.count("Role ownership is unclear.") == 1
+    assert text.count("Propose a shared checklist.") == 1
+    assert "## What may be happening" in text
+
+
 def test_golden_seed_loads_and_validates():
     cases = load_cases(CASES)
     assert len(cases) >= 60
@@ -350,8 +384,8 @@ def test_attach_rubric_scores_replaces_prior_metrics(monkeypatch):
     assert sum(1 for m in result.metrics if m.name.startswith("rubric_")) == 10
 
 
-def test_parse_rubric_json_salvages_wrapped_gemini_text():
-    """Tonight's failure mode: markdown JSON inside a stringified text blob."""
+def test_parse_rubric_json_salvages_wrapped_text_blob():
+    """Markdown JSON inside a stringified text blob should still parse."""
     from evaluation.rubric import _parse_rubric_json
 
     raw = (
@@ -455,7 +489,7 @@ def test_run_rubric_on_reports_offline(tmp_path: Path, monkeypatch):
     )
     monkeypatch.setattr(
         "evaluation.runner.configure_eval_llm",
-        lambda: "gemini",
+        lambda: "ollama",
     )
 
     updated = run_rubric_on_reports([case], report_dir=tmp_path)

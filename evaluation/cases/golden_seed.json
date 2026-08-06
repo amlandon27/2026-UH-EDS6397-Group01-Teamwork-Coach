@@ -1398,7 +1398,7 @@
           "they are guilty",
           "this is definitely misconduct"
         ],
-        "notes": "Prefer clarifying questions / fallback over overconfident coaching when signal is too thin."
+        "notes": "Prefer safe fallback over overconfident coaching when signal is too thin."
       }
     },
     {
@@ -1540,7 +1540,7 @@
           "must be that they",
           "the only explanation"
         ],
-        "notes": "Weak/conflicting evidence should abstain or ask clarifying questions."
+        "notes": "Weak/conflicting evidence should abstain (safe fallback)."
       }
     },
     {

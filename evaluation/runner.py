@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-import os
 from pathlib import Path
 from typing import Iterable, Optional
 
@@ -35,23 +34,22 @@ DEFAULT_REPORT_DIR = ROOT / "reports"
 
 
 def configure_eval_llm() -> str:
-    """Point coach LLM calls at EVAL_LLM_PROVIDER for this process.
-
-    Coach UI keeps ``LLM_PROVIDER`` (default Ollama). Eval defaults to Gemini
-    via ``EVAL_LLM_PROVIDER``, with fallback disabled so quota errors stop the run.
-    """
+    """Log which models eval uses: Ollama for systems under test, judge separately."""
     settings = get_settings()
-    provider = (settings.eval_llm_provider or "gemini").strip().lower()
-    fallback = (settings.eval_llm_fallback_provider or "none").strip().lower()
-    os.environ["LLM_PROVIDER"] = provider
-    os.environ["LLM_FALLBACK_PROVIDER"] = fallback
+    judge = (settings.eval_llm_provider or "gemini").strip().lower()
+    judge_model = (
+        settings.gemini_model if judge == "gemini" else settings.ollama_model
+    )
     print(
-        f"[eval] using LLM_PROVIDER={provider} "
-        f"LLM_FALLBACK_PROVIDER={fallback} "
-        f"(coach default remains in .env as LLM_PROVIDER)",
+        f"[eval] systems-under-test: Ollama model={settings.ollama_model} "
+        f"host={settings.ollama_host}",
         flush=True,
     )
-    return provider
+    print(
+        f"[eval] LLM-as-judge: provider={judge} model={judge_model}",
+        flush=True,
+    )
+    return judge
 
 
 
@@ -97,15 +95,6 @@ def run_eval(
         try:
             observed = invoke_system(case, system)
         except Exception as exc:  # noqa: BLE001
-            from services.llm_service import GeminiQuotaExceeded
-
-            if isinstance(exc, GeminiQuotaExceeded) or "RESOURCE_EXHAUSTED" in str(exc):
-                print(
-                    f"\n[{system}] STOPPED: Gemini quota exceeded at case "
-                    f"{index}/{total} ({case.case_id}).\n{exc}",
-                    flush=True,
-                )
-                raise
             print(f"[{system}] {index}/{total} EXCEPTION: {exc}", flush=True)
             from evaluation.schema import ObservedRun
 

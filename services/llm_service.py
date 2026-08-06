@@ -1,4 +1,4 @@
-"""LLM service: Gemini and/or local Ollama (llama3.1)."""
+"""LLM service: coach uses Ollama; optional Gemini for eval judges."""
 
 from __future__ import annotations
 
@@ -15,61 +15,17 @@ from config.settings import Settings, get_settings
 T = TypeVar("T", bound=BaseModel)
 
 
-class GeminiQuotaExceeded(RuntimeError):
-    """Raised when the Gemini API returns RESOURCE_EXHAUSTED / 429.
+def get_chat_model(
+    settings: Settings | None = None,
+    *,
+    provider: str | None = None,
+):
+    """Return a LangChain chat model.
 
-    Evaluation runner stops cleanly on this error. Coach UI may still
-    fall back to Ollama when LLM_FALLBACK_PROVIDER=ollama.
+    Coach default is Ollama. Pass ``provider="gemini"`` for the eval judge.
     """
-
-
-def _is_quota_error(exc: BaseException) -> bool:
-    text = str(exc).lower()
-    return any(
-        token in text
-        for token in (
-            "resource_exhausted",
-            "429",
-            "quota exceeded",
-            "rate-limits",
-            "rate limit",
-        )
-    )
-
-
-def _raise_if_quota_error(exc: BaseException) -> None:
-    if not _is_quota_error(exc):
-        return
-    settings = get_settings()
-    raise GeminiQuotaExceeded(
-        "Gemini API quota exceeded (free tier limit). "
-        f"Model={settings.gemini_model}. "
-        "Wait for the quota reset, set LLM_PROVIDER=ollama, switch GEMINI_MODEL, "
-        "or reduce eval size (e.g. --suites safety or --case-ids ...). "
-        f"Original error: {exc}"
-    ) from exc
-
-
-def get_chat_model(settings: Settings | None = None, *, provider: str | None = None):
-    """Return a LangChain chat model for the selected provider."""
     settings = settings or get_settings()
-    chosen = (provider or settings.llm_provider or "ollama").strip().lower()
-
-    if chosen == "gemini":
-        from langchain_google_genai import ChatGoogleGenerativeAI
-
-        if not settings.google_api_key:
-            raise RuntimeError(
-                "GOOGLE_API_KEY is not set. Copy .env.example to .env and add your "
-                "Gemini API key, or set LLM_PROVIDER=ollama."
-            )
-        return ChatGoogleGenerativeAI(
-            model=settings.gemini_model,
-            google_api_key=settings.google_api_key,
-            temperature=0.2,
-            timeout=60,
-            max_retries=1,
-        )
+    chosen = (provider or "ollama").strip().lower()
 
     if chosen == "ollama":
         from langchain_ollama import ChatOllama
@@ -80,8 +36,24 @@ def get_chat_model(settings: Settings | None = None, *, provider: str | None = N
             temperature=0.2,
         )
 
+    if chosen == "gemini":
+        from langchain_google_genai import ChatGoogleGenerativeAI
+
+        if not settings.google_api_key:
+            raise RuntimeError(
+                "GOOGLE_API_KEY is not set. Add it to .env for the Gemini "
+                "evaluator (EVAL_LLM_PROVIDER=gemini)."
+            )
+        return ChatGoogleGenerativeAI(
+            model=settings.gemini_model,
+            google_api_key=settings.google_api_key,
+            temperature=0.2,
+            timeout=60,
+            max_retries=1,
+        )
+
     raise RuntimeError(
-        f"Unknown LLM_PROVIDER={chosen!r}. Use 'ollama' or 'gemini'."
+        f"Unknown LLM provider={chosen!r}. Use 'ollama' or 'gemini'."
     )
 
 
@@ -107,8 +79,8 @@ def _invoke_structured(
     system_prompt: str,
     user_prompt: str,
     *,
-    provider: str,
     settings: Settings,
+    provider: str,
 ) -> T:
     model = get_chat_model(settings, provider=provider)
     messages = [
@@ -123,11 +95,7 @@ def _invoke_structured(
             return result
         return schema.model_validate(result)
     except Exception as first_exc:
-        # Gemini quota should surface as GeminiQuotaExceeded (not swallowed by JSON retry)
-        if provider == "gemini" and _is_quota_error(first_exc):
-            _raise_if_quota_error(first_exc)
-
-        # Fallback: ask for JSON and parse (helps some Ollama builds)
+        # Fallback: ask for JSON and parse (helps some Ollama / Gemini builds)
         try:
             json_system = (
                 system_prompt
@@ -148,24 +116,7 @@ def _invoke_structured(
                 )
             return schema.model_validate(_extract_json_object(str(content)))
         except Exception as second_exc:
-            if provider == "gemini" and _is_quota_error(second_exc):
-                _raise_if_quota_error(second_exc)
             raise second_exc from first_exc
-
-
-def _resolve_fallback(settings: Settings) -> tuple[str | None, bool]:
-    """Return (explicit_fallback, allow_auto_ollama_on_gemini_quota).
-
-    ``LLM_FALLBACK_PROVIDER=none|off|disabled`` disables all fallback (eval default).
-    An explicit provider name is used as-is.
-    When unset, interactive Gemini may auto-fall back to Ollama on quota.
-    """
-    raw = (settings.llm_fallback_provider or "").strip().lower()
-    if raw in ("none", "off", "disabled"):
-        return None, False
-    if raw:
-        return raw, False
-    return None, True
 
 
 @traceable(name="structured_llm_invoke", run_type="llm")
@@ -174,43 +125,39 @@ def structured_invoke(
     system_prompt: str,
     user_prompt: str,
     settings: Settings | None = None,
+    *,
+    provider: str | None = None,
 ) -> T:
+    """Structured LLM call. Default provider is Ollama (coach path)."""
     settings = settings or get_settings()
-    primary = (settings.llm_provider or "ollama").strip().lower()
-    fallback, allow_auto_ollama = _resolve_fallback(settings)
-
+    chosen = (provider or "ollama").strip().lower()
     started = time.perf_counter()
-    try:
-        result = _invoke_structured(
-            schema, system_prompt, user_prompt, provider=primary, settings=settings
-        )
-    except GeminiQuotaExceeded:
-        if allow_auto_ollama and primary == "gemini":
-            fallback = fallback or "ollama"
-        if not fallback or fallback == primary:
-            raise
-        result = _invoke_structured(
-            schema, system_prompt, user_prompt, provider=fallback, settings=settings
-        )
-    except Exception as exc:
-        if primary == "gemini" and _is_quota_error(exc):
-            if allow_auto_ollama:
-                fallback = fallback or "ollama"
-            if fallback and fallback != primary:
-                result = _invoke_structured(
-                    schema,
-                    system_prompt,
-                    user_prompt,
-                    provider=fallback,
-                    settings=settings,
-                )
-            else:
-                _raise_if_quota_error(exc)
-                raise
-        else:
-            raise
-
+    result = _invoke_structured(
+        schema,
+        system_prompt,
+        user_prompt,
+        settings=settings,
+        provider=chosen,
+    )
     elapsed = time.perf_counter() - started
     if elapsed > 20:
-        print(f"[llm] structured_invoke finished in {elapsed:.1f}s", flush=True)
+        print(f"[llm] structured_invoke ({chosen}) finished in {elapsed:.1f}s", flush=True)
     return result
+
+
+def eval_judge_invoke(
+    schema: Type[T],
+    system_prompt: str,
+    user_prompt: str,
+    settings: Settings | None = None,
+) -> T:
+    """Structured call for the evaluation rubric judge (default: Gemini)."""
+    settings = settings or get_settings()
+    provider = (settings.eval_llm_provider or "gemini").strip().lower()
+    return structured_invoke(
+        schema,
+        system_prompt,
+        user_prompt,
+        settings,
+        provider=provider,
+    )

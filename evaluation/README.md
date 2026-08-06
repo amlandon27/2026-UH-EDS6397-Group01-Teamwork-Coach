@@ -36,7 +36,7 @@ source .venv/bin/activate
 # Validate case file only
 python -m evaluation --dry-run
 
-# Full golden seed — gated RAG product path (uses EVAL_LLM_PROVIDER=gemini by default; needs API key + Chroma)
+# Full golden seed — gated RAG product path (needs Ollama + Chroma)
 python -m evaluation
 
 # No-RAG baseline only
@@ -131,13 +131,14 @@ Chunk-id `retrieval_recall_at_k` / `retrieval_precision_at_k` are **not scored**
 ## Optional LLM rubric (`--system rubric`)
 
 PRD-aligned LLM-as-judge for **coaching-suite** answers already saved in reports.
+Judge model defaults to **Gemini** (`EVAL_LLM_PROVIDER=gemini`, `GOOGLE_API_KEY`, `GEMINI_MODEL`). Systems under test still run on Ollama.
 
 Absolute dimensions (1–5; pass ≥4):
 
 - `observation_vs_interpretation` — observable behavior vs motive/character claims
 - `actionability` — specific, feasible next steps
 - `proportionality` — advice scaled to severity
-- `evidence_to_action` — grounded in cites when present; LLM-only capped conceptually at generic advice
+- `evidence_to_action` — conceptual alignment with the approved judge evidence base (CATME, ABET Meets/Exceeds, re:Work, conflict/coordination, psychological safety, interventions); same standard for gated and no-RAG; no score-3 cap for missing chunk IDs
 - `scope_fidelity` — teamwork/leadership only
 - `tone_non_accusatory` — respectful, non-shaming
 - `calibrated_certainty` — no overclaiming / blame verdicts
@@ -148,8 +149,10 @@ Also emits `rubric_no_weak_dimension` (no dim ≤3) and `rubric_min_dimension`.
 After absolute scoring, runs **pairwise preference** (gated vs no-RAG) and writes
 `latest_preference.md` / `.json`. Win rate is the main discriminative compare signal.
 
-Uses structured LLM output (with hardened JSON salvage) and passes retrieved/cited
-chunk IDs into the judge so evidence scoring is product-aware.
+Uses structured LLM output (with hardened JSON salvage). Absolute and pairwise
+judges receive the approved evidence-base catalog (`evaluation/judge_evidence.py`)
+and score `evidence_to_action` for conceptual alignment — product cite IDs are
+optional context only.
 
 **Preferred workflow:** run `--system compare` first (writes `latest_gated_rag.json` + `latest_no_rag.json`), then:
 
@@ -166,7 +169,7 @@ Prefer pairwise win-rate and `% cases with any weak dim` over raw means (means i
 ## Baseline definition (`no_rag` / LLM-only)
 
 - Still runs **privacy / high-risk escalation** (fair safety routing).
-- On normal cases: Gemini coaching **without retrieval or citations**.
+- On normal cases: Ollama coaching **without retrieval or citations**.
 - **Compared only on advice quality**: `actionability`, `forbidden_phrase_free`, and optional `rubric_*`.
 - Retrieval, citation, and gate metrics are **gated product-path only** — not used to “beat” the LLM baseline.
 
@@ -182,7 +185,7 @@ Prefer pairwise win-rate and `% cases with any weak dim` over raw means (means i
 
 ## Offline unit tests
 
-Deterministic metric logic is covered without API keys:
+Deterministic metric logic is covered without Ollama:
 
 ```bash
 pytest -q tests/test_evaluation.py

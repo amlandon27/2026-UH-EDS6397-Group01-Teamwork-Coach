@@ -42,7 +42,6 @@ class TeamworkDiagnosis(BaseModel):
     student_goal: Optional[str] = None
     confidence: float = Field(default=0.5, ge=0.0, le=1.0)
     uncertainty_notes: list[str] = Field(default_factory=list)
-    clarifying_question_needed: bool = False
     observation_summary: str = ""
     interpretation_notes: list[str] = Field(default_factory=list)
 

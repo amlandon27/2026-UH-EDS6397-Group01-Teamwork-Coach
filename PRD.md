@@ -144,7 +144,7 @@ The MVP will demonstrate this end-to-end outcome:
 - One tagged evidence corpus (hand-built for MVP; replaceable later)
 - Local embeddings via `sentence-transformers/all-MiniLM-L6-v2`
 - Local ChromaDB vector store
-- Gemini 3.5 Flash for diagnosis, advice, and validation
+- Ollama `llama3.1:8b` for diagnosis and advice
 - Structured diagnosis
 - Diagnosis-guided retrieval
 - Evidence-grounded advice
@@ -526,7 +526,6 @@ possible_conflict_sources:
 student_goal:
 confidence:
 uncertainty_notes:
-clarifying_question_needed:
 
 ```
 
@@ -538,6 +537,9 @@ The diagnosis must:
 - Avoid assuming silence means agreement.
 - Avoid treating one reflection as a complete account.
 - Recognize that uneven contribution may reflect skill, confidence, capacity, access, role clarity, or competing commitments.
+- Because the MVP is one-shot (no clarifying-question turn), thin or conflicting
+  signal must lower confidence so the system abstains with a safe fallback
+  rather than asking follow-up questions.
 
 The uploaded study’s “iceberg” framing reinforces that visible conflict, conflict sources, and underlying issues are not the same and that hidden causes cannot be confidently inferred from brief reflections.
 
@@ -729,7 +731,7 @@ No LLM node should receive an external operational tool registry.
 
 | Component | Selection |
 | --- | --- |
-| LLM provider / model | Google Gemini 3.5 Flash |
+| LLM provider / model | Local Ollama `llama3.1:8b` |
 | Embedding model | `sentence-transformers/all-MiniLM-L6-v2` (local) |
 | Vector store | ChromaDB (local) |
 | Interface | Streamlit |
@@ -752,7 +754,7 @@ No LLM node should receive an external operational tool registry.
 ```text
 langgraph
 langchain-core
-langchain-google-genai
+langchain-ollama
 langchain-huggingface
 langchain-chroma
 sentence-transformers
@@ -1045,7 +1047,7 @@ The final prototype should demonstrate:
 | Internal repair         | At most one controlled internal repair attempt                                                 | Selected |
 | External tools          | No operational tools or user actions                                                          | Selected |
 | Framework               | Python, LangGraph, LangChain Core, Pydantic                                                   | Selected |
-| LLM provider            | Google Gemini 3.5 Flash                                                                       | Selected |
+| LLM provider            | Local Ollama `llama3.1:8b`                                                                    | Selected |
 | Embedding model         | `sentence-transformers/all-MiniLM-L6-v2` (local via sentence-transformers)                    | Selected |
 | Vector store            | ChromaDB (local)                                                                              | Selected |
 | Interface               | Streamlit                                                                                     | Selected |

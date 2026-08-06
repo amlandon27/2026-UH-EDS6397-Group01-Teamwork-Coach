@@ -17,7 +17,9 @@ from typing import Any, Literal, Optional
 from pydantic import BaseModel, Field
 
 from evaluation.schema import CaseResult, EvalCase, MetricScore, ObservedRun
-from services.llm_service import structured_invoke
+from evaluation.judge_evidence import JUDGE_EVIDENCE_BASE
+from services.llm_service import eval_judge_invoke, get_chat_model
+from config.settings import get_settings
 
 RUBRIC_DIMENSIONS = (
     "observation_vs_interpretation",
@@ -66,7 +68,7 @@ class PairwisePreferenceJudgment(BaseModel):
     rationale: str = Field(default="", max_length=600)
 
 
-_SYSTEM_PROMPT = """You are an expert evaluator for a University of Houston engineering
+_SYSTEM_PROMPT = f"""You are an expert evaluator for a University of Houston engineering
 teamwork & leadership coach (PRD-aligned).
 
 Score ONLY what the student-facing coach response actually does.
@@ -85,12 +87,22 @@ Dimension definitions:
   FAIL hard for motive/character claims ("lazy", "does not care", "personality").
 - actionability: Specific, feasible next steps a student could try this week.
 - proportionality: Advice scaled to severity; not dramatic or punitive.
-- evidence_to_action:
-  * If cited/retrieved evidence IDs are present: advice must look grounded in that
-    evidence; vague "best practices" without tying to cites maxes at 3.
-  * If no retrieval/cites (LLM-only baseline): score generic-but-plausible teamwork
-    advice; do NOT award above 3 for "evidence grounding" because there is no
-    approved corpus grounding. Fabricated-looking citations score 1.
+- evidence_to_action: How well advice aligns with the approved evidence base below
+  (CATME dimensions, ABET Meets/Exceeds teamwork criteria, Google re:Work team
+  effectiveness, constructive conflict / coordination sources, psychological
+  safety & climate sources, and teamwork-intervention literature).
+  Apply the SAME standard to gated_rag and no_rag:
+  * 5 = concrete next steps clearly consistent with one or more evidence-base
+    frameworks (e.g., CATME dimension language, constructive controversy,
+    psychological safety practices, coordinated roles/quality expectations).
+  * 4 = mostly aligned with evidence-base ideas; minor vagueness.
+  * 3 = plausible generic teamwork advice; weak or unclear link to the base.
+  * 2 = thin / mismatched to the reflection or weakly related to the base.
+  * 1 = fabricated-looking research claims, contradictory to the base, or
+    empty platitudes with no actionable grounding.
+  Do NOT cap scores at 3 merely because retrieved/cited chunk IDs are absent.
+  Product cite IDs are optional context; conceptual alignment with the approved
+  evidence base is what matters for this dimension.
 - scope_fidelity: Teamwork/leadership coaching only — not legal, clinical,
   disciplinary, misconduct investigator, or instructor surveillance.
 - tone_non_accusatory: Respectful, non-shaming, no humiliation.
@@ -99,19 +111,26 @@ Dimension definitions:
 - student_agency: Encourages action without commanding ("you could/consider" vs
   "you must/tell them they have to").
 
+{JUDGE_EVIDENCE_BASE}
+
 Return structured fields only. Include evidence_quote from the response that
 justifies your lowest dimension score.
 """
 
-_PAIRWISE_SYSTEM = """You compare two student-facing answers from a teamwork coach.
+_PAIRWISE_SYSTEM = f"""You compare two student-facing answers from a teamwork coach.
 
 Prefer the answer that better matches a PRD-aligned product:
 practical, observational (not motive-attributing), proportionate, non-commanding,
-scope-safe, calibrated certainty, and — when evidence/cites are available —
-grounded in approved evidence rather than generic advice.
+scope-safe, calibrated certainty, and better aligned with the approved evidence
+base (CATME, ABET Meets/Exceeds teamwork criteria, re:Work, conflict/coordination
+sources, psychological safety / climate, teamwork interventions).
 
+Do NOT prefer gated_rag solely because it lists chunk/source IDs. Prefer the
+answer whose advice better reflects the evidence base for this reflection.
 Forced choice: gated_rag, no_rag, or tie (only if truly indistinguishable).
 Be willing to pick a winner; ties should be rare.
+
+{JUDGE_EVIDENCE_BASE}
 """
 
 
@@ -127,16 +146,16 @@ def judge_coaching_quality(
 
     user_prompt = _absolute_user_prompt(case, observed, system=system)
     try:
-        scored = structured_invoke(RubricScores, _SYSTEM_PROMPT, user_prompt)
+        scored = eval_judge_invoke(RubricScores, _SYSTEM_PROMPT, user_prompt)
         payload = scored.model_dump()
         payload["overall_notes"] = str(payload.get("overall_notes", ""))[:500]
         payload["evidence_quote"] = str(payload.get("evidence_quote", ""))[:400]
         return payload
     except Exception as exc:  # noqa: BLE001
         # Fallback: free-form invoke path may still return parseable JSON.
-        from services.llm_service import get_chat_model
-
-        model = get_chat_model()
+        settings = get_settings()
+        provider = (settings.eval_llm_provider or "gemini").strip().lower()
+        model = get_chat_model(settings, provider=provider)
         raw = model.invoke(
             [
                 {"role": "system", "content": _SYSTEM_PROMPT},
@@ -162,7 +181,7 @@ def judge_pairwise_preference(
 
     user_prompt = _pairwise_user_prompt(case, gated, no_rag)
     try:
-        judged = structured_invoke(
+        judged = eval_judge_invoke(
             PairwisePreferenceJudgment, _PAIRWISE_SYSTEM, user_prompt
         )
         payload = judged.model_dump()
@@ -239,6 +258,8 @@ def _absolute_user_prompt(
         f"Student goal:\n{case.student_goal or '(none)'}\n\n"
         f"Coach route: {observed.route}\n"
         f"{evidence_block}\n"
+        "Score evidence_to_action against the approved evidence base in the "
+        "system prompt (same standard for gated_rag and no_rag).\n\n"
         f"Coach response:\n{response}\n"
     )
 
@@ -257,7 +278,9 @@ def _pairwise_user_prompt(
         f"=== Answer B: no_rag (LLM-only baseline) ===\n"
         f"{_evidence_context(no_rag, system='no_rag')}\n"
         f"Response:\n{no_rag.student_facing_text or no_rag.body}\n\n"
-        "Which answer better fits a cited, observational, proportionate teamwork coach?\n"
+        "Which answer better fits an observational, proportionate teamwork coach "
+        "aligned with the approved evidence base?\n"
+        "Do not prefer gated_rag only for having chunk IDs.\n"
         "Set winner to gated_rag, no_rag, or tie."
     )
 
@@ -324,7 +347,7 @@ def _parse_rubric_json(text: str) -> dict[str, Any]:
 
 def _normalize_model_text(text: str) -> str:
     text = (text or "").strip()
-    # Gemini / LangChain sometimes stringifies {"type":"text","text":"```json..."}.
+    # LangChain sometimes stringifies {"type":"text","text":"```json..."}.
     if text.startswith("{") and "'text':" in text and "observation_vs_interpretation" in text:
         match = re.search(
             r"['\"]text['\"]\s*:\s*['\"](.*?)['\"]\s*\}\s*$",

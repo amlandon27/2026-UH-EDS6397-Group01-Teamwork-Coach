@@ -21,8 +21,7 @@ This repository also includes:
 | Component | Choice |
 | --- | --- |
 | Orchestration | LangGraph |
-| LLM (default) | Google Gemini 3.5 Flash (`LLM_PROVIDER=gemini`) |
-| LLM (fallback) | Local Ollama `llama3.1:8b` (`LLM_FALLBACK_PROVIDER=ollama`) |
+| LLM (default) | Local Ollama `llama3.1:8b` |
 | Embeddings | `sentence-transformers/all-MiniLM-L6-v2` |
 | Vector store | ChromaDB (local) |
 | UI | Streamlit |
@@ -56,11 +55,10 @@ This repository also includes:
 ## Prerequisites
 
 - Python 3.10+
-- Google AI Studio API key for Gemini (`GOOGLE_API_KEY` in `.env`)
-- Optional: [Ollama](https://ollama.com/) with `llama3.1:8b` (coach fallback / corpus builder)
+- [Ollama](https://ollama.com/) with `llama3.1:8b` (coach, eval, and corpus builder)
 
 ```bash
-ollama pull llama3.1:8b   # only if using Ollama fallback or Knowledge_Corpus_Builder
+ollama pull llama3.1:8b
 ```
 
 - Optional: LangSmith API key for tracing
@@ -78,7 +76,7 @@ python -m venv .venv
 
 pip install -r requirements.txt
 cp .env.example .env
-# Edit .env — coach defaults to Gemini Flash. Optional Ollama fallback on quota.
+# Edit .env if your Ollama host/model differ from the defaults.
 
 python -m ingestion.build_index
 ```
@@ -86,17 +84,12 @@ python -m ingestion.build_index
 ### Environment variables (`.env`)
 
 ```bash
-# LLM: gemini (Flash) or ollama — coach UI / CLI
-LLM_PROVIDER=gemini
-LLM_FALLBACK_PROVIDER=ollama
+# Coach / systems-under-test — local Ollama
 OLLAMA_HOST=http://localhost:11434
 OLLAMA_MODEL=llama3.1:8b
 
-# Evaluation harness (python -m evaluation) — independent of coach default
+# Evaluation LLM-as-judge (rubric / pairwise)
 EVAL_LLM_PROVIDER=gemini
-EVAL_LLM_FALLBACK_PROVIDER=none
-
-# Gemini (coach + evals)
 GOOGLE_API_KEY=
 GEMINI_MODEL=gemini-3.5-flash
 
@@ -111,8 +104,6 @@ LANGSMITH_TRACING=false
 LANGSMITH_API_KEY=
 LANGSMITH_PROJECT=teamwork-leadership-coach
 ```
-
-When `LLM_PROVIDER=gemini` and free-tier quota is exhausted (429), the coach can fall back to Ollama if `LLM_FALLBACK_PROVIDER=ollama`.
 
 ## Run the coach
 
@@ -154,19 +145,20 @@ python -m ingestion.build_index
 
 Stratified golden set + gated RAG vs no-RAG baseline. See `evaluation/README.md`.
 
-Eval runs use **`EVAL_LLM_PROVIDER`** (default `gemini`), not the coach’s `LLM_PROVIDER`. Set `GOOGLE_API_KEY` in `.env`. On Gemini quota exhaustion the harness stops (no Ollama fallback) unless you change `EVAL_LLM_FALLBACK_PROVIDER`.
+Eval runs use **Ollama** for systems under test (gated RAG / no-RAG). The optional LLM-as-judge rubric uses **Gemini** (`EVAL_LLM_PROVIDER=gemini`; needs `GOOGLE_API_KEY`).
 
 ```bash
 python -m evaluation --dry-run
-python -m evaluation                       # gated RAG (Gemini + Chroma by default)
+python -m evaluation                       # gated RAG (Ollama + Chroma)
 python -m evaluation --system compare      # gated RAG vs no-RAG
+python -m evaluation --system rubric       # Gemini judge on saved reports
 python -m evaluation --system scorecard    # rebuild one-page scorecard
 python -m evaluation --suites safety,privacy
 ```
 
 Reports: `evaluation/reports/` (`latest.md`, `latest_compare.md`, `latest_scorecard.md`).
 
-Offline metric tests (no API key):
+Offline metric tests (no Ollama / API key):
 
 ```bash
 pytest -q tests/test_evaluation.py

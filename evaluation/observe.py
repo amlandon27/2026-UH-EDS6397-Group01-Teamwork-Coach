@@ -79,14 +79,28 @@ def student_facing_text(
     final: FinalResponse | None,
     recommendation: CoachingRecommendation | None,
 ) -> str:
-    parts: list[str] = []
+    """Build the text the judge/metrics see — matching what students get.
+
+    ``FinalResponse.body`` already contains the formatted recommendation
+    sections. Do not re-append recommendation fields (that duplicates content).
+    Fall back to assembling from the recommendation only when body is empty.
+    """
     if final:
-        parts.extend([final.title, final.body])
-    if recommendation:
-        parts.append(recommendation.what_may_be_happening)
-        parts.extend(recommendation.what_you_could_do_next)
-        parts.extend(recommendation.how_you_might_say_it)
-        parts.append(recommendation.why_this_may_help)
-        parts.extend(recommendation.what_to_watch_for)
-        parts.append(recommendation.when_to_involve_someone_else)
+        parts = [final.title, final.body]
+        text = "\n".join(p for p in parts if p)
+        if (final.body or "").strip():
+            return text
+
+    if not recommendation:
+        return ""
+
+    # Fallback for incomplete states (no finalized body yet).
+    parts = [
+        recommendation.what_may_be_happening,
+        *recommendation.what_you_could_do_next,
+        *recommendation.how_you_might_say_it,
+        recommendation.why_this_may_help,
+        *recommendation.what_to_watch_for,
+        recommendation.when_to_involve_someone_else,
+    ]
     return "\n".join(p for p in parts if p)

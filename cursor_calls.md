@@ -94,3 +94,34 @@ Decisions made while building the MVP. Keep entries short and dated.
 | Default | `LANGSMITH_TRACING=false` | No key required for local/tests |
 | Privacy | Omit `raw_input`/`reflection`; PII-redact other strings | Matches PRD telemetry rule |
 | Wiring | `run_with_tracing` + `@traceable` root + node/LLM/retriever spans | Full end-to-end chain in one link |
+
+## 2026-08-06 — Ollama-only LLM stack
+
+| Decision | Choice | Rationale |
+| --- | --- | --- |
+| LLM | Local Ollama `llama3.1:8b` for coach, eval, and corpus builder | No cloud API key; same model everywhere |
+| Gemini | Removed (`langchain-google-genai`, `GOOGLE_API_KEY`, provider fallback) | Single provider; eliminate quota/billing path |
+| Config | `OLLAMA_HOST` / `OLLAMA_MODEL` only | Matches Knowledge Corpus Builder |
+
+## 2026-08-06 — Gemini evaluator (rubric judge)
+
+| Decision | Choice | Rationale |
+| --- | --- | --- |
+| Coach / SUT | Ollama `llama3.1:8b` | Local product path |
+| LLM-as-judge | Gemini (`EVAL_LLM_PROVIDER=gemini`, `gemini-3.5-flash`) | Stronger structured judging for rubric / pairwise |
+| Wiring | `eval_judge_invoke` in `services/llm_service.py` | Keeps coach calls on Ollama |
+
+## 2026-08-06 — One-shot abstention (no clarifying questions)
+
+| Decision | Choice | Rationale |
+| --- | --- | --- |
+| `clarifying_question_needed` | Removed from `TeamworkDiagnosis` | MVP is one-shot; no follow-up turn |
+| Thin / conflicting signal | Low confidence → `retrieval_sufficient=False` → fallback | Abstain instead of asking questions |
+
+## 2026-08-06 — evidence_to_action against shared evidence base
+
+| Decision | Choice | Rationale |
+| --- | --- | --- |
+| Cap at 3 for no-RAG | Removed | Fair compare; both systems judged the same way |
+| Judge grounding | Curated evidence catalog in `evaluation/judge_evidence.py` | CATME, ABET Meets/Exceeds, re:Work, conflict, psych safety, interventions |
+| Product cite IDs | Optional context only | Conceptual alignment > chunk-ID presence |

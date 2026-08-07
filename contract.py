@@ -61,12 +61,26 @@ class RetrievedEvidence(BaseModel):
 
 
 class CoachingRecommendation(BaseModel):
-    what_may_be_happening: str
-    what_you_could_do_next: list[str] = Field(default_factory=list)
-    how_you_might_say_it: list[str] = Field(default_factory=list)
-    why_this_may_help: str = ""
+    what_may_be_happening: str = Field(
+        description="Non-empty observational summary of what may be happening."
+    )
+    what_you_could_do_next: list[str] = Field(
+        default_factory=list,
+        description="At least two concrete next steps the student could try.",
+    )
+    how_you_might_say_it: list[str] = Field(
+        default_factory=list,
+        description="At least one example phrase the student could use.",
+    )
+    why_this_may_help: str = Field(
+        default="",
+        description="Non-empty explanation of why the advice may help.",
+    )
     what_to_watch_for: list[str] = Field(default_factory=list)
-    when_to_involve_someone_else: str = ""
+    when_to_involve_someone_else: str = Field(
+        default="",
+        description="Non-empty guidance on when to involve an instructor/advisor.",
+    )
     cited_source_ids: list[str] = Field(default_factory=list)
     cited_chunk_ids: list[str] = Field(default_factory=list)
 

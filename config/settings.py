@@ -29,7 +29,7 @@ class Settings(BaseSettings):
     chroma_collection: str = "teamwork_evidence"
     retrieval_top_k: int = 4
     retrieval_min_score: float = 0.05
-    max_repair_attempts: int = 1
+    max_repair_attempts: int = 2
     langsmith_tracing: bool = False
     langsmith_api_key: str = ""
     langsmith_project: str = "teamwork-leadership-coach"

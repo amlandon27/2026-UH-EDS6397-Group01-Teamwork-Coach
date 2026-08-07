@@ -1,6 +1,11 @@
 """Tests for high-risk detection and validation guardrails."""
 
-from agents.advice_agent import _sanitize_recommendation
+from agents.advice_agent import (
+    DEFAULT_WHEN_TO_INVOLVE,
+    _sanitize_recommendation,
+    apply_safe_defaults,
+    structural_gaps,
+)
 from agents.finalize_node import finalize_coaching_node
 from contract import (
     CitationMetadata,
@@ -206,6 +211,54 @@ def test_advice_sanitize_does_not_invent_content_or_citations():
     assert cleaned.how_you_might_say_it == []
     assert cleaned.why_this_may_help == ""
     assert cleaned.when_to_involve_someone_else == ""
+
+
+def test_apply_safe_defaults_only_fills_when_to_involve():
+    thin = CoachingRecommendation(
+        what_may_be_happening="",
+        what_you_could_do_next=[],
+        how_you_might_say_it=[],
+        why_this_may_help="",
+        when_to_involve_someone_else="",
+        cited_source_ids=[],
+        cited_chunk_ids=[],
+    )
+    filled = apply_safe_defaults(thin)
+    assert filled.when_to_involve_someone_else == DEFAULT_WHEN_TO_INVOLVE
+    assert filled.what_you_could_do_next == []
+    assert filled.how_you_might_say_it == []
+    assert filled.what_may_be_happening == ""
+
+
+def test_structural_gaps_lists_missing_required_fields():
+    thin = CoachingRecommendation(
+        what_may_be_happening="",
+        what_you_could_do_next=["only one"],
+        how_you_might_say_it=[],
+        why_this_may_help="",
+        when_to_involve_someone_else="",
+        cited_source_ids=[],
+        cited_chunk_ids=[],
+    )
+    gaps = structural_gaps(apply_safe_defaults(thin))
+    assert any("what_may_be_happening" in g for g in gaps)
+    assert any("what_you_could_do_next" in g for g in gaps)
+    assert any("how_you_might_say_it" in g for g in gaps)
+    assert any("why_this_may_help" in g for g in gaps)
+    assert not any("when_to_involve_someone_else" in g for g in gaps)
+
+
+def test_structural_gaps_empty_when_complete():
+    rec = CoachingRecommendation(
+        what_may_be_happening="Roles are unclear.",
+        what_you_could_do_next=["Propose owners.", "Add a checkpoint."],
+        how_you_might_say_it=["Could we name owners?"],
+        why_this_may_help="Clear ownership helps.",
+        when_to_involve_someone_else="If process talks stall.",
+        cited_source_ids=["src_catme_dimensions"],
+        cited_chunk_ids=["chk_accountability_01"],
+    )
+    assert structural_gaps(rec) == []
 
 
 def test_validation_marks_incomplete_coaching_repairable():
